@@ -125,7 +125,10 @@
 				    <div id="{{question.id}}" class="panel-collapse collapse">
 				      <div class="panel-body">
 						<div class="cbp-ntcontent">
-							<label class="lbel" ng-repeat=" answer in question.answers">{{ question.options[$index]}}<input type="text" value="{{ question.answers[$index]}}" class="inputTextResp"></label>
+							<label class="lbel" ng-repeat=" answer in question.answers">{{ question.options[$index]}}
+								<input type="text" value="{{ question.answers[$index]}}" class="inputTextResp">
+								
+							</label>
 						</div>
 				      </div>
 				    </div>
