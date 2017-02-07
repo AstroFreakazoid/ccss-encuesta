@@ -29,22 +29,21 @@
 		<!-- CSS
 		================================================== -->
 		<!-- stylesheet -->
-
-		 <link rel="stylesheet" type="text/css" href="../css/component.css" />
-		 
-		 <link rel="stylesheet" type="text/css" href="../css/default.css" />
-		
-
-
-        <link rel="stylesheet" href="../css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/component.css" />
+		<link rel="stylesheet" type="text/css" href="../css/default.css" />
+		<!-- Font Stylesheet -->
+		<link rel="stylesheet" href="../css/font-awesome.min.css">
 		<!-- Twitter Bootstrap css -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- jquery.fancybox  -->
         <link rel="stylesheet" href="../css/jquery.fancybox.css">
 		<!-- animate -->
         <link rel="stylesheet" href="../css/animate.css">
 		<!-- Main Stylesheet -->
         <link rel="stylesheet" href="../css/main.css">
+
+        <script src="../js/crudScreenNewTopic.js"></script>
 		
 		<!-- Modernizer Script for old Browsers -->
  		<script src="../js/jquery-1.11.1.min.js"></script>
@@ -107,7 +106,7 @@
 		  <div ng-repeat="topic in topics" class="panel panel-default">
 		    <div class="panel-heading cbp-ntaccordion">
 		      <h4 class="panel-title">
-		        <a class="cbp-nttrigger" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
+		        <a class="" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
 		        {{topic.name}}</a>
 		      </h4>
 		    </div>
@@ -118,19 +117,26 @@
 				  <div class="panel panel-default" ng-repeat="question in topic.questions">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}">
+				        <a data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}" class="cbp-ntaccordion">
 				        {{question.title}}</a>
 				      </h4>
 				    </div>
 				    <div id="{{question.id}}" class="panel-collapse collapse">
 				      <div class="panel-body">
-						<div class="cbp-ntcontent">
-							<label class="lbel" ng-repeat=" answer in question.answers">{{ question.options[$index]}}
-								<input type="text" value="{{ question.answers[$index]}}" class="inputTextResp">
-								
-							</label>
+						<div class="">
+							<label class="lbel " ng-repeat=" answer in question.answers">{{ question.options[$index]}}
+
+								<input type="text" value="{{ question.answers[$index]}}" class="inputTextResp" id="{{question.id + '-'+ question.options[$index]}}">
+								<span class="glyphicon glyphicon-pencil" onclick='modificar("s")'></span>	
+								<span class="glyphicon glyphicon-trash" onclick='eliminar("dd")'></span>
+
+				      		</label>
+							
 						</div>
 				      </div>
+
+				      
+
 				    </div>
 				  </div>
 				</div>
@@ -186,6 +192,7 @@
         <script src="../js/jquery.easing.min.js"></script>
 		<!-- jquery easing -->
         <script src="../js/wow.min.js"></script>
+
 		<script>
 			var wow = new WOW ({
 				boxClass:     'wow',      // animated element css class (default is wow)
@@ -196,62 +203,43 @@
 			  }
 			);
 			wow.init();
+			//according menu
+
+			$(document).ready(function()
+			{
+			    //Add Inactive Class To All Accordion Headers
+			    $('.accordion-header').toggleClass('inactive-header');
+				
+				//Set The Accordion Content Width
+				var contentwidth = $('.accordion-header').width();
+				$('.accordion-content').css({});
+				
+				//Open The First Accordion Section When Page Loads
+				$('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
+				$('.accordion-content').first().slideDown().toggleClass('open-content');
+				
+				// The Accordion Effect
+				$('.accordion-header').click(function () {
+					if($(this).is('.inactive-header')) {
+						$('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
+						$(this).toggleClass('active-header').toggleClass('inactive-header');
+						$(this).next().slideToggle().toggleClass('open-content');
+					}
+					
+					else {
+						$(this).toggleClass('active-header').toggleClass('inactive-header');
+						$(this).next().slideToggle().toggleClass('open-content');
+					}
+				});
+				
+				return false;
+			});
+				
 	</script> 
 		<!-- Custom Functions -->
-<script src="../js/custom.js"></script>
-		
-<script type="text/javascript">
 	
-
-//according menu
-
-	$(document).ready(function()
-	{
-	    //Add Inactive Class To All Accordion Headers
-	    $('.accordion-header').toggleClass('inactive-header');
-		
-		//Set The Accordion Content Width
-		var contentwidth = $('.accordion-header').width();
-		$('.accordion-content').css({});
-		
-		//Open The First Accordion Section When Page Loads
-		$('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
-		$('.accordion-content').first().slideDown().toggleClass('open-content');
-		
-		// The Accordion Effect
-		$('.accordion-header').click(function () {
-			if($(this).is('.inactive-header')) {
-				$('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
-				$(this).toggleClass('active-header').toggleClass('inactive-header');
-				$(this).next().slideToggle().toggleClass('open-content');
-			}
-			
-			else {
-				$(this).toggleClass('active-header').toggleClass('inactive-header');
-				$(this).next().slideToggle().toggleClass('open-content');
-			}
-		});
-		
-		return false;
-	});
-				
-</script>
-
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="../js/jquery.cbpNTAccordion.min.js"></script>
-		<script>
-			$( function() {
-				/*
-				- how to call the plugin:
-				$( selector ).cbpNTAccordion( [options] );
-				- destroy:
-				$( selector ).cbpNTAccordion( 'destroy' );
-				*/
-
-				$( '#cbp-ntaccordion' ).cbpNTAccordion();
-
-			} );
-		</script>
-
-    </body>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ 	<script src="../js/custom.js"></script>
+ 	
+  </body>
 </html>
