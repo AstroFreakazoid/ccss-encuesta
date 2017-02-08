@@ -22,7 +22,7 @@ function siguienteAnswer() {
 function alertDGC(mensaje)
 {
     var dgcTiempo=500
-    var ventanaCS='<div class="dgcAlert "><div class="dgcVentana"><div class="dgcCerrar"></div><div class="dgcMensaje "><span class="glyphicon glyphicon-hand-right parpadea text" id="headAlert "></span><br>Gracias por su Respuesta<br><div class="dgcAceptar">Cambiar Respuesta</div></div></div></div>';
+    var ventanaCS='<div class="dgcAlert "><div class="dgcVentana"><div class="dgcCerrar"></div><div class="dgcMensaje "><span class="glyphicon glyphicon-hand-right parpadea text" id="headAlert "></span><br>Gracias por su Respuesta<br><div class="dgcAceptar">Cambiar Respuesta</div> <br><br> </div></div></div>';
     $('body').append(ventanaCS);
     var alVentana=$('.dgcVentana').height();
     var alNav=$(window).height();

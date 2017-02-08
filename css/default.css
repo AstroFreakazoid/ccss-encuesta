@@ -4,6 +4,7 @@
 
 
 /* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+
 .clearfix:before,
 .clearfix:after {
 	content: " ";
@@ -105,17 +106,17 @@ input[type=text]{
 	line-height: 10px;
 	left: 20px;
 	padding-left: 10px;
-	
-	
+
+
 }
 .lbel{
 	color:#47a3da;
 	display: block;
 	width: 700px;
-	
+
 }
 footer{
-	
+
 	height: 500px;
 }
 
@@ -132,5 +133,4 @@ footer{
 
 	margin-left:15px;
 	display:block;
-}
 }
