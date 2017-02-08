@@ -2,9 +2,10 @@
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="es" class="no-js" ng-app="CCSSapp"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html lang="es" class="no-js"> <!--<![endif]-->
     <head>
 		<link rel="icon" href="../img/icon.png">
+		
     	<!-- meta charec set -->
         <meta charset="utf-8">
 		<!-- Always force latest IE rendering engine or request Chrome Frame -->
@@ -17,22 +18,19 @@
         <meta name="author" content="Muhammad Morshed">
 		<!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
 		
-		<meta name="keywords" content="nested, accordion, simple, vertical, web development, css3, javascript" />
-
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<!-- Google Font -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="../js/jquery-1.11.1.min.js"></script>
 
 		<!-- CSS
 		================================================== -->
-		<!-- stylesheet -->
-		<link rel="stylesheet" type="text/css" href="../css/component.css" />
-		<link rel="stylesheet" type="text/css" href="../css/default.css" />
-		<!-- Font Stylesheet -->
-		<link rel="stylesheet" href="../css/font-awesome.min.css">
+		<!-- Style -->
+		<link rel="stylesheet" href="../css/AnswersScreen.css">
+		<!-- Fontawesome Icon font -->
+        <link rel="stylesheet" href="../css/font-awesome.min.css">
 		<!-- Twitter Bootstrap css -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -43,18 +41,40 @@
 		<!-- Main Stylesheet -->
         <link rel="stylesheet" href="../css/main.css">
 
-        <script src="../js/crudScreenNewTopic.js"></script>
-		
-		<!-- Modernizer Script for old Browsers -->
- 		<script src="../js/jquery-1.11.1.min.js"></script>
-		<script src="../js/modernizr.custom.js"></script>
-        <script src="../js/modernizr-2.6.2.min.js"></script>
-   		<script src="../js/angular.min.js"></script>
-    	<script src="../angular/appController.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 
-	</head>
+		<!--  Script for logic -->
+		
+		 <script src="../js/AnswersScreen.js"></script>
 	
-    <body id="body" ng-controller="mainCtrl">
+		
+
+		<!-- Modernizer Script for old Browsers -->
+		<link rel="stylesheet" href="../css/main.css">
+        <script src="../js/modernizr-2.6.2.min.js"></script>
+
+
+        <!--alert-->
+      	<script src="/path/to/jquery.js" type="text/javascript"></script>
+		<script src="/path/to/jquery.ui.draggable.js" type="text/javascript"></script>
+
+		<script src="/path/to/jquery.alerts.js" type="text/javascript"></script>
+		<link href="/path/to/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
+
+		
+		
+		
+       
+		
+       
+       
+		
+
+
+    </head>
+	
+    <body id="body" >
 	
 		<!-- preloader -->
 		<div id="preloader">
@@ -102,57 +122,94 @@
         End Fixed Navigation
         ==================================== -->
 		
-		<div class="panel-group" id="accordion">
-		  <div ng-repeat="topic in topics" class="panel panel-default">
-		    <div class="panel-heading cbp-ntaccordion">
-		      <h4 class="panel-title">
-		        <a class="" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
-		        {{topic.name}}</a>
-		      </h4>
-		    </div>
-		    <div id="{{topic.id}}" class="panel-collapse collapse">
-		      <div class="panel-body">
-		      	Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-				<div class="panel-group" id="{{topic.id_container}}">
-				  <div class="panel panel-default" ng-repeat="question in topic.questions">
-				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}" class="cbp-ntaccordion">
-				        {{question.title}}</a>
-				      </h4>
-				    </div>
-				    <div id="{{question.id}}" class="panel-collapse collapse">
-				      <div class="panel-body">
-						<div class="">
-							<label class="lbel " ng-repeat=" answer in question.answers">{{ question.options[$index]}}
-
-								<input type="text" value="{{ question.answers[$index]}}" class="inputTextResp" id="{{question.id + '-'+ question.options[$index]}}">
-								<span class="glyphicon glyphicon-pencil" onclick='modificar("s")'></span>	
-								<span class="glyphicon glyphicon-trash" onclick='eliminar("dd")'></span>
-
-				      		</label>
-							
-						</div>
-				      </div>
-
-				      
-
-				    </div>
-				  </div>
-				</div>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-
-
-
-
-
-
-		<footer id="footer" class=" row  footer ">
-			<div class="container">
 		
+		
+        <!--
+        Home Slider
+        ==================================== -->
+		
+		<section id="seccionPrincipal" style="margin-top: 45px;">
+			<div  class="container ">
+			    <div id="containerAnswers" class="row">
+				   <div id="first" class="section">
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-1">
+					      <label for="radio-1"><span class="radio">Coffee</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-2">
+					      <label for="radio-2"><span class="radio">Tea</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-3">
+					      <label for="radio-3"><span class="radio">Cappuccino</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-4">
+					      <label for="radio-4"><span class="radio">Cappuccino</span></label>
+					    </div>
+				</div>
+
+			   </div>
+			</div>
+		</section>
+		
+		
+        <!--
+        End Home SliderEnd
+        ==================================== -->
+		
+		<footer id="footer" class="footer">
+			<div class="container">
+				<div class="row">
+				
+					<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
+						<div class="footer-single">
+							<img src="../img/footer-logo.png" alt="">
+							<p>eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div>
+					</div>
+				
+					<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+						<div class="footer-single">
+							<h6>Subscribe </h6>
+							<form action="#" class="subscribe">
+								<input type="text" name="subscribe" id="subscribe">
+								<input type="submit" value="&#8594;" id="subs">
+							</form>
+							<p>eusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+						</div>
+					</div>
+				
+					<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
+						<div class="footer-single">
+							<h6>Explore</h6>
+							<ul>
+								<li><a href="#">Inside Us</a></li>
+								<li><a href="#">Flickr</a></li>
+								<li><a href="#">Google</a></li>
+								<li><a href="#">Forum</a></li>
+							</ul>
+						</div>
+					</div>
+				
+					<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="900ms">
+						<div class="footer-single">
+							<h6>Support</h6>
+							<ul>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Market Blog</a></li>
+								<li><a href="#">Help Center</a></li>
+								<li><a href="#">Pressroom</a></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<p class="copyright text-center">
@@ -192,54 +249,10 @@
         <script src="../js/jquery.easing.min.js"></script>
 		<!-- jquery easing -->
         <script src="../js/wow.min.js"></script>
-
-		<script>
-			var wow = new WOW ({
-				boxClass:     'wow',      // animated element css class (default is wow)
-				animateClass: 'animated', // animation css class (default is animated)
-				offset:       120,          // distance to the element when triggering the animation (default is 0)
-				mobile:       false,       // trigger animations on mobile devices (default is true)
-				live:         true        // act on asynchronously loaded content (default is true)
-			  }
-			);
-			wow.init();
-			//according menu
-
-			$(document).ready(function()
-			{
-			    //Add Inactive Class To All Accordion Headers
-			    $('.accordion-header').toggleClass('inactive-header');
-				
-				//Set The Accordion Content Width
-				var contentwidth = $('.accordion-header').width();
-				$('.accordion-content').css({});
-				
-				//Open The First Accordion Section When Page Loads
-				$('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
-				$('.accordion-content').first().slideDown().toggleClass('open-content');
-				
-				// The Accordion Effect
-				$('.accordion-header').click(function () {
-					if($(this).is('.inactive-header')) {
-						$('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
-						$(this).toggleClass('active-header').toggleClass('inactive-header');
-						$(this).next().slideToggle().toggleClass('open-content');
-					}
-					
-					else {
-						$(this).toggleClass('active-header').toggleClass('inactive-header');
-						$(this).next().slideToggle().toggleClass('open-content');
-					}
-				});
-				
-				return false;
-			});
-				
-	</script> 
 		<!-- Custom Functions -->
+		<script src="../js/custom.js"></script>
+		
+		
 	
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
- 	<script src="../js/custom.js"></script>
- 	
-  </body>
+    </body>
 </html>

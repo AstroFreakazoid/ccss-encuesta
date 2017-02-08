@@ -95,25 +95,23 @@ a:hover {
 }
 
 .inputTextResp{
-	width: 40%;
+	width: 300px;
 }
-#formulario{
-	
-	margin-right: 10px;
-	margin-left:10px;
-}
+
 input[type=text]{
 
 	display: inline-block;
 	margin: 10px;
 	line-height: 10px;
 	left: 20px;
+	padding-left: 10px;
 	
 	
 }
 .lbel{
 	color:#47a3da;
 	display: block;
+	width: 700px;
 	
 }
 footer{
@@ -121,6 +119,18 @@ footer{
 	height: 500px;
 }
 
-form{
-	margin: 0 auto;
+#accordion{
+	margin-top: 60px;
+
+}
+.glyphicon-trash{
+
+	margin-left:15px;
+	display:block;
+}
+.glyphicon-pencil{
+
+	margin-left:15px;
+	display:block;
+}
 }

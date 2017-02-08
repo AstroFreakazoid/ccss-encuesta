@@ -95,7 +95,21 @@
 @media screen and (max-width: 32em) { 
 
 	.cbp-ntaccordion {
-		font-size: 70%;
+		font-size: 80%;
+	}
+	
+	input[type=text]{
+		
+		font-size: 80%;
+		color:#47a3da;
+		width: 180px;
+	
+	
 	}
 
+	.lbel{
+		
+		
+	
+	}
 }
