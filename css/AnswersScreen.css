@@ -1,0 +1,293 @@
+
+#first{
+
+  background-color: #81BEF7;
+}
+#containerAnswers{
+ 
+}
+
+#seccionPrincipal{
+  background-color: #81BEF7;
+}
+
+#second {
+  background-color: #FF8A66;
+}
+.section {
+  padding: 100px;
+  padding-left: 100px;
+  
+}
+.section input[type="radio"]{
+  display: none;
+}
+.container {
+  margin-bottom: 10px;
+}
+.container label {
+  position: relative;
+}
+
+
+/* Base styles for spans */
+.container label span {
+  font-size: 25px;
+  color: #fff;
+}
+.container span::before,
+.container span::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* Radio buttons */
+.container span.radio:hover {
+  cursor: pointer;
+}
+.container span.radio::before {
+  left: -52px;
+  width: 45px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 50px;
+}
+.container span.radio::after {
+  left: -49px;
+  width: 17px;
+  height: 17px;
+  border-radius: 10px;
+  background-color: #6C788A;
+  transition: left .25s, background-color .25s;
+}
+input[type="radio"]:checked + label span.radio::after {
+  left: -27px;
+  background-color: #00FF40;
+
+}
+
+/*Alert*/
+.dgcAlert {
+  top: 0;position: fixed;
+  width: 100%;
+  display: block;
+  height: 1000px; 
+  background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+  text-align:center; 
+  opacity:0; 
+  display:none; 
+  z-index:999999999999999;
+
+}
+.dgcAlert .dgcVentana{
+  width: 500px; 
+  background: white;
+  min-height: 150px;
+  position: relative;
+  margin: 0 auto;
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
+
+}
+.dgcAlert .dgcVentana .dgcCerrar {
+  height: 25px;
+  width: 25px;
+  float: right; 
+  cursor:pointer; 
+  background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+}
+.dgcAlert .dgcVentana .dgcMensaje { 
+  margin: 0 auto; 
+  padding-top: 45px; 
+  text-align: center; 
+  width: 500px;
+  font-size: 20px;
+}
+.dgcAlert .dgcVentana .dgcAceptar{
+  background:#09C; 
+  bottom:20px; 
+  display: inline-block; 
+  font-size: 12px; 
+  font-weight: bold; 
+  height: 24px; 
+  line-height: 24px; 
+  padding-left: 5px; 
+  padding-right: 5px;
+  text-align: center; 
+  text-transform: uppercase; 
+  width: 200px;
+  cursor: pointer; 
+  color:#FFF; 
+  margin-top:20px;
+
+}
+
+#headAlert{
+
+  font-size: 100px;
+}
+
+
+@media( max-width : 585px ) {
+  *{
+    font-size: 12px;
+  }
+ 
+
+      /*Alert*/
+  .dgcAlert {
+    top: 0;position: fixed;
+    width: 100%;
+    display: block;
+    height: 1000px; 
+    background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+    text-align:center; 
+    opacity:0; 
+    display:none; 
+    z-index:999999999999999;
+  }
+  .dgcAlert .dgcVentana{
+    width: 300px; 
+    background: white;
+    min-height: 10px;
+    position: relative;
+    margin: 0 auto;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .dgcAlert .dgcVentana .dgcCerrar {
+    height: 25px;
+    width: 25px;
+    float: right; 
+    cursor:pointer; 
+    background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+  }
+  .dgcAlert .dgcVentana .dgcMensaje { 
+    margin: 0 auto; 
+    padding-top: 45px; 
+    text-align: center; 
+    width: 310px;
+    font-size: 14px;
+  }
+  .dgcAlert .dgcVentana .dgcAceptar{
+    background:#09C; 
+    bottom:20px; 
+    display: inline-block; 
+    font-size: 12px; 
+    font-weight: bold; 
+    height: 24px; 
+    line-height: 24px; 
+    padding-left: 5px; 
+    padding-right: 5px;
+    text-align: center; 
+    text-transform: uppercase; 
+    width: 220px;
+    cursor: pointer; 
+    color:#FFF; 
+    margin-top:20px;
+    
+  }
+
+}
+@media( max-width : 300px ) {
+  *{
+    font-size: 10px;
+  }
+  
+  /*Alert*/
+  .dgcAlert {
+    top: 0;position: fixed;
+    width: 100%;
+    display: block;
+    height: 1000px; 
+    background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+    text-align:center; 
+    opacity:0; 
+    display:none; 
+    z-index:999999999999999;
+  }
+  .dgcAlert .dgcVentana{
+    width: 150px; 
+    background: white;
+    min-height: 150px;
+    position: relative;
+    margin: 0 auto;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .dgcAlert .dgcVentana .dgcCerrar {
+    height: 25px;
+    width: 25px;
+    float: right; 
+    cursor:pointer; 
+    background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+  }
+  .dgcAlert .dgcVentana .dgcMensaje { 
+    margin: 0 auto; 
+    padding-top: 45px; 
+    text-align: center; 
+    width: 100px;
+    font-size: 10px;
+  }
+  .dgcAlert .dgcVentana .dgcAceptar{
+    background:#09C; 
+    bottom:20px; 
+    display: inline-block; 
+    font-size: 12px; 
+    font-weight: bold; 
+    height: 24px; 
+    line-height: 24px; 
+    padding-left: 5px; 
+    padding-right: 5px;
+    text-align: center; 
+    text-transform: uppercase; 
+    width: 220px;
+    cursor: pointer; 
+    color:#FFF; 
+    margin-top:50px;
+  }
+}
+
+.text {
+  font-size: 100px;
+  font-family:helvetica;
+  font-weight:bold;
+  color:#71d90b;
+  text-transform:uppercase;
+}
+.parpadea {
+  
+  animation-name: parpadeo;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:parpadeo;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+  0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}

@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!--> <html lang="es" class="no-js"> <!--<![endif]-->
     <head>
 		<link rel="icon" href="../img/icon.png">
+		
     	<!-- meta charec set -->
         <meta charset="utf-8">
 		<!-- Always force latest IE rendering engine or request Chrome Frame -->
@@ -21,25 +22,39 @@
 		<!-- Google Font -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="../js/jquery-1.11.1.min.js"></script>
 
 		<!-- CSS
 		================================================== -->
+		<!-- Style -->
+		<link rel="stylesheet" href="../css/AnswersScreen.css">
 		<!-- Fontawesome Icon font -->
         <link rel="stylesheet" href="../css/font-awesome.min.css">
 		<!-- Twitter Bootstrap css -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<!-- jquery.fancybox  -->
         <link rel="stylesheet" href="../css/jquery.fancybox.css">
 		<!-- animate -->
         <link rel="stylesheet" href="../css/animate.css">
 		<!-- Main Stylesheet -->
         <link rel="stylesheet" href="../css/main.css">
-		<!-- media-queries -->
-        <link rel="stylesheet" href="../css/regisNewTopic.css">
+
+        <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+
+		<!--  Script for logic -->
+		
+		 <script src="../js/AnswersScreen.js"></script>
+	
+		
 
 		<!-- Modernizer Script for old Browsers -->
 		<link rel="stylesheet" href="../css/main.css">
         <script src="../js/modernizr-2.6.2.min.js"></script>
+
+
         <!--alert-->
       	<script src="/path/to/jquery.js" type="text/javascript"></script>
 		<script src="/path/to/jquery.ui.draggable.js" type="text/javascript"></script>
@@ -47,9 +62,19 @@
 		<script src="/path/to/jquery.alerts.js" type="text/javascript"></script>
 		<link href="/path/to/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />
 
+		
+		
+		
+       
+		
+       
+       
+		
+
+
     </head>
 	
-    <body id="body">
+    <body id="body" >
 	
 		<!-- preloader -->
 		<div id="preloader">
@@ -103,15 +128,36 @@
         Home Slider
         ==================================== -->
 		
-		<section id="slider">
-			<div class="container ">
-			    <div class="row">
+		<section id="seccionPrincipal" style="margin-top: 45px;">
+			<div  class="container ">
+			    <div id="containerAnswers" class="row">
+				   <div id="first" class="section">
 
-			        <
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-1">
+					      <label for="radio-1"><span class="radio">Coffee</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-2">
+					      <label for="radio-2"><span class="radio">Tea</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-3">
+					      <label for="radio-3"><span class="radio">Cappuccino</span></label>
+					    </div>
+
+					    <div class="container">
+					      <input type="radio" name="group1" id="radio-4">
+					      <label for="radio-4"><span class="radio">Cappuccino</span></label>
+					    </div>
+				</div>
 
 			   </div>
 			</div>
 		</section>
+		
 		
         <!--
         End Home SliderEnd
@@ -203,123 +249,10 @@
         <script src="../js/jquery.easing.min.js"></script>
 		<!-- jquery easing -->
         <script src="../js/wow.min.js"></script>
-		<script>
-			var wow = new WOW ({
-				boxClass:     'wow',      // animated element css class (default is wow)
-				animateClass: 'animated', // animation css class (default is animated)
-				offset:       120,          // distance to the element when triggering the animation (default is 0)
-				mobile:       false,       // trigger animations on mobile devices (default is true)
-				live:         true        // act on asynchronously loaded content (default is true)
-			  }
-			);
-			wow.init();
-	</script> 
 		<!-- Custom Functions -->
-<script src="../js/custom.js"></script>
+		<script src="../js/custom.js"></script>
 		
-<script type="text/javascript">
+		
 	
-	$(document).ready(function () {
-	    //Initialize tooltips
-	    $('.nav-tabs > li a[title]').tooltip();
-	    
-	    //Wizard
-	    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-
-	        var $target = $(e.target);
-	    
-	        if ($target.parent().hasClass('disabled')) {
-	            return false;
-	        }
-	    });
-
-	    // $(".next-step").click(function (e) {
-
-	    //     var $active = $('.wizard .nav-tabs li.active');
-	    //     $active.next().removeClass('disabled');
-	    //     nextTab($active);
-
-	    // });
-
-	    $(".prev-step").click(function (e) {
-
-	        var $active = $('.wizard .nav-tabs li.active');
-	        prevTab($active);
-
-	    });
-
-
-	
-
-	});
-
-
-
-
-//Inicio Alert
-	function alertDGC(mensaje)
-	{
-	    var dgcTiempo=500
-	    var ventanaCS='<div class="dgcAlert"><div class="dgcVentana"><div class="dgcCerrar"></div><div class="dgcMensaje">'+mensaje+'<br><div class="dgcAceptar">Aceptar</div></div></div></div>';
-	    $('body').append(ventanaCS);
-	    var alVentana=$('.dgcVentana').height();
-	    var alNav=$(window).height();
-	    var supNav=$(window).scrollTop();
-	    $('.dgcAlert').css('height',$(document).height());
-	    $('.dgcVentana').css('top',((alNav-alVentana)/2+supNav-100)+'px');
-	    $('.dgcAlert').css('display','block');
-	    $('.dgcAlert').animate({opacity:1},dgcTiempo);
-	    $('.dgcCerrar,.dgcAceptar').click(function(e) {
-	        $('.dgcAlert').animate({opacity:0},dgcTiempo);
-	        setTimeout("$('.dgcAlert').remove()",dgcTiempo);
-	    });
-	}
-	window.alert = function (message) {
-	  alertDGC(message);
-	};
-
-//Fin Alert
-
-	function nextTab(elem) {
-	    $(elem).next().find('a[data-toggle="tab"]').click();
-	}
-	function prevTab(elem) {
-	    $(elem).prev().find('a[data-toggle="tab"]').click();
-	}
-
-
-//according menu
-
-	$(document).ready(function()
-	{
-	    //Add Inactive Class To All Accordion Headers
-	    $('.accordion-header').toggleClass('inactive-header');
-		
-		//Set The Accordion Content Width
-		var contentwidth = $('.accordion-header').width();
-		$('.accordion-content').css({});
-		
-		//Open The First Accordion Section When Page Loads
-		$('.accordion-header').first().toggleClass('active-header').toggleClass('inactive-header');
-		$('.accordion-content').first().slideDown().toggleClass('open-content');
-		
-		// The Accordion Effect
-		$('.accordion-header').click(function () {
-			if($(this).is('.inactive-header')) {
-				$('.active-header').toggleClass('active-header').toggleClass('inactive-header').next().slideToggle().toggleClass('open-content');
-				$(this).toggleClass('active-header').toggleClass('inactive-header');
-				$(this).next().slideToggle().toggleClass('open-content');
-			}
-			
-			else {
-				$(this).toggleClass('active-header').toggleClass('inactive-header');
-				$(this).next().slideToggle().toggleClass('open-content');
-			}
-		});
-		
-		return false;
-	});
-				
-</script>
     </body>
 </html>
