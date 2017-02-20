@@ -212,3 +212,174 @@ input::-webkit-input-placeholder {
     font-size: 11px;
     text-align: center;
 }
+
+/*Alert*/
+.dgcAlert {
+    top: 0;position: absolute;
+    width: 100%;
+    display: block;
+    height: 1000px; 
+    background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+    text-align:center; 
+    opacity:0; 
+    display:none; 
+    z-index:999999999999999;
+}
+.dgcAlert .dgcVentana{
+    width: 500px; 
+    background: white;
+    min-height: 150px;
+    position: relative;
+    margin: 0 auto;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+.dgcAlert .dgcVentana .dgcCerrar {
+    height: 25px;
+    width: 25px;
+    float: right; 
+    cursor:pointer; 
+    background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+}
+.dgcAlert .dgcVentana .dgcMensaje { 
+    margin: 0 auto; 
+    padding-top: 45px; 
+    text-align: center; 
+    width: 400px;
+    font-size: 20px;
+}
+.dgcAlert .dgcVentana .dgcAceptar{
+    background:#09C; 
+    bottom:20px; 
+    display: inline-block; 
+    font-size: 12px; 
+    font-weight: bold; 
+    height: 24px; 
+    line-height: 24px; 
+    padding-left: 5px; 
+    padding-right: 5px;
+    text-align: center; 
+    text-transform: uppercase; 
+    width: 75px;
+    cursor: pointer; 
+    color:#FFF; 
+    margin-top:50px;
+}
+
+
+
+
+@media( max-width : 585px ) {
+
+        /*Alert*/
+    .dgcAlert {
+        top: 0;position: absolute;
+        width: 100%;
+        display: block;
+        height: 1000px; 
+        background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+        text-align:center; 
+        opacity:0; 
+        display:none; 
+        z-index:999999999999999;
+    }
+    .dgcAlert .dgcVentana{
+        width: 300px; 
+        background: white;
+        min-height: 10px;
+        position: relative;
+        margin: 0 auto;
+        color: black;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .dgcAlert .dgcVentana .dgcCerrar {
+        height: 25px;
+        width: 25px;
+        float: right; 
+        cursor:pointer; 
+        background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+    }
+    .dgcAlert .dgcVentana .dgcMensaje { 
+        margin: 0 auto; 
+        padding-top: 45px; 
+        text-align: center; 
+        width: 150px;
+        font-size: 14px;
+    }
+    .dgcAlert .dgcVentana .dgcAceptar{
+        background:#09C; 
+        bottom:20px; 
+        display: inline-block; 
+        font-size: 12px; 
+        font-weight: bold; 
+        height: 24px; 
+        line-height: 24px; 
+        padding-left: 5px; 
+        padding-right: 5px;
+        text-align: center; 
+        text-transform: uppercase; 
+        width: 75px;
+        cursor: pointer; 
+        color:#FFF; 
+        margin-top:50px;
+    }
+
+}
+@media( max-width : 300px ) {
+ 
+    /*Alert*/
+    .dgcAlert {
+        top: 0;position: absolute;
+        width: 100%;
+        display: block;
+        height: 1000px; 
+        background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; 
+        text-align:center; 
+        opacity:0; 
+        display:none; 
+        z-index:999999999999999;
+    }
+    .dgcAlert .dgcVentana{
+        width: 150px; 
+        background: white;
+        min-height: 150px;
+        position: relative;
+        margin: 0 auto;
+        color: black;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .dgcAlert .dgcVentana .dgcCerrar {
+        height: 25px;
+        width: 25px;
+        float: right; 
+        cursor:pointer; 
+        background: url(http://www.dgcmedia.es/recursosExternos/cerrarAlert.jpg) no-repeat center center;
+    }
+    .dgcAlert .dgcVentana .dgcMensaje { 
+        margin: 0 auto; 
+        padding-top: 45px; 
+        text-align: center; 
+        width: 100px;
+        font-size: 10px;
+    }
+    .dgcAlert .dgcVentana .dgcAceptar{
+        background:#09C; 
+        bottom:20px; 
+        display: inline-block; 
+        font-size: 12px; 
+        font-weight: bold; 
+        height: 24px; 
+        line-height: 24px; 
+        padding-left: 5px; 
+        padding-right: 5px;
+        text-align: center; 
+        text-transform: uppercase; 
+        width: 75px;
+        cursor: pointer; 
+        color:#FFF; 
+        margin-top:50px;
+    }
+}
