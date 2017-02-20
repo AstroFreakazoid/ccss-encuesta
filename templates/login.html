@@ -10,6 +10,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- Page Title -->
     <title>CCSS : CONGRESO NACIONAL DE GERIATRIA</title>
+
+     <!-- Coneccion a Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+   
+
     <!-- Meta Description -->
     <meta name="description" content="Blue One Page Creative HTML5 Template">
     <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
@@ -79,9 +84,9 @@
                             <div class="avatar"></div>
                             <div class="form-box">
                                 <form action="" method="">
-                                    <input name="user" type="text" placeholder="username">
-                                    <input type="password" placeholder="password">
-                                    <button class="btn btn-info btn-block login" type="submit">Login</button>
+                                    <input name="user" type="text" placeholder="Email" id="loginEmail">
+                                    <input type="password" placeholder="password" id="loginPassword">
+                                    <button class="btn btn-info btn-block login" id="btnLogin"  type="button" >Login</button>
                                 </form>
                             </div>
                         </div>
@@ -97,15 +102,6 @@
                                 <div class="main-login main-center" style="margin-top: -80px">
                                     <form class="form-horizontal" method="post" action="#">
 
-                                        <div class="form-group">
-                                            <label for="name" class="cols-sm-2 control-label">Your Name</label>
-                                            <div class="cols-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group">
                                             <label for="email" class="cols-sm-2 control-label">Your Email</label>
@@ -117,15 +113,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="username" class="cols-sm-2 control-label">Username</label>
-                                            <div class="cols-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
 
                                         <div class="form-group">
                                             <label for="password" class="cols-sm-2 control-label">Password</label>
@@ -138,7 +126,7 @@
                                         </div>
 
                                         <div class="form-group ">
-                                            <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                                            <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar">Register</button>
                                         </div>
                                         <div class="login-register">
                                             <a href="index.php">Login</a>
@@ -244,134 +232,14 @@
 <script src="../js/jquery.easing.min.js"></script>
 <!-- jquery easing -->
 <script src="../js/wow.min.js"></script>
-<script>
-    var wow = new WOW ({
-            boxClass:     'wow',      // animated element css class (default is wow)
-            animateClass: 'animated', // animation css class (default is animated)
-            offset:       120,          // distance to the element when triggering the animation (default is 0)
-            mobile:       false,       // trigger animations on mobile devices (default is true)
-            live:         true        // act on asynchronously loaded content (default is true)
-        }
-    );
-    wow.init();
-</script>
-<!-- Custom Functions -->
+
+
+
+<!-- Enlace a login.js  es la logica DON-->
+<script src="../js/login.js"></script>
+
 <script src="../js/custom.js"></script>
 
-<script type="text/javascript">
 
-
-    function checkAdviceInput(){
-        if($( window ).width() > 500){
-            setScreenMode();
-        }else{
-            setPhoneMode();
-        }
-    }
-
-    function setPhoneMode(){
-        $('#login').removeClass('login-container');
-    }
-    function setScreenMode(){
-        $('#login').addClass('login-container');
-    }
-
-    $(function(){
-        var textfield = $("input[name=user]");
-        $('button[type="submit"]').click(function(e) {
-            e.preventDefault();
-            //little validation just to check username
-            if (textfield.val() != "") {
-                //$("body").scrollTo("#output");
-                $("#output").addClass("alert alert-success animated fadeInUp").html("Bienvenido " + "<span style='text-transform:uppercase'>" + textfield.val() + "</span>");
-                $("#output").removeClass(' alert-danger');
-                $("input").css({
-                    "height":"0",
-                    "padding":"0",
-                    "margin":"0",
-                    "opacity":"0"
-                });
-                //change button text
-                $('button[type="submit"]').html("continue")
-                    .removeClass("btn-info")
-                    .addClass("btn-default").click(function(){
-                    $("input").css({
-                        "height":"auto",
-                        "padding":"10px",
-                        "opacity":"1"
-                    }).val("");
-                    debugger;
-                    document.location.href="../index.html";
-                });
-
-                //show avatar
-                $(".avatar").css({
-                    "background-image": "url('https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg')"
-                });
-            } else {
-                //remove success mesage replaced with error message
-                $("#output").removeClass(' alert alert-success');
-                $("#output").addClass("alert alert-danger animated fadeInUp").html("Disculpa, ingresa un nombre valido! ");
-            }
-            //console.log(textfield.val());
-
-        });
-    });
-
-    $(function(){
-        /* ========================================================================= */
-        /*	Contact Form
-         /* ========================================================================= */
-
-        $('#contact-form').validate({
-            rules: {
-                name: {
-                    required: true,
-                    minlength: 2
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                message: {
-                    required: true
-                }
-            },
-            messages: {
-                name: {
-                    required: "come on, you have a name don't you?",
-                    minlength: "your name must consist of at least 2 characters"
-                },
-                email: {
-                    required: "no email, no message"
-                },
-                message: {
-                    required: "um...yea, you have to write something to send this form.",
-                    minlength: "thats all? really?"
-                }
-            },
-            submitHandler: function(form) {
-                $(form).ajaxSubmit({
-                    type:"POST",
-                    data: $(form).serialize(),
-                    url:"process.php",
-                    success: function() {
-                        $('#contact-form :input').attr('disabled', 'disabled');
-                        $('#contact-form').fadeTo( "slow", 0.15, function() {
-                            $(this).find(':input').attr('disabled', 'disabled');
-                            $(this).find('label').css('cursor','default');
-                            $('#success').fadeIn();
-                        });
-                    },
-                    error: function() {
-                        $('#contact-form').fadeTo( "slow", 0.15, function() {
-                            $('#error').fadeIn();
-                        });
-                    }
-                });
-            }
-        });
-    });
-</script>
 </body>
 </html>
