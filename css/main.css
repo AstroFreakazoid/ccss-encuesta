@@ -190,6 +190,7 @@ body > section,
 			transition: background-color 800ms linear;
 }
 
+
 .navbar-toggle i {
 	color: #fff;
 }
@@ -758,4 +759,8 @@ label.error {
   position: fixed;
   right: 25px;
   z-index: 9;
+}
+
+#navigation div nav li a{
+    z-index: 99999;
 }
