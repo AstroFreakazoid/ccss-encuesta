@@ -63,14 +63,105 @@
     </div>
 </header>
 
-<br><br><br><br><br><br><br>
-<br><br><br><br>
-
 <div class="container">
-    <div class="row text-center">
-        <h1>MANAGER PAGE</h1>
+    <div class="row" >
+        <!-- Inicio del perfil no modal -->
+         <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="span3 well">
+                <a href="#aboutModal" data-toggle="modal" data-target="#myModal2"><img src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg' name="aboutme" width="140" height="140" class="img-circle" style="display:block;"></a>
+                <em>Click my face for more</em>
+            </div>
+         </div>
+
+         <div class="col-sm-12 col-md-4 col-lg-4 text-center">        
+            <h3>Jose Alejandro</h3>
+            <h4>unoDos@tres.com</h4> 
+         </div>
+
+         <div class="col-sm-12 col-md-4 col-lg-4">
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Registrar Invitado</button>
+         </div>
+    </div>
+
+</div>
+
+  <!-- Modal formulario registro invitado-->
+  <div class="modal fade" id="myModal" role="dialog" style="margin-top: 50px;">
+    <div class="modal-dialog">
+    
+          <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">×</button>
+              <h4 class="modal-title">Registro de Invitado</h4>
+            </div>
+            <div class="modal-body">
+                
+              <form>
+                 
+                  
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="pwd">Password:</label>
+                  <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox"> Remember me</label>
+                </div>
+
+                <button type="submit" class="btn btn-default btn-info btn-lg">Submit</button>
+
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      
+    </div>
+  </div>
+ <!-- Modal formulario registro invitado-->
+
+<!-- Inicio del perfil si modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  style="margin-top: 40px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+            </div>
+            <div class="modal-body">
+                <center>
+                <img src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg'src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                <h3 class="media-heading">unoDos@tres.com <small>Costa Rica</small></h3>
+                <span><strong>Skills: </strong></span>
+                    <span class="label label-warning">HTML5/CSS</span>
+                    <span class="label label-info">Bootstrap</span>
+                    <span class="label label-info">Angular</span>
+                    <span class="label label-success">FireBase</span>
+                </center>
+                <hr>
+                <center>
+                <p class="text-left"><strong>Bio: </strong><br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                <br>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <center>
+                <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                </center>
+            </div>
+        </div>
     </div>
 </div>
+<!-- Inicio del perfil si modal -->
+
 
 <br><br><br><br><br><br><br>
 <br><br><br><br>
