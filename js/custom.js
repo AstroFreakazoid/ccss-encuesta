@@ -116,8 +116,8 @@ $(document).ready(function(){
 	
 });
 
+/* ==========  START GOOGLE MAP ==========
 
-// ==========  START GOOGLE MAP ========== //
 function initialize() {
     var myLatLng = new google.maps.LatLng(22.402789, 91.822156);
 
@@ -148,4 +148,5 @@ function initialize() {
 }
 
 google.maps.event.addDomListener(window, "load", initialize);
-// ========== END GOOGLE MAP ========== //
+ ========== END GOOGLE MAP ========== */
+
