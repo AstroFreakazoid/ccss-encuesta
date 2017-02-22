@@ -106,8 +106,14 @@
 
              <div class="col-sm-12 col-md-4 col-lg-4">
                 <br><br>
-                <button type="button" class="btn btn-primary btn-lg" style="width: 100%" data-toggle="modal" data-target="#shareLink">Compartir LINK</button> <br><br>
-                <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal">Registrar Invitado </button>
+                <button type="button" class="btn btn-primary btn-lg" style="width: 100%" data-toggle="modal" data-target="#shareLink">
+                    Share by link &nbsp;
+                    <i class="btn-down-up fa fa-share-alt"></i>    
+                </button> <br><br>
+                <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal">
+                    Registrar Invitado &nbsp;
+                    <i class="btn-down-up fa fa-plus-square"></i>
+                </button>
              </div>
         </div>          
     </div>
@@ -127,7 +133,7 @@
                         <h4 class="panel-title">
                             <a>{{topic.name}}</a>
                             <div class="text-center">
-                                <i class="btn-down-up fa fa-plus-circle"></i>
+                                <i class="btn-down-up fa fa-chevron-down"></i>
                             </div>
                         </h4>
                     </div>
@@ -139,7 +145,7 @@
                                         <h4 class="panel-title">
                                             <a class="cbp-ntaccordion">{{question.title}}</a>
                                             <div class="text-center">
-                                                <i class="btn-up-down fa fa-plus-circle"></i>
+                                                <i class="btn-up-down fa fa-chevron-down"></i>
                                             </div>
                                         </h4>
                                     </div>
@@ -230,15 +236,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">Registrar</h4>
+                  <h4 class="modal-title">Registrar nueva pregunta</h4>
                 </div>
                 
-                <div class="modal-body">            
-               
+                <div class="modal-body">
+                    <p>
+                        Lo sentimos!, esta funcion no esta disponible por el momento. 
+                    </p>
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Copiar en el portapapeles</button>
                     <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Continuar</button>
                 </div>
             </div>
@@ -407,10 +414,10 @@
             $('#user-btn-details').click();
 
             $('.panel-heading-up-down').click(function(){
-                $('.btn-up-down').toggleClass('fa-plus-circle fa-minus-circle')
+                $('.btn-up-down').toggleClass('fa-chevron-down fa-chevron-up')
             });
             $('.panel-heading-down-up').click(function(){
-                $('.btn-down-up').toggleClass('fa-plus-circle fa-minus-circle')
+                $('.btn-down-up').toggleClass('fa-chevron-down fa-chevron-up')
             });
         });
         var wow = new WOW ({
