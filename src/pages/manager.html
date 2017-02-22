@@ -24,7 +24,6 @@
     <script src="../../assets/js/angular.min.js"></script>
     <script src="../../assets/angular/appController.js"></script>
 </head>
-
 <body id="body" ng-controller="managerCtrl">
 
     <!-- preloader -->
@@ -58,7 +57,7 @@
         </div>
     </header>
 
-    <br><br><br><br><br>
+    <br><br><br><br>
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -91,10 +90,12 @@
     <div class="container">
         <div class="row well">
             <!-- Inicio del perfil no modal -->
-             <div class="col-sm-12 col-md-4 col-lg-4">
-                <a href="#aboutModal" data-toggle="modal" data-target="#myModal2"><img src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg' name="aboutme" width="140" height="140" class="img-circle"></a>
-                &nbsp;&nbsp;&nbsp;
-                <em>Click para ver mas informacion!</em> 
+             <div class="col-sm-12 col-md-4 col-lg-4 bg-primary" style="padding: 15px;border-radius: 10px;">
+                <a id="user-btn-details" href="#aboutModal" data-toggle="modal" data-target="#myModal2">
+                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" class="img-circle">
+                    &nbsp;&nbsp;&nbsp;
+                   <em><b>Ver descripcion!</b></em>
+                </a> 
              </div>
 
              <div class="col-sm-12 col-md-4 col-lg-4 text-center">        
@@ -104,8 +105,8 @@
              </div>
 
              <div class="col-sm-12 col-md-4 col-lg-4">
-                <br><br><br>    
-                <!-- Trigger the modal with a button -->
+                <br><br>
+                <button type="button" class="btn btn-primary btn-lg" style="width: 100%" data-toggle="modal" data-target="#shareLink">Compartir LINK</button> <br><br>
                 <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal">Registrar Invitado </button>
              </div>
         </div>          
@@ -116,81 +117,101 @@
            <div class="col-sm-12 col-md-8 col-lg-8">
                 <h3>Preguntas Registradas</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores ipsa nemo dignissimos, totam assumenda sint magni voluptatum odit modi ea illum corrupti iure similique cum veritatis, cupiditate eveniet porro nihil. 
+                    Lorem <b>ipsum dolor</b> sit amet, consectetur adipisicing elit. <b>Dolores ipsa nemo dignissimos, totam assumenda sint magni voluptatum odit modi ea illum corrupti iure similique</b> cum veritatis, <b>cupiditate eveniet porro</b> nihil. 
                 </p>
-                <br>    
-
+                <br><br><br>
                 <!-- PREGUNTAS -->
                 <div class="panel-group" id="accordion" ng-controller="encuestaCtrl">
                     <div ng-repeat="topic in topics" class="panel panel-default">
-                    <div class="panel-heading cbp-ntaccordion">
+                    <div class="panel-heading cbp-ntaccordion panel-heading-down-up" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
                         <h4 class="panel-title">
-                        <a class="" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
-                        {{topic.name}}</a>
+                            <a>{{topic.name}}</a>
+                            <div class="text-center">
+                                <i class="btn-down-up fa fa-plus-circle"></i>
+                            </div>
                         </h4>
                     </div>
                     <div id="{{topic.id}}" class="panel-collapse collapse">
                         <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        <div class="panel-group" id="{{topic.id_container}}">
-                            <div class="panel panel-default" ng-repeat="question in topic.questions">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}" class="cbp-ntaccordion">
-                                {{question.title}}</a>
-                                </h4>
-                            </div>
-                            <div id="{{question.id}}" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                <div class="">
-                                    <label class="lbel " ng-repeat=" answer in question.answers">{{ question.options[$index]}}
-                                        <input type="text" value="{{ question.answers[$index]}}" class="inputTextResp" id="{{question.id + '-'+ question.options[$index]}}">
-                                        <span class="glyphicon glyphicon-pencil" onclick='modificar("s")'></span>	
-                                        <span class="glyphicon glyphicon-trash" onclick='eliminar("dd")'></span>
-                                    </label>
+                            <div class="panel-group" id="{{topic.id_container}}">
+                                <div class="panel panel-default" ng-repeat="question in topic.questions">
+                                    <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}">
+                                        <h4 class="panel-title">
+                                            <a class="cbp-ntaccordion">{{question.title}}</a>
+                                            <div class="text-center">
+                                                <i class="btn-up-down fa fa-plus-circle"></i>
+                                            </div>
+                                        </h4>
+                                    </div>
+                                    <div id="{{question.id}}" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="">
+                                                <label class="lbel " ng-repeat=" answer in question.answers">{{ question.options[$index]}}
+                                                    <input type="text" value="{{ question.answers[$index]}}" class="inputTextResp" id="{{question.id + '-'+ question.options[$index]}}">
+                                                    <span class="glyphicon glyphicon-pencil" onclick='modificar("s")'></span>	
+                                                    <span class="glyphicon glyphicon-trash" onclick='eliminar("dd")'></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                </div>
                             </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     </div>
                 </div>
                 <!-- PREGUNTAS -->
-
+                <br>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                        <i><b>Click aqui para registrar una nueva pregunta!</b></i>
+                        <br><br>
+                        <button class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#registerAns">
+                            NUEVA PREGUNTA &nbsp;
+                            <i class="btn-down-up fa fa-plus-square"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <h3>Noticias</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. <b> Repudiandae impedit ratione ducimus dicta eaque. </b> Eius, saepe voluptate maxime, voluptatibus suscipit.
+                        </p>
+                    </div>
+                </div>
                 <div class="row text-center">
                     <div class="col-md-12" style="margin-top: 20px;">
                         <div class="pricing-table">
                             <div class="panel panel-primary">
                                 <div class="controle-header panel-heading panel-heading-landing">
                                     <h3 class="panel-title panel-title-landing">
-                                        Premium
+                                        BENEFICIOS
                                     </h3>
                                 </div>
                                 <div class="controle-panel-heading panel-heading panel-heading-landing-box">
-                                    Best Choice
+                                    Encuesta Digital
                                 </div>
                                 <div class="panel-body panel-body-landing">
                                     <table class="table text-primary">
                                         <tr>
                                             <td width="50px"><i class="fa fa-check"></i></td>
-                                            <td>30+ Accounts</td>
+                                            <td>100% Editable</td>
                                         </tr>
                                         <tr>
                                             <td width="50px"><i class="fa fa-check"></i></td>
-                                            <td>150+ Projects</td>
+                                            <td>99% Adaptable</td>
                                         </tr>
                                         <tr>
                                             <td width="50px"><i class="fa fa-check"></i></td>
-                                            <td>Lead Required</td>
+                                            <td>500% Astrofreakazoid</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="panel-footer panel-footer-landing">
-                                    <a href="#" class="btn btn-price bg-primary btn-lg">SELECT</a>
+                                    <a href="#" class="btn btn-price bg-primary btn-lg">CALIFICAR</a>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +221,54 @@
         </div>
     </div>
 
-    <br><br><br><br><br>    
+    <br><br><br>    
+
+    <!-- Modal formulario registara pregunta -->
+    <div class="modal fade" id="registerAns" role="dialog" style="margin-top: 50px;">
+        <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title">Registrar</h4>
+                </div>
+                
+                <div class="modal-body">            
+               
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Copiar en el portapapeles</button>
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal formulario registara pregunta -->
+
+    <!-- Modal formulario compartir link -->
+    <div class="modal fade" id="shareLink" role="dialog" style="margin-top: 50px;">
+        <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title">Copia este link para compartir</h4>
+                </div>
+                
+                <div class="modal-body">            
+                    <input style="width: 100%;border: none;font-size: 15px;color: red;" type="text" value="file:///C:/Users/alego/Documents/GitHub/ccss-encuesta/" />
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Copiar en el portapapeles</button>
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal formulario compartir link -->
+
 
     <!-- Modal formulario registro invitado-->
     <div class="modal fade" id="myModal" role="dialog" style="margin-top: 50px;">
@@ -247,22 +315,19 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
                 </div>
-                <div class="modal-body">
-                    <center>
-                    <img src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg'src='https://lh6.googleusercontent.com/-CJiiie5rYOE/AAAAAAAAAAI/AAAAAAAAAVc/uWXTDjnIbv0/photo.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                <div class="modal-body text-center">
+                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading">unoDos@tres.com <small>Costa Rica</small></h3>
                     <span><strong>Skills: </strong></span>
                         <span class="label label-warning">HTML5/CSS</span>
                         <span class="label label-info">Bootstrap</span>
                         <span class="label label-info">Angular</span>
                         <span class="label label-success">FireBase</span>
-                    </center>
                     <hr>
-                    <center>
-                    <p class="text-left"><strong>Bio: </strong><br>
+                    <p class="text-left">
+                        <b>Bio:</b><br>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
                     <br>
-                    </center>
                 </div>
                 <div class="modal-footer">                    
                     <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
@@ -337,6 +402,15 @@
             $('.material-button-toggle').on("click", function () {
                 $(this).toggleClass('open');
                 $('.option').toggleClass('scale-on');
+            });
+
+            $('#user-btn-details').click();
+
+            $('.panel-heading-up-down').click(function(){
+                $('.btn-up-down').toggleClass('fa-plus-circle fa-minus-circle')
+            });
+            $('.panel-heading-down-up').click(function(){
+                $('.btn-down-up').toggleClass('fa-plus-circle fa-minus-circle')
             });
         });
         var wow = new WOW ({
