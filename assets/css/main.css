@@ -2,7 +2,6 @@
 /* =================================== */
 /*	Basic Style 
 /* =================================== */
-
 body {
     background-color: #fff;
     font-family: 'Open Sans', sans-serif;
@@ -10,6 +9,9 @@ body {
 	font-size: 13px;
     color: #6a737b;
     font-size: 12px;
+    
+    background: url('../img/salud.jpg') fixed center no-repeat;
+    background-size: cover; 
 }
 
 .main {
