@@ -4,238 +4,128 @@
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
-    <!-- meta charec set -->
     <meta charset="utf-8">
-    <!-- Always force latest IE rendering engine or request Chrome Frame -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!-- Page Title -->
     <title>CCSS : CONGRESO NACIONAL DE GERIATRIA</title>
-
-     <!-- Coneccion a Firebase-->
     <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-   
-
-    <!-- Meta Description -->
     <meta name="description" content="Blue One Page Creative HTML5 Template">
     <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
     <meta name="author" content="Muhammad Morshed">
-    <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Google Font -->
-
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <!-- Fontawesome Icon font -->
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="../../css/font-awesome.min.css">
-    <!-- Twitter Bootstrap css -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <!-- jquery.fancybox  -->
-    <link rel="stylesheet" href="../../css/jquery.fancybox.css">
-    <!-- animate -->
-    <link rel="stylesheet" href="../../css/animate.css">
-    <!-- Main Stylesheet -->
-    <link rel="stylesheet" href="../../css/main.css">
-    <!-- media-queries -->
-    <link rel="stylesheet" href="../../css/media-queries.css">
-    <!-- login-styles -->
-    <link rel="stylesheet" href="../../css/login.css">
-
-
-    <!-- Modernizer Script for old Browsers -->
-    <script src="../../js/modernizr-2.6.2.min.js"></script>
-
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../../assets/css/animate.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/media-queries.css">
+    <link rel="stylesheet" href="../../assets/css/login.css">
+    <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
     <style>
-
         html,body{
-            background: #eee url(../../img/ancianos-blur.jpg) center fixed no-repeat;
+            background: #eee url(../../assets/img/ancianos-blur.jpg) center fixed no-repeat;
             background-size: cover;
             position: relative;
             height: 100%;
         }
-
     </style>
 </head>
-
 <body id="body" onload="setInterval('checkAdviceInput()', 500);">
+    <!-- preloader -->
+    <div id="preloader">
+        <img src="../../assets/img/preloader.gif" alt="Preloader">
+    </div>
+    <!-- end preloader -->
+    <br>
 
-<!-- preloader -->
-<div id="preloader">
-    <img src="../../img/preloader.gif" alt="Preloader">
-</div>
-<!-- end preloader -->
-<br>
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-md-12" style="">
-            <!-- Nav tabs -->
-            <div class="card">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Login</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrarse</a></li>
-                </ul>
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">
-                        <div id="login" class="">
-                            <div id="output"></div>
-                            <div class="avatar"></div>
-                            <div class="form-box">
-                                <form action="" method="">
-                                    <input name="user" type="text" placeholder="Email" id="loginEmail">
-                                    <input type="password" placeholder="password" id="loginPassword">
-                                    <button class="btn btn-info btn-block login" id="btnLogin"  type="button" >Login</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="profile">
-                            <div class="row main">
-                                <div class="panel-heading">
-                                    <div class="panel-title text-center">
-                                    </div>
-                                </div>
-                                <div class="main-login main-center" style="margin-top: -80px">
-                                    <form class="form-horizontal" method="post" action="#">
-
-                                        <div class="form-group">
-                                            <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                                            <div class="cols-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                    <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="password" class="cols-sm-2 control-label">Password</label>
-                                            <div class="cols-sm-10">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                    <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group ">
-                                            <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar">Register</button>
-                                        </div>
-                                        <div class="login-register">
-                                            <a href="index.php">Login</a>
-                                        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-md-12" style="">
+                <!-- Nav tabs -->
+                <div class="card">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Login</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrarse</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div id="login" class="">
+                                <div id="output"></div>
+                                <div class="avatar"></div>
+                                <div class="form-box">
+                                    <form action="" method="">
+                                        <input name="user" type="text" placeholder="Email" id="loginEmail">
+                                        <input type="password" placeholder="password" id="loginPassword">
+                                        <button class="btn btn-info btn-block login" id="btnLogin"  type="button" >Login</button>
                                     </form>
                                 </div>
                             </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                                <div class="row main">
+                                    <div class="panel-heading">
+                                        <div class="panel-title text-center">
+                                        </div>
+                                    </div>
+                                    <div class="main-login main-center" style="margin-top: -80px">
+                                        <form class="form-horizontal" method="post" action="#">
+
+                                            <div class="form-group">
+                                                <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                                        <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                <div class="cols-sm-10">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                                        <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar">Register</button>
+                                            </div>
+                                            <div class="login-register">
+                                                <a href="index.php">Login</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
     <!-- End Carousel -->
-</div>
-
-
-<!--
-<footer id="footer" class="footer">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
-                <div class="footer-single">
-                    <img src="../../img/footer-logo.png" alt="">
-                    <p>eusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                <div class="footer-single">
-                    <h6>Subscribe </h6>
-                    <form action="#" class="subscribe">
-                        <input type="text" name="subscribe" id="subscribe">
-                        <input type="submit" value="&#8594;" id="subs">
-                    </form>
-                    <p>eusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
-                <div class="footer-single">
-                    <h6>Explore</h6>
-                    <ul>
-                        <li><a href="#">Inside Us</a></li>
-                        <li><a href="#">Flickr</a></li>
-                        <li><a href="#">Google</a></li>
-                        <li><a href="#">Forum</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="900ms">
-                <div class="footer-single">
-                    <h6>Support</h6>
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Market Blog</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Pressroom</a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <p class="copyright text-center">
-                    Copyright © 2016 <a href="https://www.themefisher.com/free-bootstrap-templates">Themefisher</a>. All rights reserved.  Developed by <a href="https://www.themefisher.com/free-bootstrap-templates/">Themefisher</a>
-                </p>
-            </div>
-        </div>
     </div>
-</footer>
--->
-<a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
-
-<!-- Essential jQuery Plugins
-================================================== -->
-<!-- Main jQuery -->
-<script src="../../js/jquery-1.11.1.min.js"></script>
-<!-- Single Page Nav -->
-<script src="../../js/jquery.singlePageNav.min.js"></script>
-<!-- Twitter Bootstrap -->
-<script src="../../js/bootstrap.min.js"></script>
-<!-- jquery.fancybox.pack -->
-<script src="../../js/jquery.fancybox.pack.js"></script>
-<!-- jquery.mixitup.min -->
-<script src="../../js/jquery.mixitup.min.js"></script>
-<!-- jquery.parallax -->
-<script src="../../js/jquery.parallax-1.1.3.js"></script>
-<!-- jquery.countTo -->
-<script src="../../js/jquery-countTo.js"></script>
-<!-- jquery.appear -->
-<script src="../../js/jquery.appear.js"></script>
-<!-- Contact form validation -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-<!-- Google Map -->
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<!-- jquery easing -->
-<script src="../../js/jquery.easing.min.js"></script>
-<!-- jquery easing -->
-<script src="../../js/wow.min.js"></script>
+    
+    <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
 
-
-<!-- Enlace a login.js  es la logica DON-->
-<script src="../../js/login.js"></script>
-
-<script src="../../js/custom.js"></script>
-
-
+    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
+    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/jquery.fancybox.pack.js"></script>
+    <script src="../../assets/js/jquery.mixitup.min.js"></script>
+    <script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
+    <script src="../../assets/js/jquery-countTo.js"></script>
+    <script src="../../assets/js/jquery.appear.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="../../assets/js/jquery.easing.min.js"></script>
+    <script src="../../assets/js/wow.min.js"></script>
+    <script src="../../assets/js/login.js"></script>
+    <script src="../../assets/js/custom.js"></script>
 </body>
 </html>

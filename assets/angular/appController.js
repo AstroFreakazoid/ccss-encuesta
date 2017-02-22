@@ -1,9 +1,8 @@
 /**
  * Created by alego on 30/1/2017.
  */
-angular.module('CCSSapp', [])
-    .controller('mainCtrl', function($scope) {
-
+angular.module('myApp', [])
+    .controller('encuestaCtrl', function($scope) {
         $scope.topics = 
             [
                 {
@@ -95,19 +94,15 @@ angular.module('CCSSapp', [])
             ];
 
     })
-    .controller('managerCtrl', function($scope) {
-            
+    .controller('managerCtrl', function($scope) {            
         $scope.userAuth = {
             username: "MARVIN",
             password: "1723hjasd",
             mail: "marvin@astrofreakazoid.com"
         }
-
         $scope.invitado = {
             username: "invitado",
             password: "12345",
             mail: "marvin@astrofreakazoid.com"
         }
-
     });
-
