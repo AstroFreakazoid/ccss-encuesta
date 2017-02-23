@@ -240,10 +240,129 @@
                   <h4 class="modal-title">Registrar nueva pregunta</h4>
                 </div>
                 
-                <div class="modal-body">
-                    <p>
-                        Lo sentimos!, esta funcion no esta disponible por el momento. 
-                    </p>
+                <div class="modal-body .container-fluid">
+                    <section id="slider">
+                        <div class="wizard row">
+                            <div class="wizard-inner col-md-12 col-sm-12 col-xs-12">
+                                <div class="connecting-line"></div>
+                                <ul class="nav nav-tabs" role="tablist">
+
+                                    <li role="presentation" class="active 1">
+                                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Tema" >
+                                            <span class="round-tab">
+                                                <i>1</i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled 2">
+                                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Pregunta">
+                                            <span class="round-tab">
+                                                <i >2</i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="disabled 3">
+                                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Respuestas">
+                                            <span class="round-tab">
+                                                <i>3</i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled 4">
+                                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Completado">
+                                            <span class="round-tab">
+                                                <i>4</i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form role="form">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" role="tabpanel" id="step1">
+                                            <div class="step1">
+                                                <div class="step_21">
+                                                    <h5><strong>Tema</strong></h5>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <input type="text" class="form-control" id="tema" placeholder="Tema">
+                                                        </div>
+                                                   
+                                                    </div>
+                                             
+                                        
+                                                </div>
+                                            </div>
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="btn btn-primary btnContinue1 next-step btnSaveAnContinue">continue</button></li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" role="tabpanel" id="step2">
+                                            <div class="step2">
+                                                <div class="step_21">
+                                                    <h5><strong>Pregunta</strong></h5>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                                            <input type="text" class="form-control" id="pregunta" placeholder="Pregunta">
+                                                        
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-inline pull-right row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <button type="button" class="btn btn-primary btnContinue2 next-step btnSaveAnContinue">continue</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane " role="tabpanel" id="step3">
+                                            <div class="step33">
+                                                <h5><strong>Respuestas</strong></h5>
+                                                <hr>
+                                                <div class="row mar_ned">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                       <label for="respuesta">A</label>
+                                                       <input type="email" class="form-control" id="respA" placeholder="Respuesta A">
+                                                       <label for="respuesta">B</label>
+                                                       <input type="email" class="form-control" id="respB" placeholder="Respuesta B">
+                                                       <label for="respuesta">C</label>
+                                                       <input type="email" class="form-control" id="respC" placeholder="Respuesta C">
+                                                       <label for="respuesta">D</label>
+                                                       <input type="email" class="form-control" id="respD" placeholder="Respuesta D">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-inline pull-right row">
+                                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                                    <button type="button" class="btn btn-primary btnContinue3 btn-info-full next-step btnSaveAnContinue">continue</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane " role="tabpanel" id="complete">
+                                            <div class="step44 row">
+                                               
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <button type="button" class="btn btn-default nuevaPregunta ">Nueva pergunta</button>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <button type="button" class="btn btn-default nuevoTema">Nuevo tema</button>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <button type="button" class="btn btn-primary guardar btn-info-full next-step btnSaveAnContinue">Guardar Tema</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                    </section>
                 </div>
                 
                 <div class="modal-footer">
