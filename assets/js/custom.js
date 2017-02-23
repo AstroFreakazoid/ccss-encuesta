@@ -152,130 +152,133 @@ google.maps.event.addDomListener(window, "load", initialize);
 
 
 
- // ========== Logica formulario modal de registrarPregunta  ========== 
-//Funcion que hace tab para el registro de una nueva pregunta
-    $(".nuevaPregunta").click(function (e) {
+// ========== LOGICA FORMULARIO MODAL DE REGISTRARPREGUNTA  ========== 
 
-        var $active = $('.wizard .nav-tabs li.1');
-        $active.next().removeClass('disabled');
-        nextTab($active);
-        $( '.wizard .nav-tabs li.1' ).addClass( "disabled" );
-        $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
-        $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
-   		limpiarText1();
+$(document).ready(function () {
+//INITIALIZE TOOLTIPS
+    $('.nav-tabs > li a[title]').tooltip();
+    //WIZARD
+    $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+		var $target = $(e.target);
+   		if ($target.parent().hasClass('disabled')) {
+            return false;
+        }
     });
-//Esta funcion limpia los input text de las preguntas y respuestas
-	function limpiarText1(){
-		$('#pregunta').val("");
-		$('#respA').val("");
-		$('#respB').val("");
-		$('#respC').val("");
-		$('#respD').val("");
-	}
-//Funcion que hace tab para el registro de un nuevo tema
-    $(".nuevoTema").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.2');
+	$(".prev-step").click(function (e) {
+	var $active = $('.wizard .nav-tabs li.active');
         prevTab($active);
-        $( '.wizard .nav-tabs li.1' ).removeClass('disabled');
-        $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
-        $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
-        $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
-        limpiarText2();
+	 });
+});
+//FUNCION QUE HACE TAB PARA EL REGISTRO DE UNA NUEVA PREGUNTA
+$(".nuevaPregunta").click(function (e) {
+	var $active = $('.wizard .nav-tabs li.1');
+    $active.next().removeClass('disabled');
+    nextTab($active);
+    $( '.wizard .nav-tabs li.1' ).addClass( "disabled" );
+    $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
+    $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
+		limpiarText1();
+});
+//ESTA FUNCION LIMPIA LOS INPUT TEXT DE LAS PREGUNTAS Y RESPUESTAS
+function limpiarText1(){
+	$('#pregunta').val("");
+	$('#respA').val("");
+	$('#respB').val("");
+	$('#respC').val("");
+	$('#respD').val("");
+}
+//FUNCION QUE HACE TAB PARA EL REGISTRO DE UN NUEVO TEMA
+$(".nuevoTema").click(function (e) {
+	var $active = $('.wizard .nav-tabs li.2');
+    prevTab($active);
+    $( '.wizard .nav-tabs li.1' ).removeClass('disabled');
+    $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
+    $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
+    $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
+    limpiarText2();
+});
+//ESTA FUNCION LIMPIA LOS INPUT TEXT DEL TEMA,DE LAS PREGUNTAS Y RESPUESTAS
+function limpiarText2(){
+	$('#tema').val("");
+	$('#pregunta').val("");
+	$('#respA').val("");
+	$('#respB').val("");
+	$('#respC').val("");
+	$('#respD').val("");
+}
+//EVENTO CLICK DEL BOTON QUE REGISTRAR EL TEMA, AQUI SE VALIDA QUE EL INPUT TEXT NO ESTE EN BLANCO
+$(".btnContinue1").click(function (e) {
+    if ($('#tema').val() === ''|| $('#tema').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese el tema por favor');
+    } else {
+        var $active = $('.wizard .nav-tabs li.active');
+    	$active.next().removeClass('disabled');
+    	nextTab($active);
+    }
+});
+//EVENTO CLICK DEL BOTON QUE REGISTRAR LA PREGUNATA, AQUI SE VALIDA QUE EL INPUT TEXT NO ESTE EN BLANCO
+$(".btnContinue2").click(function (e) {
+    if ($('#pregunta').val() === ''|| $('#pregunta').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la pregunta por favor');
+    } else {
+        var $active = $('.wizard .nav-tabs li.active');
+    	$active.next().removeClass('disabled');
+    	nextTab($active);
+    }
+});
+
+//EVENTO CLICK DEL BOTON QUE REGISTRAR LAS REPUESTAS, AQUI SE VALIDA QUE LOS INPUT TEXT NO ESTEN EN BLANCO.
+$(".btnContinue3").click(function (e) {
+	var siguiente=true;
+
+    if ($('#respA').val() === ''|| $('#respA').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta A');
+       siguiente=false;
+    }
+    if ($('#respB').val() === ''|| $('#respB').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta B');
+       siguiente=false;
+    } 
+    if ($('#respC').val() === ''|| $('#respC').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta C');
+       siguiente=false;
+    } 
+    if ($('#respD').val() === ''|| $('#respD').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta D');
+       siguiente=false;
+    }
+	if(siguiente===true){
+        var $active = $('.wizard .nav-tabs li.active');
+    	$active.next().removeClass('disabled');
+    	nextTab($active);
+    }
+});
+//INICIO ALERT
+function alertDGC(mensaje)
+{
+    var dgcTiempo=500
+    var ventanaCS='<div class="dgcAlert"><div class="dgcVentana"><div class="dgcCerrar"></div><div class="dgcMensaje">'+mensaje+'<br><div class="dgcAceptar">Aceptar</div></div></div></div>';
+    $('body').append(ventanaCS);
+    var alVentana=$('.dgcVentana').height();
+    var alNav=$(window).height();
+    var supNav=$(window).scrollTop();
+    $('.dgcAlert').css('height',$(document).height());
+    $('.dgcVentana').css('top',((alNav-alVentana)/2+supNav-100)+'px');
+    $('.dgcAlert').css('display','block');
+    $('.dgcAlert').animate({opacity:1},dgcTiempo);
+    $('.dgcCerrar,.dgcAceptar').click(function(e) {
+        $('.dgcAlert').animate({opacity:0},dgcTiempo);
+        setTimeout("$('.dgcAlert').remove()",dgcTiempo);
     });
-
-//Esta funcion limpia los input text del tema,de las preguntas y respuestas
-	function limpiarText2(){
-		$('#tema').val("");
-		$('#pregunta').val("");
-		$('#respA').val("");
-		$('#respB').val("");
-		$('#respC').val("");
-		$('#respD').val("");
-		
-	}
-
-//Evento click del boton que registrar el tema, aqui se valida que el input text no este en blanco
-
-	$(".btnContinue1").click(function (e) {
-	    if ($('#tema').val() === ''|| $('#tema').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese el tema por favor');
-	    } else {
-	        var $active = $('.wizard .nav-tabs li.active');
-        	$active.next().removeClass('disabled');
-        	nextTab($active);
-	    }
- 	});
-//Evento click del boton que registrar la pregunata, aqui se valida que el input text no este en blanco
-
-	$(".btnContinue2").click(function (e) {
-	    if ($('#pregunta').val() === ''|| $('#pregunta').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese la pregunta por favor');
-	    } else {
-	        var $active = $('.wizard .nav-tabs li.active');
-        	$active.next().removeClass('disabled');
-        	nextTab($active);
-	    }
- 	});
-
-//Evento click del boton que registrar las repuestas, aqui se valida que los input text no esten en blanco.
-
-	$(".btnContinue3").click(function (e) {
-		var siguiente=true;
-
-	    if ($('#respA').val() === ''|| $('#respA').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese la respuesta A');
-	       siguiente=false;
-	    }
-	    if ($('#respB').val() === ''|| $('#respB').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese la respuesta B');
-	       siguiente=false;
-	    } 
-	    if ($('#respC').val() === ''|| $('#respC').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese la respuesta C');
-	       siguiente=false;
-	    } 
-	    if ($('#respD').val() === ''|| $('#respD').val().indexOf(" ") == 0 ) {
-	       alertDGC('Ingrese la respuesta D');
-	       siguiente=false;
-	    }
-
-	    if(siguiente===true){
-	        var $active = $('.wizard .nav-tabs li.active');
-        	$active.next().removeClass('disabled');
-        	nextTab($active);
-	    }
- 	});
-
-
-//Inicio Alert
-	function alertDGC(mensaje)
-	{
-	    var dgcTiempo=500
-	    var ventanaCS='<div class="dgcAlert"><div class="dgcVentana"><div class="dgcCerrar"></div><div class="dgcMensaje">'+mensaje+'<br><div class="dgcAceptar">Aceptar</div></div></div></div>';
-	    $('body').append(ventanaCS);
-	    var alVentana=$('.dgcVentana').height();
-	    var alNav=$(window).height();
-	    var supNav=$(window).scrollTop();
-	    $('.dgcAlert').css('height',$(document).height());
-	    $('.dgcVentana').css('top',((alNav-alVentana)/2+supNav-100)+'px');
-	    $('.dgcAlert').css('display','block');
-	    $('.dgcAlert').animate({opacity:1},dgcTiempo);
-	    $('.dgcCerrar,.dgcAceptar').click(function(e) {
-	        $('.dgcAlert').animate({opacity:0},dgcTiempo);
-	        setTimeout("$('.dgcAlert').remove()",dgcTiempo);
-	    });
-	}
-	window.alert = function (message) {
-	  alertDGC(message);
-	};
-
-//Fin Alert
-
-	function nextTab(elem) {
-	    $(elem).next().find('a[data-toggle="tab"]').click();
-	}
-	function prevTab(elem) {
-	    $(elem).prev().find('a[data-toggle="tab"]').click();
-	}
- // ========== Logica formulario modal de registrarPregunta  ========== 
+}
+window.alert = function (message) {
+  alertDGC(message);
+};
+//FIN ALERT
+function nextTab(elem) {
+    $(elem).next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+    $(elem).prev().find('a[data-toggle="tab"]').click();
+}
+	// ========== LOGICA FORMULARIO MODAL DE REGISTRARPREGUNTA  ========== 
