@@ -778,3 +778,25 @@ span.round-tab:hover {
 /*
 Style Modal registrar pregunta
 */
+/*
+Style glyphicon
+*/
+.fa{
+
+    margin-left:8px;
+    display:inline-block;
+}
+.fa:hover{
+
+    color: red;
+    
+}
+.lbel{
+    color:#47a3da;
+    display: block;
+    width: 700px;
+
+}
+a{
+    font-style: none;
+}
