@@ -137,7 +137,7 @@
                 <p>{{ctrl.objectInform.text}}</p>
                 <br><br><br>
                 <!-- PREGUNTAS -->
-                <div class="panel-group" id="accordion" ng-controller="MyCtrl as ctrl">
+                <div class="panel-group" id="accordion">
                     <div ng-repeat="(idTopoc,topic) in ctrl.topicObject" class="panel panel-default">
                     <div class="panel-heading cbp-ntaccordion panel-heading-down-up" data-toggle="collapse" data-parent="#accordion" href="#{{idTopoc + '-'+'topi'}}">
                         <h4 class="panel-title">
@@ -151,7 +151,7 @@
                         <div class="panel-body">
                             <div class="panel-group" id="{{$index + '-'+ obtion[$index].id}}">
                                 <div class="panel panel-default" ng-repeat="(idQuestion,question) in topic.questions">
-                                    <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{$index + '-'+ obtion[$index].id}}" href="#{{idQuestion}}">
+                                    <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{$index + '-'+ obtion[$index].id}}" href="#{{idQuestion + '-'+ idTopoc}}">
                                         <h4 class="panel-title">
                                             <a class="cbp-ntaccordion">{{question.name}}</a>
                                             <div class="text-center">
@@ -159,19 +159,19 @@
                                             </div>
                                         </h4>
                                     </div>
-                                    <div id="{{idQuestion}}" class="panel-collapse collapse">
+                                    <div id="{{idQuestion + '-'+ idTopoc}}" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <div class="">
                                                 <label  class="lbel">Pregunta
-                                                    <input type="text" value="{{question.name}}">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i> 
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <input type="text" value="{{question.name}}" id="{{question.name}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)"></i> 
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion)"></i>
                                                 </label>
                                                 <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers">{{obtion[$index].id}}
-                                                    <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer}}">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>	
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                    <i class="fa fa-table" aria-hidden="true"></i>
+                                                    <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ idQuestion + '-'+ answer.name }}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ idQuestion + '-'+ answer.name )"></i>	
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminar(idTopoc,idQuestion,idAnswer)"></i>
+                                                    <i class="fa fa-table" aria-hidden="true"   ng-click="registrar(idTopoc,idQuestion,idAnswer)"></i>
                                                 </label>
                                             </div>
                                         </div>
@@ -363,14 +363,12 @@
                                             <div class="step44 row">
                                                
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevaPregunta ">Nueva pergunta</button>
+                                                    <button type="button" class="btn btn-default nuevaPregunta " ng-click="guardarPregunta()">Nueva pergunta</button>
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevoTema">Nuevo tema</button>
+                                                    <button type="button" class="btn btn-default nuevoTema" ng-click="guardarTema()">Nuevo tema</button>
                                                 </div>
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-primary guardar btn-info-full next-step btnSaveAnContinue">Guardar Tema</button>
-                                                </div>
+                                                 
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -459,14 +457,14 @@
                   <h4 class="modal-title">Datos de Invitado</h4>
                 </div>
                 <div class="modal-body">            
-                    <div class="form-group">
-                      <label for="email">nombre:{{ctrl.UserInvietdObject.name}}</label>
+                    <div>
+                      <span >Nombre: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.name}}</span>
                     </div>
-                    <div class="form-group">
-                      <label for="email">Email:{{ctrl.UserInvietdObject.username}}</label>
+                    <div>
+                      <span >Email: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.username}}</span>
                     </div>
-                    <div class="form-group">
-                      <label for="pw">Password:{{ctrl.UserInvietdObject.password}}</label>
+                    <div>
+                      <span >Password: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.password}}</span>
                     </div>
                 </div>
                 <div class="modal-footer">
