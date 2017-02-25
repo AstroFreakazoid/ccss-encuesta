@@ -20,11 +20,18 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/manager.css">
+    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
     <script src="../../assets/js/angular.min.js"></script>
-    <script src="../../assets/angular/appController.js"></script>
+    
 </head>
-<body id="body" ng-controller="managerCtrl">
+<body id="body" ng-controller="MyCtrl as ctrl">
 
     <!-- preloader -->
     <div id="preloader">
@@ -100,8 +107,8 @@
 
              <div class="col-sm-12 col-md-4 col-lg-4 text-center">        
                 <br>    
-                <h3>{{userAuth.username}}</h3>
-                <h4>{{userAuth.mail}}</h4> 
+                <h3>{{ctrl.UserAdmidObject.username}}</h3>
+                <h4>{{ctrl.UserAdmidObject.name}}</h4> 
              </div>
 
              <div class="col-sm-12 col-md-4 col-lg-4">
@@ -110,10 +117,15 @@
                     Share by link &nbsp;
                     <i class="btn-down-up fa fa-share-alt"></i>    
                 </button> <br><br>
-                <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal" id="btnRegistrarInvitado">
                     Registrar Invitado &nbsp;
                     <i class="btn-down-up fa fa-plus-square"></i>
                 </button>
+                <button type="button" class="btn btn-info btn-lg hidden" style="width: 100%" data-toggle="modal" data-target="#myModalInfoInvitado" id="btnDatosInvitado">
+                    Ver datos de tu invitado &nbsp;
+                    <i class="btn-down-up fa fa-plus-square"></i>
+                </button>
+               
              </div>
         </div>          
     </div>
@@ -122,14 +134,12 @@
         <div class="row">
            <div class="col-sm-12 col-md-8 col-lg-8">
                 <h3>Preguntas Registradas</h3>
-                <p>
-                    Lorem <b>ipsum dolor</b> sit amet, consectetur adipisicing elit. <b>Dolores ipsa nemo dignissimos, totam assumenda sint magni voluptatum odit modi ea illum corrupti iure similique</b> cum veritatis, <b>cupiditate eveniet porro</b> nihil. 
-                </p>
+                <p>{{ctrl.objectInform.text}}</p>
                 <br><br><br>
                 <!-- PREGUNTAS -->
-                <div class="panel-group" id="accordion" ng-controller="encuestaCtrl">
-                    <div ng-repeat="topic in topics" class="panel panel-default">
-                    <div class="panel-heading cbp-ntaccordion panel-heading-down-up" data-toggle="collapse" data-parent="#accordion" href="#{{topic.id}}">
+                <div class="panel-group" id="accordion">
+                    <div ng-repeat="(idTopoc,topic) in ctrl.topicObject" class="panel panel-default">
+                    <div class="panel-heading cbp-ntaccordion panel-heading-down-up" data-toggle="collapse" data-parent="#accordion" href="#{{idTopoc + '-'+'topi'}}">
                         <h4 class="panel-title">
                             <a>{{topic.name}}</a>
                             <div class="text-center">
@@ -137,25 +147,31 @@
                             </div>
                         </h4>
                     </div>
-                    <div id="{{topic.id}}" class="panel-collapse collapse">
+                    <div id="{{idTopoc + '-'+'topi'}}" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <div class="panel-group" id="{{topic.id_container}}">
-                                <div class="panel panel-default" ng-repeat="question in topic.questions">
-                                    <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{topic.id_container}}" href="#{{question.id}}">
+                            <div class="panel-group" id="{{$index + '-'+ obtion[$index].id}}">
+                                <div class="panel panel-default" ng-repeat="(idQuestion,question) in topic.questions">
+                                    <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{$index + '-'+ obtion[$index].id}}" href="#{{idQuestion + '-'+ idTopoc}}">
                                         <h4 class="panel-title">
-                                            <a class="cbp-ntaccordion">{{question.title}}</a>
+                                            <a class="cbp-ntaccordion">{{question.name}}</a>
                                             <div class="text-center">
                                                 <i class="btn-up-down fa fa-chevron-down"></i>
                                             </div>
                                         </h4>
                                     </div>
-                                    <div id="{{question.id}}" class="panel-collapse collapse">
+                                    <div id="{{idQuestion + '-'+ idTopoc}}" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <div class="">
-                                                <label class="lbel " ng-repeat=" answer in question.answers">{{ question.options[$index]}}
-                                                    <input type="text" value="{{ question.answers[$index]}}" class="inputTextResp" id="{{question.id + '-'+ question.options[$index]}}">
-                                                    <span class="glyphicon glyphicon-pencil" onclick='modificar("s")'></span>	
-                                                    <span class="glyphicon glyphicon-trash" onclick='eliminar("dd")'></span>
+                                                <label  class="lbel">Pregunta
+                                                    <input type="text" value="{{question.name}}" id="{{question.name}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)"></i> 
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion)"></i>
+                                                </label>
+                                                <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers">{{obtion[$index].id}}
+                                                    <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ idQuestion + '-'+ answer.name }}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ idQuestion + '-'+ answer.name )"></i>	
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminar(idTopoc,idQuestion,idAnswer)"></i>
+                                                    <i class="fa fa-table" aria-hidden="true"   ng-click="registrar(idTopoc,idQuestion,idAnswer)"></i>
                                                 </label>
                                             </div>
                                         </div>
@@ -347,14 +363,12 @@
                                             <div class="step44 row">
                                                
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevaPregunta ">Nueva pergunta</button>
+                                                    <button type="button" class="btn btn-default nuevaPregunta " ng-click="guardarPregunta()">Nueva pergunta</button>
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevoTema">Nuevo tema</button>
+                                                    <button type="button" class="btn btn-default nuevoTema" ng-click="guardarTema()">Nuevo tema</button>
                                                 </div>
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-primary guardar btn-info-full next-step btnSaveAnContinue">Guardar Tema</button>
-                                                </div>
+                                                 
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -433,6 +447,33 @@
         </div>
     </div>
     <!-- Modal formulario registro invitado-->
+     <!-- Modal datos del invitado-->
+    <div class="modal fade" id="myModalInfoInvitado" role="dialog" style="margin-top: 50px;">
+        <div class="modal-dialog">
+              <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4 class="modal-title">Datos de Invitado</h4>
+                </div>
+                <div class="modal-body">            
+                    <div>
+                      <span >Nombre: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.name}}</span>
+                    </div>
+                    <div>
+                      <span >Email: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.username}}</span>
+                    </div>
+                    <div>
+                      <span >Password: &nbsp;&nbsp;&nbsp;{{objetoProfileUserInvited.password}}</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal datos del invitado-->
 
     <!-- Inicio del perfil si modal -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  style="margin-top: 40px;">
@@ -444,16 +485,15 @@
                 </div>
                 <div class="modal-body text-center">
                     <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-                    <h3 class="media-heading">unoDos@tres.com <small>Costa Rica</small></h3>
+                    <h3 class="media-heading">{{ctrl.UserAdmidObject.username}}<small><br>Costa Rica</small></h3>
                     <span><strong>Skills: </strong></span>
-                        <span class="label label-warning">HTML5/CSS</span>
-                        <span class="label label-info">Bootstrap</span>
-                        <span class="label label-info">Angular</span>
-                        <span class="label label-success">FireBase</span>
+                        <span class="label label-warning">{{ctrl.UserAdmidObject.name}}</span>
+                        <span class="label label-info">{{ctrl.UserAdmidObject.username}}</span>
+                        <span class="label label-info">{{ctrl.UserAdmidObject.password}}</span>
+                        <span class="label label-success">{{ctrl.UserAdmidObject.rol}}</span>
                     <hr>
                     <p class="text-left">
-                        <b>Bio:</b><br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
+                        <b>Bio:</b><br>{{ctrl.UserAdmidObject.commentary}}</p>
                     <br>
                 </div>
                 <div class="modal-footer">                    
@@ -510,7 +550,6 @@
 
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
-    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
     <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/jquery.fancybox.pack.js"></script>
@@ -523,7 +562,8 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
-
+    <script src="../../assets/angular/appController.js"></script>
+    
     <script>
         $(document).ready(function () {
             $('.material-button-toggle').on("click", function () {

@@ -177,7 +177,7 @@ $(".nuevaPregunta").click(function (e) {
     $( '.wizard .nav-tabs li.1' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
-		limpiarText1();
+		
 });
 //ESTA FUNCION LIMPIA LOS INPUT TEXT DE LAS PREGUNTAS Y RESPUESTAS
 function limpiarText1(){
@@ -195,7 +195,7 @@ $(".nuevoTema").click(function (e) {
     $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
-    limpiarText2();
+    
 });
 //ESTA FUNCION LIMPIA LOS INPUT TEXT DEL TEMA,DE LAS PREGUNTAS Y RESPUESTAS
 function limpiarText2(){
