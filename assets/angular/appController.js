@@ -87,14 +87,19 @@ const userAdmin='mar90jesusgmailcom';
             }
         }
         //Function que eliminara una pregunata.
-        $scope.eliminarPregunta = function(idQuestion)
-        {  
+        $scope.eliminarPregunta = function(idQuestion,idTopic)
+        {   
+            refUnTopic=topicsRef.child(idTopic);
+            refPregunta=refUnTopic.child("/questions");
             refUnaPregunta=refPregunta.child(idQuestion);
-            refUnaPregunta.remove();
+            refUnaPregunta.remove(function(error) {
+                alert(error ? "Uh oh!" : "Success!");
+            });
         }
         //Function que modificara el valor de una respuesta.
         $scope.modificarAnswer = function(idTopic,idQuestion,idAnswer,idInput)
-        {  
+        {   
+
             valueInput = document.getElementById(idInput);
             refUnTopic=topicsRef.child(idTopic);
             refPregunta=refUnTopic.child("/questions");
@@ -105,7 +110,7 @@ const userAdmin='mar90jesusgmailcom';
            
         }
         //Function que registrara una nueva respuesta a una pregunta.
-        $scope.registrar = function(idTopic,idQuestion,idAnswer)
+        $scope.registrarAnswer = function(idTopic,idQuestion,idAnswer)
         {  
             refUnTopic=topicsRef.child(idTopic);
             refPregunta=refUnTopic.child("/questions");
@@ -118,14 +123,17 @@ const userAdmin='mar90jesusgmailcom';
            
         }
         //Function que eliminara una respuesta de una pregunta.
-        $scope.eliminar = function(idTopic,idQuestion,idAnswer)
+        $scope.eliminarAsnwer = function(idTopic,idQuestion,idAnswer)
         {  
             refUnTopic=topicsRef.child(idTopic);
             refPregunta=refUnTopic.child("/questions");
             refUnaPregunta=refPregunta.child(idQuestion);
             refRespuesta=refUnaPregunta.child("answers");
-            refUnaRespuesta=refRespuesta.child(idAnswer);
-            refUnaRespuesta.remove();
+            refRespuesta.child(idAnswer).remove(function(error) {
+                alert(error ? "Uh oh!" : "Success!");
+            });
+            
+
         }
 
         function guardarObject(obj){
@@ -133,6 +141,7 @@ const userAdmin='mar90jesusgmailcom';
             $scope.objetoProfileUserInvited= this.userInvietdObject;
         }
 
+        //============================================
         //Seccion de insercion de datos para los topic y questions
         var valueInputTema="";
         var valueInputPregunta="";
@@ -141,9 +150,42 @@ const userAdmin='mar90jesusgmailcom';
         var valueInputRespC="";
         var valueInputRespD="";
         var keyTopic;
-        
+       
+        //Function en cargada de delegar el registro de tema o preguntas.
+         $scope.registar = function(){
+            
+            if(valueInputTema = $("#tema").val()!="" && validarAnwer()){
+                $scope.guardarTema();
+                alert("El tema se registro con exito");
+                limpiarText2();
+                var $active = $('.wizard .nav-tabs li.2');
+                $active.next().removeClass('disabled');
+                prevTab($active);
+                $( '.wizard .nav-tabs li.1' ).removeClass('disabled');
+                $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
+                $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
+                $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
+            }else{
+
+                if( valueInputPregunta =$("#pregunta").val()!="" && validarAnwer()){
+                    $scope.guardarPregunta();
+                    alert("La pregunta se registro con exito");
+                    limpiarText1(); 
+                    var $active = $('.wizard .nav-tabs li.2');
+                    $active.next().removeClass('disabled');
+                    prevTab($active);
+                    $( '.wizard .nav-tabs li.1' ).removeClass('disabled');
+                    $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
+                    $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
+                    $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
+                }
+             }
+                
+          }
+
+        //Function que guarda un tema registrado
         $scope.guardarTema = function()
-        {   
+        {   //Se obtienen los input txt con los datos del formulario de registrar tema y pregunta.
             valueInputTema = $("#tema").val();
             valueInputPregunta =$("#pregunta").val();
             valueInputRespA = $("#respA").val();
@@ -153,6 +195,7 @@ const userAdmin='mar90jesusgmailcom';
            const referenciaUserAdmin=firebase.database().ref().child('uses/admin/'+userAdmin);
            var refNewTopic=referenciaUserAdmin.child('topics');
            var newKey=referenciaUserAdmin.child('topics').push();
+           //Se inserta el Json en la bd
            refNewTopic.push().set(
            {
                 name: valueInputTema,
@@ -180,26 +223,28 @@ const userAdmin='mar90jesusgmailcom';
                  },
                 ],
             });
-           referenciaUserAdmin.child('topics').limitToLast(2).on("child_added", function(snapshot) {
+           //Se inicia liza la varible que guardara la ultima key de un tema registrado .
+           referenciaUserAdmin.child('topics').orderByKey().limitToLast(1).on("child_added", function(snapshot) {
               sobreEscribirKeyRef(snapshot.key);
             });
-           alert("El tema se rigistro con exito");
-           limpiarText2();
         }
-        
+
+
+        //Function que guarda una preguna registrada . 
         $scope.guardarPregunta = function()
-        {   
+        {   //Se obtienen los input txt con los datos del formulario de registrar tema y pregunta.
             valueInputPregunta =$("#pregunta").val();
             valueInputRespA = $("#respA").val();
             valueInputRespB = $("#respB").val();
             valueInputRespC = $("#respC").val();
             valueInputRespD = $("#respD").val();
-
+            //Se obtienen las referencias para la insercion de la pregunta en la bd.
             const referenciaUserAdmin=firebase.database().ref().child('uses/admin/'+userAdmin);
-            referenciaUserAdmin.child('topics').limitToLast(2).on("child_added", function(snapshot) {
+            referenciaUserAdmin.child('topics').orderByKey().limitToLast(1).on("child_added", function(snapshot) {
             sobreEscribirKeyRef(snapshot.key);
             });   
             var refNewQuestion=userRef.child('topics/'+keyTopic+"/questions");
+            //Se inserta el Json con la pregunta y sus respuestas.
             refNewQuestion.push().set(
            {  name:valueInputPregunta,
                     help:"isisisisis",
@@ -221,16 +266,90 @@ const userAdmin='mar90jesusgmailcom';
                         porcentage:0,
                     }],
             });
-            alert("La pregunta se rigistro con exito");
-            limpiarText1();
         }
+
+        $scope.registrarPregunta = function(idTopic)
+        {   var idUltimaPregunta;
+            //Se obtienen las referencias para la insercion de la pregunta en la bd.
+            const referenciaUserAdmin=firebase.database().ref().child('uses/admin/'+userAdmin);
+            referenciaUserAdmin.child('topics/'+idTopic+'/questions').orderByKey().limitToLast(1).on("child_added", function(snapshot) {
+            idUltimaPregunta=snapshot.key;
+            }); 
+            
+            var refNewQuestion=userRef.child('topics/'+idTopic+"/questions");
+            //Se inserta el Json con la pregunta y sus respuestas.
+            refNewQuestion.push().set(
+           {  name:'pregunta'+idUltimaPregunta,
+                    help:"isisisisis",
+                    visible:false,
+                    answers:[
+                    {
+                        name:'A'+idTopic,
+                        porcentage:0,
+                    },
+                    {
+                        name:'B'+idTopic,
+                        porcentage:0,
+                    },
+                    {
+                        name:'C'+idTopic,
+                        porcentage:0,
+                    },{
+                        name:'D'+idTopic,
+                        porcentage:0,
+                    }],
+            });
+        }
+        
+
+        //Funtion que sobre escribe le valor de la variable que guarda la ultima key de un tema registrado.
         function sobreEscribirKeyRef(topicKey){keyTopic=topicKey;}
-              
+        //seccion para la gestin de modificacion de datos de un tema.
+
+        //Esta functiones la que se encarga de modificar el nombre de un tema.
+        $scope.modificarTopic = function(idTopic,idInput)
+        {       
+            valueInput = document.getElementById(idInput);
+            refUnTopic=topicsRef.child(idTopic+"/name");
+            refUnTopic.set(valueInput.value);
+        }
+        //Function encargada de eliminar un tema.
+        $scope.eliminarTopic = function(idTopic)
+        {       
+           refUnTopic=topicsRef.child(idTopic);
+           refUnTopic.remove(function(error) {
+                alert(error ? "Uh oh!" : "Success!");
+            });
+         }     
     });
-    
-
-
 }());
+
+
+//===================================================================
+//Seccion de validacion de las preguntas y limpiesa de los texfil
+//Function encargada de validar que los campos de las respuestas del modal de regitrar preguntas tengan campos validos.
+function validarAnwer(){
+    var siguiente=true;
+
+    if ($('#respA').val() === ''|| $('#respA').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta A');
+       siguiente=false;
+    }
+    if ($('#respB').val() === ''|| $('#respB').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta B');
+       siguiente=false;
+    } 
+    if ($('#respC').val() === ''|| $('#respC').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta C');
+       siguiente=false;
+    } 
+    if ($('#respD').val() === ''|| $('#respD').val().indexOf(" ") == 0 ) {
+       alertDGC('Ingrese la respuesta D');
+       siguiente=false;
+    }
+ 
+    return siguiente;
+};
 
 //ESTA FUNCION LIMPIA LOS INPUT TEXT DE LAS PREGUNTAS Y RESPUESTAS
 function limpiarText1(){
@@ -248,4 +367,12 @@ function limpiarText2(){
     $('#respB').val("");
     $('#respC').val("");
     $('#respD').val("");
+}
+
+//Funciones que mueven los tabuladore adelante o para atras. Los del modal de registrar pregunta.
+function nextTab(elem) {
+    $(elem).next().find('a[data-toggle="tab"]').click();
+}
+function prevTab(elem) {
+    $(elem).prev().find('a[data-toggle="tab"]').click();
 }
