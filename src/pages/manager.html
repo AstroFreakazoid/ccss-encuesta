@@ -99,7 +99,7 @@
             <!-- Inicio del perfil no modal -->
              <div class="col-sm-12 col-md-4 col-lg-4 bg-primary" style="padding: 15px;border-radius: 10px;">
                 <a id="user-btn-details" href="#aboutModal" data-toggle="modal" data-target="#myModal2">
-                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" class="img-circle">
+                    <img src='{{ctrl.UserAdmidObject.imgname}}' name="aboutme" width="140" height="140" class="img-circle">
                     &nbsp;&nbsp;&nbsp;
                    <em><b>Ver descripcion!</b></em>
                 </a> 
@@ -178,7 +178,7 @@
                                                 <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers track by $index">{{obtion[$index].id}}
                                                     <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name}}">
                                                     <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name)" title="Modficar"></i>	
-                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarAsnwer(idTopoc,idQuestion,idAnswer)" title="Eliminar"></i>
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarAsnwer(idTopoc,idQuestion,idAnswer,answer)" title="Eliminar"></i>
                                                     <i class="fa fa-table" aria-hidden="true"   ng-click="registrarAnswer(idTopoc,idQuestion,idAnswer)" title="Agregar"></i>
                                                 </label>
                                             </div>
@@ -487,7 +487,7 @@
                     <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
                 </div>
                 <div class="modal-body text-center">
-                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <img src="{{ctrl.UserAdmidObject.imgname}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading">{{ctrl.UserAdmidObject.username}}<small><br>Costa Rica</small></h3>
                     <span><strong>Skills: </strong></span>
                         <span class="label label-warning">{{ctrl.UserAdmidObject.name}}</span>

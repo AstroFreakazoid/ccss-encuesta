@@ -171,11 +171,11 @@ $(document).ready(function () {
 });
 //FUNCION QUE HACE TAB PARA EL REGISTRO DE UNA NUEVA PREGUNTA
 $(".nuevaPregunta").click(function (e) {
-	var $active = $('.wizard .nav-tabs li.1');
+	var $active = $('.wizard .nav-tabs li.2');
     $active.next().removeClass('disabled');
     nextTab($active);
-    $( '.wizard .nav-tabs li.1' ).addClass( "disabled" );
-    $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
+    $( '.wizard .nav-tabs li.1' ).removeClass( "disabled" );
+    $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
 		
 });
@@ -189,12 +189,13 @@ function limpiarText1(){
 }
 //FUNCION QUE HACE TAB PARA EL REGISTRO DE UN NUEVO TEMA
 $(".nuevoTema").click(function (e) {
-	var $active = $('.wizard .nav-tabs li.2');
-    prevTab($active);
-    $( '.wizard .nav-tabs li.1' ).removeClass('disabled');
-    $( '.wizard .nav-tabs li.2' ).addClass( "disabled" );
+	var $active = $('.wizard .nav-tabs li.1');
+    $active.next().removeClass('disabled');
+    nextTab($active);
+    $( '.wizard .nav-tabs li.2' ).removeClass('disabled');
     $( '.wizard .nav-tabs li.3' ).addClass( "disabled" );
     $( '.wizard .nav-tabs li.4' ).addClass( "disabled" );
+   
     
 });
 //ESTA FUNCION LIMPIA LOS INPUT TEXT DEL TEMA,DE LAS PREGUNTAS Y RESPUESTAS
@@ -227,32 +228,7 @@ $(".btnContinue2").click(function (e) {
     }
 });
 
-//EVENTO CLICK DEL BOTON QUE REGISTRAR LAS REPUESTAS, AQUI SE VALIDA QUE LOS INPUT TEXT NO ESTEN EN BLANCO.
-$(".btnContinue3").click(function (e) {
-	var siguiente=true;
 
-    if ($('#respA').val() === ''|| $('#respA').val().indexOf(" ") == 0 ) {
-       alertDGC('Ingrese la respuesta A');
-       siguiente=false;
-    }
-    if ($('#respB').val() === ''|| $('#respB').val().indexOf(" ") == 0 ) {
-       alertDGC('Ingrese la respuesta B');
-       siguiente=false;
-    } 
-    if ($('#respC').val() === ''|| $('#respC').val().indexOf(" ") == 0 ) {
-       alertDGC('Ingrese la respuesta C');
-       siguiente=false;
-    } 
-    if ($('#respD').val() === ''|| $('#respD').val().indexOf(" ") == 0 ) {
-       alertDGC('Ingrese la respuesta D');
-       siguiente=false;
-    }
-	if(siguiente===true){
-        var $active = $('.wizard .nav-tabs li.active');
-    	$active.next().removeClass('disabled');
-    	nextTab($active);
-    }
-});
 //INICIO ALERT
 function alertDGC(mensaje)
 {
