@@ -99,7 +99,7 @@
             <!-- Inicio del perfil no modal -->
              <div class="col-sm-12 col-md-4 col-lg-4 bg-primary" style="padding: 15px;border-radius: 10px;">
                 <a id="user-btn-details" href="#aboutModal" data-toggle="modal" data-target="#myModal2">
-                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" class="img-circle">
+                    <img src='{{ctrl.UserAdmidObject.imgname}}' name="aboutme" width="140" height="140" class="img-circle">
                     &nbsp;&nbsp;&nbsp;
                    <em><b>Ver descripcion!</b></em>
                 </a> 
@@ -150,6 +150,13 @@
                     <div id="{{idTopoc + '-'+'topi'}}" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="panel-group" id="{{$index + '-'+ obtion[$index].id}}">
+
+                                 <label class="lbel">Tema
+                                    <input type="text" value="{{topic.name}}" class="inputTextResp" id="{{topic.name +'-'+ idTopoc}}">
+                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarTopic(idTopoc,topic.name +'-'+ idTopoc)" title="Modificar"></i>  
+                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarTopic(idTopoc)" title="Eliminar"></i>
+                                </label>
+
                                 <div class="panel panel-default" ng-repeat="(idQuestion,question) in topic.questions">
                                     <div class="panel-heading panel-heading-up-down" data-toggle="collapse" data-parent="#{{$index + '-'+ obtion[$index].id}}" href="#{{idQuestion + '-'+ idTopoc}}">
                                         <h4 class="panel-title">
@@ -163,15 +170,16 @@
                                         <div class="panel-body">
                                             <div class="">
                                                 <label  class="lbel">Pregunta
-                                                    <input type="text" value="{{question.name}}" id="{{question.name}}">
-                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)"></i> 
-                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion)"></i>
+                                                    <input type="text" value="{{question.name}}" id="{{question.name }}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)" title="Modificar"></i> 
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion,idTopoc)" title="Eliminar"></i>
+                                                     <i class="fa fa-table" aria-hidden="true"   ng-click="registrarPregunta(idTopoc)" title="Agregar"></i>
                                                 </label>
-                                                <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers">{{obtion[$index].id}}
-                                                    <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ idQuestion + '-'+ answer.name }}">
-                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ idQuestion + '-'+ answer.name )"></i>	
-                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminar(idTopoc,idQuestion,idAnswer)"></i>
-                                                    <i class="fa fa-table" aria-hidden="true"   ng-click="registrar(idTopoc,idQuestion,idAnswer)"></i>
+                                                <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers track by $index">{{obtion[$index].id}}
+                                                    <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name}}">
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name)" title="Modficar"></i>	
+                                                    <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarAsnwer(idTopoc,idQuestion,idAnswer,answer)" title="Eliminar"></i>
+                                                    <i class="fa fa-table" aria-hidden="true"   ng-click="registrarAnswer(idTopoc,idQuestion,idAnswer)" title="Agregar"></i>
                                                 </label>
                                             </div>
                                         </div>
@@ -287,7 +295,7 @@
                                     </li>
 
                                     <li role="presentation" class="disabled 4">
-                                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Completado">
+                                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Completado">
                                             <span class="round-tab">
                                                 <i>4</i>
                                             </span>
@@ -299,7 +307,18 @@
                                 <form role="form">
                                     <div class="tab-content">
                                         <div class="tab-pane active" role="tabpanel" id="step1">
-                                            <div class="step1">
+                                            <div class="step2 row">
+                                               
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <button type="button" class="btn btn-default nuevoTema">Nueva tema</button>
+                                                </div>
+                                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                                    <button type="button" class="btn btn-default nuevaPregunta">Nuevo pregunta</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" role="tabpanel" id="step2">
+                                            <div class="step2">
                                                 <div class="step_21">
                                                     <h5><strong>Tema</strong></h5>
                                                     <hr>
@@ -307,26 +326,22 @@
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                                             <input type="text" class="form-control" id="tema" placeholder="Tema">
                                                         </div>
-                                                   
-                                                    </div>
-                                             
-                                        
+                                                   </div>
                                                 </div>
                                             </div>
                                             <ul class="list-inline pull-right">
                                                 <li><button type="button" class="btn btn-primary btnContinue1 next-step btnSaveAnContinue">continue</button></li>
                                             </ul>
                                         </div>
-                                        <div class="tab-pane" role="tabpanel" id="step2">
-                                            <div class="step2">
+                                        <div class="tab-pane " role="tabpanel" id="step3">
+                                            <div class="step33">
                                                 <div class="step_21">
                                                     <h5><strong>Pregunta</strong></h5>
                                                     <hr>
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                                             <input type="text" class="form-control" id="pregunta" placeholder="Pregunta">
-                                                        
-                                                         </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -336,8 +351,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane " role="tabpanel" id="step3">
-                                            <div class="step33">
+                                        <div class="tab-pane " role="tabpanel" id="step4">
+                                            <div class="step4 row">
                                                 <h5><strong>Respuestas</strong></h5>
                                                 <hr>
                                                 <div class="row mar_ned">
@@ -355,20 +370,8 @@
                                             </div>
                                             <div class="list-inline pull-right row">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <button type="button" class="btn btn-primary btnContinue3 btn-info-full next-step btnSaveAnContinue">continue</button>
+                                                     <button type="button" class="btn btn-default" ng-click="registar()">Registrar</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane " role="tabpanel" id="complete">
-                                            <div class="step44 row">
-                                               
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevaPregunta " ng-click="guardarPregunta()">Nueva pergunta</button>
-                                                </div>
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevoTema" ng-click="guardarTema()">Nuevo tema</button>
-                                                </div>
-                                                 
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -484,7 +487,7 @@
                     <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
                 </div>
                 <div class="modal-body text-center">
-                    <img src='http://wp1.themexlab.com/html/medi-plus/img/team/single-doctor.jpg' name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <img src="{{ctrl.UserAdmidObject.imgname}}" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     <h3 class="media-heading">{{ctrl.UserAdmidObject.username}}<small><br>Costa Rica</small></h3>
                     <span><strong>Skills: </strong></span>
                         <span class="label label-warning">{{ctrl.UserAdmidObject.name}}</span>

@@ -73,6 +73,13 @@
     border: 2px solid #aaa;
     background-size: cover;
 }
+.avatarRegistrar{
+    width: 170px;height: 150px;
+    margin: 10px auto 30px;
+    border-radius: 10%;
+    border: 2px solid #aaa;
+    background-size: cover;
+}
 
 .form-box input{
     width: 100%;
