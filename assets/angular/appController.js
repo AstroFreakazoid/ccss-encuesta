@@ -1,5 +1,5 @@
 //Se inicializa el usuario.
-const userAdmin='mar90jesusgmailcom';
+const userAdmin=localStorage.getItem("username");
 //Se inicializa el usuario.
 (function(){
     //Se inicialializa firebase.
@@ -18,7 +18,8 @@ const userAdmin='mar90jesusgmailcom';
     angular
     .module('myApp',['firebase'])
 
-    .controller('MyCtrl',function($scope,$firebaseObject,$firebaseArray){
+    .controller('MyCtrl',function($scope,$firebaseObject,$firebaseArray)
+    {
         //Se declara la variable del usuario invitado.
         $scope.userinvited='null';
         //Se crea una referencia a la informacion extra relacionada a la pagina mananger.
@@ -38,23 +39,26 @@ const userAdmin='mar90jesusgmailcom';
         var referenciaUserInvited;
 
         //Se obtienen el nombre del invitado pormedio del snapshot.
-        userinvitedRef.on('value', function(snapshot) {
-          //Se crea un objeto invitado. Por medio de la referncia se trae el Json.
-          referenciaUserInvited=firebase.database().ref().child('uses/invited/'+snapshot.val()+"/profile");
-          //Se llama la fucntion guardar objeto para poder sacar los datos 
-          guardarObject(referenciaUserInvited);
+        userinvitedRef.on('value', function(snapshot) 
+        {
+            //Se crea un objeto invitado. Por medio de la referncia se trae el Json.
+             referenciaUserInvited=firebase.database().ref().child('uses/invited/'+snapshot.val()+"/profile");
+            //Se llama la fucntion guardar objeto para poder sacar los datos 
+            guardarObject(referenciaUserInvited);
 
-          //Se valida si existe  invitado sino para ocultar el boton de registrar invitado.
-          if(snapshot.val()!='null'){
-             $('#btnRegistrarInvitado').addClass("hidden");//Se oculta el boton
-             $('#btnDatosInvitado').removeClass("hidden");//Remueve la clase que oculta el boto.
-            $('#btnDatosInvitado').addClass("show");//Agrega una clase que hace el boton visible.
-          }
-         if(snapshot.val()==='null'){
-            $('#btnDatosInvitado').addClass("hidden");//Remueve la clase que oculta el boto.
-            $('#btnRegistrarInvitado').removeClass("hidden");//Agrega la clase que oculta el boto.
-            $('#btnRegistrarInvitado').addClass("show");//Agrega una clase que hace el boton visible.
-          }
+            //Se valida si existe  invitado sino para ocultar el boton de registrar invitado.
+            if(snapshot.val()!='null')
+            {
+                 $('#btnRegistrarInvitado').addClass("hidden");//Se oculta el boton
+                 $('#btnDatosInvitado').removeClass("hidden");//Remueve la clase que oculta el boto.
+                $('#btnDatosInvitado').addClass("show");//Agrega una clase que hace el boton visible.
+            }
+            if(snapshot.val()==='null')
+            {
+                $('#btnDatosInvitado').addClass("hidden");//Remueve la clase que oculta el boto.
+                $('#btnRegistrarInvitado').removeClass("hidden");//Agrega la clase que oculta el boto.
+                $('#btnRegistrarInvitado').addClass("show");//Agrega una clase que hace el boton visible.
+            }
         });
      
         //Se crea un array con datos quemados. Es el array avecedario.
@@ -125,6 +129,7 @@ const userAdmin='mar90jesusgmailcom';
         //Function que eliminara una respuesta de una pregunta.
         $scope.eliminarAsnwer = function(idTopic,idQuestion,idAnswer)
         {  
+           
             refUnTopic=topicsRef.child(idTopic);
             refPregunta=refUnTopic.child("/questions");
             refUnaPregunta=refPregunta.child(idQuestion);
@@ -132,11 +137,9 @@ const userAdmin='mar90jesusgmailcom';
             refRespuesta.child(idAnswer).remove(function(error) {
                 alert(error ? "Uh oh!" : "Success!");
             });
-            
-
         }
-
-        function guardarObject(obj){
+        function guardarObject(obj)
+        {
             this.userInvietdObject=$firebaseObject(obj);
             $scope.objetoProfileUserInvited= this.userInvietdObject;
         }
@@ -152,7 +155,8 @@ const userAdmin='mar90jesusgmailcom';
         var keyTopic;
        
         //Function en cargada de delegar el registro de tema o preguntas.
-         $scope.registar = function(){
+         $scope.registar = function()
+         {
             
             if(valueInputTema = $("#tema").val()!="" && validarAnwer()){
                 $scope.guardarTema();
@@ -181,7 +185,7 @@ const userAdmin='mar90jesusgmailcom';
                 }
              }
                 
-          }
+        }
 
         //Function que guarda un tema registrado
         $scope.guardarTema = function()
@@ -228,7 +232,6 @@ const userAdmin='mar90jesusgmailcom';
               sobreEscribirKeyRef(snapshot.key);
             });
         }
-
 
         //Function que guarda una preguna registrada . 
         $scope.guardarPregunta = function()
@@ -320,7 +323,7 @@ const userAdmin='mar90jesusgmailcom';
            refUnTopic.remove(function(error) {
                 alert(error ? "Uh oh!" : "Success!");
             });
-         }     
+        }     
     });
 }());
 
