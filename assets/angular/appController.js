@@ -1,4 +1,4 @@
-//Se inicializa el usuario.
+//Se inicializa el usuario con los datos del local storage
 const userAdmin=localStorage.getItem("username");
 //Se inicializa el usuario.
 (function(){
@@ -34,7 +34,7 @@ const userAdmin=localStorage.getItem("username");
         //Se crea un objeto con la funcion$firebaseObject();.
         this.UserAdmidObject=$firebaseObject(profileRef);
         //Se obtiene la referencia al nombre del usuario invitado .
-        userinvitedRef=profileRef.child('invitedname');
+        var userinvitedRef=profileRef.child('invitedname');
         //Se declara la variable que guardara la referencia a los datos del invitado.
         var referenciaUserInvited;
 
@@ -323,7 +323,60 @@ const userAdmin=localStorage.getItem("username");
            refUnTopic.remove(function(error) {
                 alert(error ? "Uh oh!" : "Success!");
             });
-        }     
+        }
+        var nameInvitado=document.getElementById("name");
+        var correoInvitado=document.getElementById("email");
+        var passwordInvitado=document.getElementById("pwd");
+        var nameInvitadoFormanted;
+
+        $scope.registrarInvitado=function()
+        {   
+            if(this.valiadarDatosInvited()){
+               nameInvitadoFormanted=this.formatearNameUser(correoInvitado.value);
+               firebase.database().ref().child('uses/invited/'+nameInvitadoFormanted+"/profile/").set(
+                {name:nameInvitado.value,
+                 dependence:userAdmin,
+                 password:passwordInvitado.value,
+                 rol:"invited",
+                 username:nameInvitadoFormanted
+             }); 
+               profileRef.update({
+                invitedname:nameInvitadoFormanted
+               });
+            }
+            
+        } 
+        $scope.valiadarDatosInvited=function()
+        {   var siguiente=true;
+
+            if ($('#name').val() === ''|| $('#respA').val().indexOf(" ") == 0 ) {
+               alertDGC('Ingrese el nombre y apellidos de su invitado');
+               siguiente=false;
+            }
+            if ($('#email').val() === ''|| $('#email').val().indexOf(" ") == 0 ) {
+               alertDGC('Ingrese un correo para el invitado');
+               siguiente=false;
+            }
+            if ($('#pwd').val() === ''|| $('#pwd').val().indexOf(" ") == 0 && $('#pwd').val()<6) {
+               alertDGC('contraseña invalida, se permite un minimo de 6 caracteres ');
+               siguiente=false;
+            }
+            return siguiente;
+        }
+        $scope.formatearNameUser = function( nameUser)//Funtion responsable de formatear el correo electronicom para conventirlo en el nombre de usuario del sistema(id).
+        { 
+           var formatName="";//Variable que lamacenara le correo ya formateado
+           var chart; //Variable que guardara cada caracter sacado del correo electronico del usuario
+           for(var i=0;i<nameUser.length;i++){//Bucle que recorre cada letra o caracter del corro electronico.
+              chart = nameUser.charAt(i);//Se guarda un caracter.
+              if(chart==="."||chart==="@"||chart===" "){//Se valida . @ y espacios
+                
+              }else{
+                formatName=(formatName+chart);//Se concatenan los caracteres validos para el formateo del correo
+              }
+           }
+           return formatName;//Se retorna la cadena de caracteres ya formateada.
+        }    
     });
 }());
 

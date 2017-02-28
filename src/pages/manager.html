@@ -427,6 +427,10 @@
                 <div class="modal-body">            
                   <form>
                     <div class="form-group">
+                      <label for="name">Name:</label>
+                      <input type="text" class="form-control" id="name" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
                       <label for="email">Email:</label>
                       <input type="email" class="form-control" id="email" placeholder="Enter email">
                     </div>
@@ -438,13 +442,13 @@
                       <label><input type="checkbox"> Remember me</label>
                     </div>
 
-                    <button type="submit" class="btn btn-default btn-info btn-lg">Submit</button>
+                    <button type="button" class="btn btn-default btn-info btn-lg" ng-click="registrarInvitado()" data-dismiss="modal">Registrar</button>
                   </form>
 
                 </div>
                 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal" >Close</button>
                 </div>
             </div>
         </div>
