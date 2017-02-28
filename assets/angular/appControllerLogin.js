@@ -193,24 +193,48 @@ const userAdmin=localStorage.getItem("username");
     var txtEmail = document.getElementById('loginEmail');
     var txtPassword = document.getElementById('loginPassword');
     var correoFormateado="null";//Varisable que almacenara el correo electronico si . y @
+    $scope.checkboxModel = {
+       value1 :false 
+    };
     $scope.login = function(){
       correoFormateado=$scope.formatearNameUser(txtEmail.value);//Se llama a la function que formatea el correo electronico.
-      ref.child("/uses/admin").orderByChild("profile/username/").on("child_added", function(snapshot) 
-      {//Se obtiene la lista de usuarios exixtentes en la bd.
-        if(snapshot.key===correoFormateado)
-        {//Se comparan los nombres de los corros 
-            ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
-            {
-                if(txtPassword.value==snapshot.val())
-                {
-                  localStorage.setItem("username",correoFormateado);
-                  location.href = "manager.html";
-                }else{
-                  alert("Contraseña no valida");
-                }
-            });
-        }
-      });
+      if($scope.checkboxModel.value1){
+        ref.child("/uses/admin").orderByChild("profile/username/").on("child_added", function(snapshot) 
+        {//Se obtiene la lista de usuarios exixtentes en la bd.
+          if(snapshot.key===correoFormateado)
+          {//Se comparan los nombres de los corros 
+              ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
+              {
+                  if(txtPassword.value==snapshot.val())
+                  {
+                    localStorage.setItem("username",correoFormateado);
+                    location.href = "manager.html";
+                  }else{
+                    alert("Contraseña no valida");
+                  }
+              });
+          }
+        });
+      }else{
+        ref.child("/uses/invited").orderByChild("profile/username/").on("child_added", function(snapshot) 
+        {//Se obtiene la lista de usuarios exixtentes en la bd.
+          if(snapshot.key===correoFormateado)
+          {//Se comparan los nombres de los corros 
+              ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
+              {
+                  if(txtPassword.value==snapshot.val())
+                  {
+                    localStorage.setItem("username",correoFormateado);
+                    location.href = "encuesta.html";
+                  }else{
+                    alert("Contraseña no valida");
+                  }
+              });
+          }
+        });
+      }
+      
+   
     }
 
 
