@@ -1,11 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: url("../img/ancianos-blur.jpg") fixed center no-repeat;
-    background-size: cover;
-}
-
 .column-chart {
     position: relative;
     z-index: 20;
