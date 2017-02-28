@@ -15,53 +15,526 @@
     <link rel="stylesheet" href="../../assets/css/animate.css">
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
-    <link rel="stylesheet" href="../../assets/css/AnswersScreen.css">
-    <script src="../../assets/js/AnswersScreen.js"></script>
+    <link rel="stylesheet" href="../../assets/css/stats.css">
     <script src="../../assets/js/angular.min.js"></script>
-    <script src="../../assets/angular/appController.js"></script>
+    <script src="../../assets/angular/encuestaController.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
+    <style>
+
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.428571429;
+            border-radius: 15px;
+        }
+        .btn-circle.btn-lg {
+            width: 50px;
+            height: 50px;
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 25px;
+        }
+        .btn-circle.btn-xl {
+            width: 70px;
+            height: 70px;
+            padding: 10px 16px;
+            font-size: 24px;
+            line-height: 1.33;
+            border-radius: 35px;
+        }
+
+        @import('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css')
+
+        .funkyradio div {
+            clear: both;
+            overflow: hidden;
+        }
+
+        .funkyradio label {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid #D1D3D4;
+            font-weight: normal;
+        }
+
+        .funkyradio input[type="radio"]:empty,
+        .funkyradio input[type="checkbox"]:empty {
+            display: none;
+        }
+
+        .funkyradio input[type="radio"]:empty ~ label,
+        .funkyradio input[type="checkbox"]:empty ~ label {
+            position: relative;
+            line-height: 2.5em;
+            text-indent: 3.25em;
+            margin-top: 2em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .funkyradio input[type="radio"]:empty ~ label:before,
+        .funkyradio input[type="checkbox"]:empty ~ label:before {
+            position: absolute;
+            display: block;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            content: '';
+            width: 2.5em;
+            background: #D1D3D4;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
+        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
+            color: #888;
+        }
+
+        .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
+        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #C2C2C2;
+        }
+
+        .funkyradio input[type="radio"]:checked ~ label,
+        .funkyradio input[type="checkbox"]:checked ~ label {
+            color: #777;
+        }
+
+        .funkyradio input[type="radio"]:checked ~ label:before,
+        .funkyradio input[type="checkbox"]:checked ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #333;
+            background-color: #ccc;
+        }
+
+        .funkyradio input[type="radio"]:focus ~ label:before,
+        .funkyradio input[type="checkbox"]:focus ~ label:before {
+            box-shadow: 0 0 0 3px #999;
+        }
+
+        .funkyradio-default input[type="radio"]:checked ~ label:before,
+        .funkyradio-default input[type="checkbox"]:checked ~ label:before {
+            color: #333;
+            background-color: #ccc;
+        }
+
+        .funkyradio-primary input[type="radio"]:checked ~ label:before,
+        .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #337ab7;
+        }
+
+        .funkyradio-success input[type="radio"]:checked ~ label:before,
+        .funkyradio-success input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #5cb85c;
+        }
+
+        .funkyradio-danger input[type="radio"]:checked ~ label:before,
+        .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #d9534f;
+        }
+
+        .funkyradio-warning input[type="radio"]:checked ~ label:before,
+        .funkyradio-warning input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #f0ad4e;
+        }
+
+        .funkyradio-info input[type="radio"]:checked ~ label:before,
+        .funkyradio-info input[type="checkbox"]:checked ~ label:before {
+            color: #fff;
+            background-color: #5bc0de;
+        }
+
+        /* SCSS STYLES */
+        /*
+        .funkyradio {
+
+            div {
+                clear: both;
+                overflow: hidden;
+            }
+
+            label {
+                width: 100%;
+                border-radius: 3px;
+                border: 1px solid #D1D3D4;
+                font-weight: normal;
+            }
+
+            input[type="radio"],
+            input[type="checkbox"] {
+
+                &:empty {
+                    display: none;
+
+                    ~ label {
+                        position: relative;
+                        line-height: 2.5em;
+                        text-indent: 3.25em;
+                        margin-top: 2em;
+                        cursor: pointer;
+                        user-select: none;
+
+                        &:before {
+                            position: absolute;
+                            display: block;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            content: '';
+                            width: 2.5em;
+                            background: #D1D3D4;
+                            border-radius: 3px 0 0 3px;
+                        }
+                    }
+                }
+
+                &:hover:not(:checked) ~ label {
+                    color: #888;
+
+                    &:before {
+                        content: '\2714';
+                        text-indent: .9em;
+                        color: #C2C2C2;
+                    }
+                }
+
+                &:checked ~ label {
+                    color: #777;
+
+                    &:before {
+                        content: '\2714';
+                        text-indent: .9em;
+                        color: #333;
+                        background-color: #ccc;
+                    }
+                }
+
+                &:focus ~ label:before {
+                    box-shadow: 0 0 0 3px #999;
+                }
+            }
+
+            &-default {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #333;
+                        background-color: #ccc;
+                    }
+                }
+            }
+
+            &-primary {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #fff;
+                        background-color: #337ab7;
+                    }
+                }
+            }
+
+            &-success {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #fff;
+                        background-color: #5cb85c;
+                    }
+                }
+            }
+
+            &-danger {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #fff;
+                        background-color: #d9534f;
+                    }
+                }
+            }
+
+            &-warning {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #fff;
+                        background-color: #f0ad4e;
+                    }
+                }
+            }
+
+            &-info {
+                input[type="radio"],
+                input[type="checkbox"] {
+                    &:checked ~ label:before {
+                        color: #fff;
+                        background-color: #5bc0de;
+                    }
+                }
+            }
+        }
+        */
+
+    </style>
 </head>
-<body id="body">
+<body id="body" ng-controller="encuestaCtrl">
     <div id="preloader">
         <img src="../../assets/img/preloader.gif" alt="Preloader">
     </div>
 
-    <header id="navigation" class="navbar-fixed-top navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <!-- responsive nav button -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars fa-2x"></i>
-                </button>
-                <a class="navbar-brand" href="#body">
-                    <h1 id="logo">
-                        <img src="../../assets/img/logo.png" alt="Brandi">
-                    </h1>
-                </a>
-            </div>
-            <nav class="collapse navbar-collapse navbar-right" role="navigation">
-                <ul id="nav" class="nav navbar-nav">
-                    <li><a href="home.html">PRINCIPAL</a></li>
-                    <li><a href="encuesta.html">ENCUESTA</a></li>
-                    <li><a href="manager.html">MANAGER</a></li>
-                    <li><a href="about.html">ACERCA DE</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    
     <br><br><br><br><br>
-    
+
     <div class="container">
         <div class="row text-center">
             <h1>ENCUESTA</h1>
             <hr width="50%"><br>
-            
         </div>
     </div>
 
-    <!-- 
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="opacity: 0.8;">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active bg-primary">
+                <div class="carousel-caption">
+                    <h3>{{title}}</h3>
+                    <h4>{{comment}}</h4>
+                </div>
+            </div>
+            <div class="item bg-primary" ng-repeat="item in items">
+                <div>
+                    <div class="carousel-caption">
+                        <a data-toggle="modal" data-target="#helpId" style="position: fixed;top: 20px;right: 30px;"><i class="fa fa-slideshare btn-lg"></i></a>
+                        <h3>{{item.title}}</h3>
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId" style="position: fixed;top: 15px;left:30px;z-index: 9999;">ESTADISTICAS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <i class="fa fa-arrow-left fa-2x" style="margin-top: 300px;"></i>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <i class="fa fa-arrow-right fa-2x" style="margin-top: 300px;"></i>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+    <!-- Inicio del perfil si modal -->
+    <div class="modal fade" id="helpId" tabindex="-1" role="dialog" aria-labelledby="helpLabelId" aria-hidden="true"  style="margin-top: 40px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="helpLabelId">Help</h4>
+                </div>
+                <div class="modal-body text-center">
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci asperiores debitis dicta dolore doloremque dolores doloribus ex expedita facere impedit laudantium maiores nesciunt, perspiciatis reiciendis reprehenderit similique voluptatem voluptatibus.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inicio del perfil si modal -->
+
+
+
+    <!-- Inicio del perfil si modal -->
+    <div class="modal fade" id="statsId" tabindex="-1" role="dialog" aria-labelledby="statsLabelId" aria-hidden="true"  style="margin-top: 40px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="statsLabelId">ESTADISTICAS</h4>
+                </div>
+                <div class="modal-body text-center">
+
+                    <div class="container bg-info">
+                        <div class="row">
+                            <div class="col-md-12"><br>
+                                <div class="text-center text-uppercase">
+                                    <h2>Encuesta Anterior</h2>
+                                </div>
+                                <!-- //.text-center -->
+
+                                <div class="column-chart">
+                                    <div class="legend legend-left hidden-xs">
+                                        <h3 class="legend-title">ME</h3>
+                                    </div>
+                                    <!-- //.legend -->
+
+                                    <div class="legend legend-right hidden-xs">
+                                        <div class="item">
+                                            <h4>Superhero</h4>
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <h4>Preety Good</h4>
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <h4>Good</h4>
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <h4>Newbie</h4>
+                                        </div>
+                                        <!-- //.item -->
+                                    </div>
+                                    <!-- //.legend -->
+
+                                    <div class="chart clearfix">
+                                        <div class="item">
+                                            <div class="bar">
+                                                <span class="percent">92%</span>
+
+                                                <div class="item-progress" data-percent="92">
+                                                    <span class="title">Creativity</span>
+                                                </div>
+                                                <!-- //.item-progress -->
+                                            </div>
+                                            <!-- //.bar -->
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <div class="bar">
+                                                <span class="percent">71%</span>
+
+                                                <div class="item-progress" data-percent="71">
+                                                    <span class="title">Reliable</span>
+                                                </div>
+                                                <!-- //.item-progress -->
+                                            </div>
+                                            <!-- //.bar -->
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <div class="bar">
+                                                <span class="percent">82%</span>
+
+                                                <div class="item-progress" data-percent="82">
+                                                    <span class="title">Comunication</span>
+                                                </div>
+                                                <!-- //.item-progress -->
+                                            </div>
+                                            <!-- //.bar -->
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <div class="bar">
+                                                <span class="percent">58%</span>
+
+                                                <div class="item-progress" data-percent="58">
+                                                    <span class="title">Leadership</span>
+                                                </div>
+                                                <!-- //.item-progress -->
+                                            </div>
+                                            <!-- //.bar -->
+                                        </div>
+                                        <!-- //.item -->
+
+                                        <div class="item">
+                                            <div class="bar">
+                                                <span class="percent">67%</span>
+
+                                                <div class="item-progress" data-percent="67">
+                                                    <span class="title">Persuasion</span>
+                                                </div>
+                                                <!-- //.item-progress -->
+                                            </div>
+                                            <!-- //.bar -->
+                                        </div>
+                                        <!-- //.item -->
+                                    </div>
+                                    <!-- //.chart -->
+                                </div>
+                                <!-- //.column-chart -->
+                            </div>
+                            <!-- //.col-md-6 -->
+                        </div>
+                        <!-- //.row -->
+                        <br>
+                    </div>
+                    <!-- //.container -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Inicio del perfil si modal -->
+
+    <br><br><br><br><br>
+
+    <!-- //.bar chart -->
+    <div class="container bg-success" style="margin-top: -100px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>ESTADISTICAS GLOBALES</h3>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="area-example" style="height: 300px;"></div>
+                </div>
+                <div class="col-md-12">
+                    <div id="line-example" style="height: 300px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="donut-example" style="height: 250px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="bar-example" style="height: 250px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bar chart -->
+
+
+    <!--
+    <div class="sub-menu-ctrl" style="position: fixed;bottom: 10px;">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-link"></i></button>
+        <button type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-ok"></i></button>
+        <button type="button" class="btn btn-danger btn-circle btn-lg"><i class="glyphicon glyphicon-heart"></i></button>
+        <button type="button" class="btn btn-warning btn-circle btn-lg"><i class="glyphicon glyphicon-remove"></i></button>
+    </div>
+    -->
+    <br><br><br>
+    <!--
          <link rel="stylesheet" href="../css/AnswersScreen.css">
 		 <script src="../js/AnswersScreen.js"></script>
 
@@ -91,50 +564,6 @@
         </section>
     -->
 
-    <br><br><br><br><br><br><br>
-    <footer id="footer" class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
-                    <div class="footer-single">
-                        <img src="../../assets/img/footer-logo.png" alt="">
-                        <br><br>
-                        <p>Frase: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloribus enim est hic illum ipsam perferendis, soluta. Accusamus aliquam amet distinctio eius ex necessitatibus nihil placeat quam, unde voluptatem? Voluptate.</p>
-                        <br>
-                        <p><b>Gracias por nuestra pagina</b></p>
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
-                    <div class="footer-single">
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
-                    <div class="footer-single">
-                        <br>
-                        <h6>Mas informacion!</h6>
-                        <form action="#" class="subscribe">
-                            <input title="alguien@ejemplo.com" placeholder="alguien@ejemplo.com" type="text" name="subscribe" id="subscribe">
-                            <input type="submit" value="&#8594;" id="subs">
-                        </form>
-                        <p>Ingresa tu correo electronico para recibir mas informacion de nuestros servicios!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="copyright text-center">
-                        Desarrollado por <a href="">Marvin Calvo Acuña y Jose Alejandro Gomez Castro</a>
-                        <br>
-                        Copyright © 2017 <a href="">Astrofreakazoid</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
@@ -147,7 +576,6 @@
     <script src="../../assets/js/jquery.appear.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
     <script>
@@ -163,5 +591,6 @@
     </script>
     <!-- Custom Functions -->
     <script src="../../assets/js/custom.js"></script>
+    <script src="../../assets/js/stats.js"></script>
 </body>
 </html>
