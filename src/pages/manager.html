@@ -102,20 +102,20 @@
                     <img src='{{ctrl.UserAdmidObject.imgname}}' name="aboutme" width="140" height="140" class="img-circle">
                     &nbsp;&nbsp;&nbsp;
                    <em><b>Ver descripcion!</b></em>
-                </a> 
+                </a>
              </div>
 
-             <div class="col-sm-12 col-md-4 col-lg-4 text-center">        
-                <br>    
+             <div class="col-sm-12 col-md-4 col-lg-4 text-center">
+                <br>
                 <h3>{{ctrl.UserAdmidObject.username}}</h3>
-                <h4>{{ctrl.UserAdmidObject.name}}</h4> 
+                <h4>{{ctrl.UserAdmidObject.name}}</h4>
              </div>
 
              <div class="col-sm-12 col-md-4 col-lg-4">
                 <br><br>
                 <button type="button" class="btn btn-primary btn-lg" style="width: 100%" data-toggle="modal" data-target="#shareLink">
                     Share by link &nbsp;
-                    <i class="btn-down-up fa fa-share-alt"></i>    
+                    <i class="btn-down-up fa fa-share-alt"></i>
                 </button> <br><br>
                 <button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal" id="btnRegistrarInvitado">
                     Registrar Invitado &nbsp;
@@ -125,12 +125,12 @@
                     Ver datos de tu invitado &nbsp;
                     <i class="btn-down-up fa fa-plus-square"></i>
                 </button>
-               
+
              </div>
-        </div>          
+        </div>
     </div>
-    
-    <div class="container bg-primary"> 
+
+    <div class="container bg-primary">
         <div class="row">
            <div class="col-sm-12 col-md-8 col-lg-8">
                 <h3>Preguntas Registradas</h3>
@@ -153,7 +153,7 @@
 
                                  <label class="lbel">Tema
                                     <input type="text" value="{{topic.name}}" class="inputTextResp" id="{{topic.name +'-'+ idTopoc}}">
-                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarTopic(idTopoc,topic.name +'-'+ idTopoc)" title="Modificar"></i>  
+                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarTopic(idTopoc,topic.name +'-'+ idTopoc)" title="Modificar"></i>
                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarTopic(idTopoc)" title="Eliminar"></i>
                                 </label>
 
@@ -171,13 +171,13 @@
                                             <div class="">
                                                 <label  class="lbel">Pregunta
                                                     <input type="text" value="{{question.name}}" id="{{question.name }}">
-                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)" title="Modificar"></i> 
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)" title="Modificar"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion,idTopoc)" title="Eliminar"></i>
                                                      <i class="fa fa-table" aria-hidden="true"   ng-click="registrarPregunta(idTopoc)" title="Agregar"></i>
                                                 </label>
                                                 <label class="lbel " ng-repeat="(idAnswer,answer) in question.answers track by $index">{{obtion[$index].id}}
                                                     <input type="text" value="{{answer.name}}" class="inputTextResp" id="{{idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name}}">
-                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name)" title="Modficar"></i>	
+                                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarAnswer(idTopoc,idQuestion,idAnswer,idAnswer + '-'+ $index + '-'+ obtion[$index].id + '-'+ question.name)" title="Modficar"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarAsnwer(idTopoc,idQuestion,idAnswer,answer)" title="Eliminar"></i>
                                                     <i class="fa fa-table" aria-hidden="true"   ng-click="registrarAnswer(idTopoc,idQuestion,idAnswer)" title="Agregar"></i>
                                                 </label>
@@ -252,7 +252,7 @@
         </div>
     </div>
 
-    <br><br><br>    
+    <br><br><br>
 
     <!-- Modal formulario registara pregunta -->
     <div class="modal fade" id="registerAns" role="dialog" style="margin-top: 50px;">
@@ -599,5 +599,6 @@
     </script>
     <!-- Custom Functions -->
     <script src="../../assets/js/custom.js"></script>
+
 </body>
 </html>
