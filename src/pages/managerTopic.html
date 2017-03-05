@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" ng-app="myApp">
+<head>
+    <title>CCSS: ENCUESTACR</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <script src="../../assets/js/angular.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="../../assets/angular/encuestaController.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="../../assets/css/animate.css">
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/media-queries.css">
+    <link rel="stylesheet" href="../../assets/css/stats.css">
+    <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
+</head>
+<body id="body" ng-controller="encuestaCtrl">
+<div id="preloader">
+    <img src="../../assets/img/preloader.gif" alt="Preloader">
+</div>
+
+
+
+<!-- //.bar chart -->
+<div class="container bg-success" style="margin-top: -100px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <br><br><br><br><br><br><br>
+                <h3>ESTADISTICAS GLOBALES</h3>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="area-example" style="height: 300px;"></div>
+            </div>
+            <div class="col-md-12">
+                <div id="line-example" style="height: 300px;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="donut-example" style="height: 250px;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="bar-example" style="height: 250px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- bar chart -->
+
+
+
+<a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
+
+<script src="../../assets/js/jquery.singlePageNav.min.js"></script>
+<script src="../../assets/js/bootstrap.min.js"></script>
+<script src="../../assets/js/jquery.fancybox.pack.js"></script>
+<script src="../../assets/js/jquery.mixitup.min.js"></script>
+<script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
+<script src="../../assets/js/jquery-countTo.js"></script>
+<script src="../../assets/js/jquery.appear.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+<script src="../../assets/js/jquery.easing.min.js"></script>
+<script src="../../assets/js/wow.min.js"></script>
+<script>
+    var wow = new WOW ({
+            boxClass:     'wow',      // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset:       120,          // distance to the element when triggering the animation (default is 0)
+            mobile:       false,       // trigger animations on mobile devices (default is true)
+            live:         true        // act on asynchronously loaded content (default is true)
+        }
+    );
+    wow.init();
+
+
+    $.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
+        $.getScript('http://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.0/morris.min.js',function(){
+
+            Morris.Area({
+                element: 'area-example',
+                data: [
+                    { y: '1.1.', a: 100, b: 90 },
+                    { y: '2.1.', a: 75,  b: 65 },
+                    { y: '3.1.', a: 50,  b: 40 },
+                    { y: '4.1.', a: 75,  b: 65 },
+                    { y: '5.1.', a: 50,  b: 40 },
+                    { y: '6.1.', a: 75,  b: 65 },
+                    { y: '7.1.', a: 100, b: 90 }
+                ],
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['Series A', 'Series B']
+            });
+
+            Morris.Line({
+                element: 'line-example',
+                data: [
+                    {year: '2010', value: 20},
+                    {year: '2011', value: 10},
+                    {year: '2012', value: 5},
+                    {year: '2013', value: 2},
+                    {year: '2014', value: 20}
+                ],
+                xkey: 'year',
+                ykeys: ['value'],
+                labels: ['Value']
+            });
+
+            Morris.Donut({
+                element: 'donut-example',
+                data: [
+                    {label: "Android", value: 12},
+                    {label: "iPhone", value: 30},
+                    {label: "Other", value: 20}
+                ]
+            });
+
+            Morris.Bar({
+                element: 'bar-example',
+                data: [
+                    {y: 'Jan 2014', a: 100},
+                    {y: 'Feb 2014', a: 75},
+                    {y: 'Mar 2014', a: 50},
+                    {y: 'Apr 2014', a: 75},
+                    {y: 'May 2014', a: 50},
+                    {y: 'Jun 2014', a: 75}
+                ],
+                xkey: 'y',
+                ykeys: ['a'],
+                labels: ['Visitors', 'Conversions']
+            });
+
+        });
+    });
+
+</script>
+<!-- Custom Functions -->
+<script src="../../assets/js/custom.js"></script>
+<script src="../../assets/js/stats.js"></script>
+</body>
+</html>
+
