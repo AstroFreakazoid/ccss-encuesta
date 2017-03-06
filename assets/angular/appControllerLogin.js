@@ -220,7 +220,7 @@ const userAdmin=localStorage.getItem("username");
         {//Se obtiene la lista de usuarios exixtentes en la bd.
           if(snapshot.key===correoFormateado)
           {//Se comparan los nombres de los corros 
-              ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
+              ref.child("/uses/invited/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
               {
                   if(txtPassword.value==snapshot.val())
                   {
