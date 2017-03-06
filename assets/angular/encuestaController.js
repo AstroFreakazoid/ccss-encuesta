@@ -7,54 +7,69 @@ app.controller('encuestaCtrl', function($scope) {
     $scope.title = "BIENVENIDO";
     $scope.comment = "Encuesta Virtual";
 
-    $scope.items = [
+    $scope.topics= [
         {
-            title: "pregunta uno",
-            ans: [
+            id: 'topic1',
+            name: "Topic 1",
+            visible: false,
+            help: 'help text',
+            preguntas: [
                 {
-                    id: "p1-a1",
-                }
-            ]
-        },
-        {
-            title: "pregunta dos",
-            ans: [
-                {
-                    id: "p2-a1",
+                    id: 'topic1-preg1',
+                    name: 'pregunta 1',
+                    visible: false,
+                    options: [
+                        {
+                            id: 'topic1-preg1-option1',
+                            ref: 'topic1-preg1-tab1',
+                            text: 'lorem text',
+                            keyword: 'star'
+                        },
+                        {
+                            id: 'topic1-preg1-option2',
+                            ref: 'topic1-preg1-tab2',
+                            text: 'lorem text',
+                            keyword: 'medicina'
+                        },
+                        {
+                            id: 'topic1-preg1-option3',
+                            ref: 'topic1-preg1-tab3',
+                            text: 'lorem text',
+                            keyword: 'oftalmology'
+                        }
+                        ,
+                        {
+                            id: 'topic1-preg1-option4',
+                            ref: 'topic1-preg1-tab4',
+                            text: 'lorem text',
+                            keyword: 'technology'
+                        }
+                    ]
                 },
                 {
-                    id: "p2-a2",
-                }
-            ]
-        },
-        {
-            title: "pregunta tres",
-            ans: [
-                {
-                    id: "p3-a1",
-                },
-                {
-                    id: "p3-a2",
-                },
-                {
-                    id: "p3-a3",
-                }
-            ]
-        },
-        {
-            title: "pregunta cuatro",
-            ans: [
-                {
-                    id: "p4-a1",
-                },
-                {
-                    id: "p4-a2",
-                },
-                {
-                    id: "p4-a3",
-                },
-                {
-                    id: "p4-a4",
+                    id: 'topic1-preg2',
+                    name: 'pregunta 2',
+                    visible: false,
+                    options: [
+                        {
+                            id: 'topic1-preg2-option1',
+                            ref: 'topic1-preg2-tab1',
+                            text: 'lorem text',
+                            keyword: 'technology'
+                        },
+                        {
+                            id: 'topic1-preg2-option2',
+                            ref: 'topic1-preg2-tab2',
+                            text: 'lorem text',
+                            keyword: 'technology'
+                        },
+                        {
+                            id: 'topic1-preg2-option3',
+                            ref: 'topic1-preg2-tab3',
+                            text: 'lorem text',
+                            keyword: 'technology'
+                        }
+                    ]
                 }
             ]
         }

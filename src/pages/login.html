@@ -38,7 +38,7 @@
         }
     </style>
 </head>
-<body id="body" onload="setInterval('checkAdviceInput()', 500);" ng-controller="MyCtrl as ctrl">
+<body id="body" ng-controller="MyCtrl as ctrl">
     <!-- preloader -->
     <div id="preloader">
         <img src="../../assets/img/preloader.gif" alt="Preloader">
@@ -64,10 +64,12 @@
                                 <div class="form-box">
                                     <!-- Formulario de iniciae secion -->
                                     <form action="" method="">
-                                        <input name="user" type="text" placeholder="Email" id="loginEmail">
+                                        <input name="user" type="text" placeholder="Username / Mail" id="loginEmail">
                                         <input type="password" placeholder="password" id="loginPassword">
+                                        <br><br>
                                         <label>I'm an administrator:
                                             <input type="checkbox" ng-model="checkboxModel.value1">
+                                            <input ng-if="checkboxModel.value1" type="text" value="insert code" />
                                         </label><br>
                                         <button class="btn btn-info btn-block login" id="btnLogin"  type="button" ng-click="login()" >Login</button>
                                     </form>
@@ -149,7 +151,11 @@
     
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
-
+    <script>
+        $(document).ready(function(){
+            checkAdviceInput();
+        })
+    </script>
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
     <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
