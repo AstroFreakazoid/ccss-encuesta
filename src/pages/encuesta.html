@@ -8,11 +8,6 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
-    <script src="../../assets/js/angular.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-    <script src="../../assets/angular/encuestaController.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
@@ -21,6 +16,14 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/stats.css">
+    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <!-- AngularJS -->
+     <script src="../../assets/js/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+     <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="../../assets/angular/encuestaController.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
     <style>
         @import('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css')
@@ -143,90 +146,6 @@
         .full-width-modal-content {
             height: 99%;
         }
-        /* USER PROFILE PAGE */
-        .card {
-            margin-top: 20px;
-            padding: 30px;
-            background-color: rgba(214, 224, 226, 0.2);
-            -webkit-border-top-left-radius:5px;
-            -moz-border-top-left-radius:5px;
-            border-top-left-radius:5px;
-            -webkit-border-top-right-radius:5px;
-            -moz-border-top-right-radius:5px;
-            border-top-right-radius:5px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        .card.hovercard {
-            position: relative;
-            padding-top: 0;
-            overflow: hidden;
-            text-align: center;
-            background-color: #fff;
-            background-color: rgba(255, 255, 255, 1);
-        }
-        .card.hovercard .card-background {
-            height: 130px;
-        }
-        .card-background img {
-            -webkit-filter: blur(25px);
-            -moz-filter: blur(25px);
-            -o-filter: blur(25px);
-            -ms-filter: blur(25px);
-            filter: blur(25px);
-            margin-left: -100px;
-            margin-top: -200px;
-            min-width: 130%;
-        }
-        .card.hovercard .useravatar {
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-        }
-        .card.hovercard .useravatar img {
-            width: 100px;
-            height: 100px;
-            max-width: 100px;
-            max-height: 100px;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            border: 5px solid rgba(255, 255, 255, 0.5);
-        }
-        .card.hovercard .card-info {
-            position: absolute;
-            bottom: 14px;
-            left: 0;
-            right: 0;
-        }
-        .card.hovercard .card-info .card-title {
-            padding:0 5px;
-            font-size: 20px;
-            line-height: 1;
-            color: #262626;
-            background-color: rgba(255, 255, 255, 0.1);
-            -webkit-border-radius: 4px;
-            -moz-border-radius: 4px;
-            border-radius: 4px;
-        }
-        .card.hovercard .card-info {
-            overflow: hidden;
-            font-size: 12px;
-            line-height: 20px;
-            color: #737373;
-            text-overflow: ellipsis;
-        }
-        .card.hovercard .bottom {
-            padding: 0 20px;
-            margin-bottom: 17px;
-        }
-        .btn-pref .btn {
-            -webkit-border-radius:0 !important;
-        }
-
-
     </style>
 </head>
 <body id="body" ng-controller="encuestaCtrl">
@@ -243,90 +162,68 @@
         </div>
     </div>
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="opacity: 0.8;">
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active bg-primary">
-                <div class="carousel-caption">
-                    <h3>{{title}}</h3>
-                    <h4>{{comment}}</h4>
+    <div ng-repeat="topic in objectTopic" ng-if="topic.visible">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="opacity: 0.8;">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox" >
+                <div ng-if="$index==0" class="item bg-primary active">
+                    <div class="carousel-caption" style="position: absolute;">
+                        <h3>{{topic.name}}</h3>
+                        <h4>{{comment}}</h4>
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-            </div>
-            <div class="item" ng-repeat="item in topics[0].preguntas">
-                <div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
+                <div class="item bg-primary" ng-repeat="question in topic.questions">
+                    <div >
 
-                                <!-- NEW ITEM -->
-
-                                <div class="col-lg-12 col-sm-12">
-                                    <div class="card hovercard">
-                                        <div class="card-background">
-                                        </div>
-                                        <div class="card-info"> <span class="card-title">{{item.name}}</span></div>
-                                    </div>
-
-                                    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-
-                                        <div class="btn-group" role="group" ng-repeat="opt in item.options">
-                                            <button type="button" id="{{opt.id}}" class="btn btn-primary" href="#{{opt.ref}}" data-toggle="tab"><span class="glyphicon glyphicon-{{opt.keyword}}" aria-hidden="true"></span>
-                                                <div class="hidden-xs">{{opt.keyword}}</div>
-                                            </button>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="well">
-                                        <div class="tab-content bg-primary">
-                                            <div class="tab-pane fade in active" id="{{opt.ref}}" ng-repeat="opt in item.options">
-                                                <h3>{{opt.text}}</h3>
-                                                <div class="text-center">
-                                                    <button class="btn btn-danger">Elegir</button>
-                                                </div>
-                                                <hr>
-                                            </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-md-12">
+                                    <h3>{{question.name}}</h3>
+                                    <p style="padding: 15px;">{{question.help}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-md-12">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-info " ng-repeat="(idAnswer,answer) in question.answers">
+                                            <input type="radio" name="radio" id="{{idAnswer+answer.name+question.name}}" />
+                                            <label for="{{idAnswer+answer.name+question.name}}">{{answer.name}}</label>
                                         </div>
                                     </div>
 
                                 </div>
-
-                                <!-- NEW ITEM -->
-
-
+                            </div>
+                            <div class="row text-center">
+                                <br>
+                                <hr>
+                                <div class="col-sm-6 col-xs-6">
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId">ESTADISTICAS</button>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <a data-toggle="modal" data-target="#helpId"><i class="fa fa-slideshare btn-lg"></i></a>
+                                </div>
+                                
                             </div>
                         </div>
-                        <div class="row">
 
-                        </div>
-                        <div class="row text-center">
-                            <br>
-                            <hr>
-                            <div class="col-sm-6 col-xs-6">
-                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId">ESTADISTICAS</button>
-                            </div>
-                            <div class="col-sm-6 col-xs-6">
-                                <a data-toggle="modal" data-target="#helpId"><i class="fa fa-slideshare btn-lg"></i></a>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left fa-2x" style="margin-top: 300px;"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <i class="fa fa-arrow-right fa-2x" style="margin-top: 300px;"></i>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-        <!-- Left and right controls -->
-        <a class="left carousel-control hidden" href="#myCarousel" role="button" data-slide="prev">
-            <i class="fa fa-arrow-left fa-2x" style="margin-top: 300px;"></i>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control hidden" href="#myCarousel" role="button" data-slide="next">
-            <i class="fa fa-arrow-right fa-2x" style="margin-top: 300px;"></i>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
+    
 
 
-    <br><br><br><br><br><br><br>
 
     <!-- Inicio del perfil si modal -->
     <div class="modal fade" id="helpId" tabindex="-1" role="dialog" aria-labelledby="helpLabelId" aria-hidden="true"  style="margin-top: 40px;">
@@ -481,8 +378,6 @@
             </div>
         </div>
     </div>
-    <!-- Inicio del perfil si modal -->
-
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
     <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
@@ -506,13 +401,6 @@
             }
         );
         wow.init();
-        $(document).ready(function() {
-            $(".btn-pref .btn").click(function () {
-                $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-                // $(".tab").addClass("active"); // instead of this do the below
-                $(this).removeClass("btn-default").addClass("btn-primary");
-            });
-        });
     </script>
     <!-- Custom Functions -->
     <script src="../../assets/js/custom.js"></script>
