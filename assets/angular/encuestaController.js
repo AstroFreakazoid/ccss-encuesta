@@ -29,8 +29,23 @@
             $scope.objectTopic= $firebaseObject(refUserAdminTopics);
               
         })
+        $scope.incrementarPorcentage=function(idTopic,idQuestion,idAnswer){
+               var porcent;
+               refUserAdminTopics=ref.child('uses/admin/'+idUserAdmin+"/topics");
+               refUserAdminTopicQuestionAswer=refUserAdminTopics.child(idTopic+"/questions/"+idQuestion+"/answers/"+idAnswer);
+               refUserAdminTopicQuestionAswer.child('porcentage').on("value", function(snapshot){
+                    porcent= snapshot.val();
+                })
+                porcent=porcent+1;
+                refUserAdminTopicQuestionAswer.update({
+                    porcentage:porcent
+                });
+                $('#myModal').modal('show');
+                console.log(porcent);
+        }
     });
    
+  
 }());
 
 
