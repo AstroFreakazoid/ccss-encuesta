@@ -162,18 +162,18 @@
         </div>
     </div>
 
-    <div ng-repeat="topic in objectTopic" ng-if="topic.visible">
+    <div ng-repeat="(idTopic,topic) in objectTopic" ng-if="topic.visible">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" style="opacity: 0.8;">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" >
-                <div  class="item bg-primary active">
+                <div ng-if="$index==0" class="item bg-primary active">
                     <div class="carousel-caption" style="position: absolute;">
                         <h3>{{topic.name}}</h3>
                         <h4>{{comment}}</h4>
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-                <div class="item bg-primary" ng-repeat="question in topic.questions">
+                <div class="item bg-primary" ng-repeat="(idQuestion,question) in topic.questions">
                     <div >
 
                         <div class="container">
@@ -187,8 +187,8 @@
                                 <div class="col-md-12 col-sm-12 col-md-12">
                                     <div class="funkyradio">
                                         <div class="funkyradio-info " ng-repeat="(idAnswer,answer) in question.answers">
-                                            <input type="radio" name="radio" id="{{idAnswer+answer.name+question.name}}" />
-                                            <label for="{{idAnswer+answer.name+question.name}}">{{answer.name}}</label>
+                                            <input type="radio" name="radio" id="{{idAnswer+answer.name+question.name}}" ng-click="incrementarPorcentage(idTopic,idQuestion,idAnswer)"/>
+                                            <label for="{{idAnswer+answer.name+question.name}}">{{answer.name}} </label>
                                         </div>
                                     </div>
 
@@ -378,6 +378,35 @@
             </div>
         </div>
     </div>
+    <!-- Modal aparece al celeccionar una respuesta, en este modal se podra enviar comentarios-->
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                         <h4 class="modal-title">Puedes hacer un comentario si lo deseas</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="comment">Comment:</label>
+                                <textarea class="form-control" rows="5" id="comment" style="resize:none;"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Enviar Comentario</button>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+     </div>
+        
+
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 
     <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
