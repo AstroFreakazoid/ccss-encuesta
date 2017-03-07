@@ -1,79 +1,51 @@
 /**
  * Created by alego on 27/2/2017.
  */
-var app = angular.module('myApp', []);
-app.controller('encuestaCtrl', function($scope) {
-
-    $scope.title = "BIENVENIDO";
-    $scope.comment = "Encuesta Virtual";
-
-    $scope.topics= [
-        {
-            id: 'topic1',
-            name: "Topic 1",
-            visible: false,
-            help: 'help text',
-            preguntas: [
-                {
-                    id: 'topic1-preg1',
-                    name: 'pregunta 1',
-                    visible: false,
-                    options: [
-                        {
-                            id: 'topic1-preg1-option1',
-                            ref: 'topic1-preg1-tab1',
-                            text: 'lorem text',
-                            keyword: 'star'
-                        },
-                        {
-                            id: 'topic1-preg1-option2',
-                            ref: 'topic1-preg1-tab2',
-                            text: 'lorem text',
-                            keyword: 'medicina'
-                        },
-                        {
-                            id: 'topic1-preg1-option3',
-                            ref: 'topic1-preg1-tab3',
-                            text: 'lorem text',
-                            keyword: 'oftalmology'
-                        }
-                        ,
-                        {
-                            id: 'topic1-preg1-option4',
-                            ref: 'topic1-preg1-tab4',
-                            text: 'lorem text',
-                            keyword: 'technology'
-                        }
-                    ]
-                },
-                {
-                    id: 'topic1-preg2',
-                    name: 'pregunta 2',
-                    visible: false,
-                    options: [
-                        {
-                            id: 'topic1-preg2-option1',
-                            ref: 'topic1-preg2-tab1',
-                            text: 'lorem text',
-                            keyword: 'technology'
-                        },
-                        {
-                            id: 'topic1-preg2-option2',
-                            ref: 'topic1-preg2-tab2',
-                            text: 'lorem text',
-                            keyword: 'technology'
-                        },
-                        {
-                            id: 'topic1-preg2-option3',
-                            ref: 'topic1-preg2-tab3',
-                            text: 'lorem text',
-                            keyword: 'technology'
-                        }
-                    ]
-                }
-            ]
+(function() {
+    const userInvited=localStorage.getItem("username");
+    var idUserAdmin;
+    var refUserAdmin;
+    var app = angular.module('myApp',['firebase']);
+    //Se inicialializa firebase.
+    var config = {
+            apiKey: "AIzaSyCmI3gN4jJR-TV7FaiGhUkhvxOdtdP2sco",
+            authDomain: "encuesta-5a920.firebaseapp.com",
+            databaseURL: "https://encuesta-5a920.firebaseio.com",
+            storageBucket: "encuesta-5a920.appspot.com",
+            messagingSenderId: "843177083745"
+    };
+    firebase.initializeApp(config);
+   
+    app.controller('encuestaCtrl', function($scope,$firebaseObject,$firebaseArray) {
+        $scope.title = "BIENVENIDO";
+        $scope.comment = "Encuesta Virtual";
+        $scope.listTopic=[];
+        $scope.list;
+        const ref=firebase.database().ref();
+        var refUserInvited=ref.child('uses/invited/'+userInvited);
+        refUserInvited.child('profile/dependence').on("value", function(snapshot){
+            idUserAdmin=snapshot.val();
+            refUserAdminTopics=ref.child('uses/admin/'+idUserAdmin+"/topics");
+            $scope.objectTopic= $firebaseObject(refUserAdminTopics);
+              
+        })
+        $scope.incrementarPorcentage=function(idTopic,idQuestion,idAnswer){
+               var porcent;
+               refUserAdminTopics=ref.child('uses/admin/'+idUserAdmin+"/topics");
+               refUserAdminTopicQuestionAswer=refUserAdminTopics.child(idTopic+"/questions/"+idQuestion+"/answers/"+idAnswer);
+               refUserAdminTopicQuestionAswer.child('porcentage').on("value", function(snapshot){
+                    porcent= snapshot.val();
+                })
+                porcent=porcent+1;
+                refUserAdminTopicQuestionAswer.update({
+                    porcentage:porcent
+                });
+                $('#myModal').modal('show');
+                console.log(porcent);
         }
-    ]
+    });
+   
+  
+}());
 
 
-});
