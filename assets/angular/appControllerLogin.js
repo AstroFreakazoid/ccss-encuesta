@@ -224,7 +224,7 @@ const userAdmin=localStorage.getItem("username");
               {
                   if(txtPassword.value==snapshot.val())
                   {
-                    localStorage.setItem("username",correoFormateado);
+                    localStorage.setItem("usernameInvited",correoFormateado);
                     location.href = "encuesta.html";
                   }else{
                     alert("Contraseña no valida");

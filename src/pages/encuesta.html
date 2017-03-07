@@ -8,6 +8,11 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <!-- script grafico -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
@@ -17,6 +22,7 @@
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/stats.css">
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    
     <!-- AngularJS -->
      <script src="../../assets/js/angular.min.js"></script>
     <!-- Firebase -->
@@ -163,7 +169,7 @@
     </div>
 
     <div ng-repeat="(idTopic,topic) in objectTopic" ng-if="topic.visible">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="opacity: 0.8;">
+        <div id="myCarousel" class="carousel slide" style="opacity: 0.8;">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" >
                 <div ng-if="$index==0" class="item bg-primary active">
@@ -178,13 +184,13 @@
 
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-12 col-sm-12 col-md-12">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
                                     <h3>{{question.name}}</h3>
                                     <p style="padding: 15px;">{{question.help}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 col-sm-12 col-md-12">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
                                     <div class="funkyradio">
                                         <div class="funkyradio-info " ng-repeat="(idAnswer,answer) in question.answers">
                                             <input type="radio" name="radio" id="{{idAnswer+answer.name+question.name}}" ng-click="incrementarPorcentage(idTopic,idQuestion,idAnswer)"/>
@@ -212,11 +218,11 @@
             </div>
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <i class="fa fa-arrow-left fa-2x" style="margin-top: 300px;"></i>
+                <i class="fa fa-arrow-left fa-2x hidden" style="margin-top: 300px;"></i>
                 <span class="sr-only">Previous</span>
             </a>
             <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <i class="fa fa-arrow-right fa-2x" style="margin-top: 300px;"></i>
+                <i class="fa fa-arrow-right fa-2x hidden" style="margin-top: 300px;"></i>
                 <span class="sr-only">Next</span>
             </a>
         </div>
@@ -385,12 +391,12 @@
             <div class="modal-dialog">
             
                 <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
+                <div class="modal-content row">
+                    <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
                          <h4 class="modal-title">Puedes hacer un comentario si lo deseas</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form class="col-md-12 col-sm-12 col-lg-12">
                             <div class="form-group">
                                 <label for="comment">Comment:</label>
                                 <textarea class="form-control" rows="5" id="comment" style="resize:none;"></textarea>
@@ -398,14 +404,37 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Enviar Comentario</button>
+                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" data-backdrop="static">Enviar Comentario</button>
+                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()" data-backdrop="static" data-keyboard="false"  data-toggle="modal" data-target="#modalGracias">No Gracias</button>
                     </div>
+                   
                 </div>
             
             </div>
         </div>
      </div>
-        
+     <div class="container">
+        <!-- Modal -->
+        <div class="modal fade  row" id="modalGracias" role="dialog">
+            <div class="modal-dialog"  style="margin-top: 100px;">
+            <!-- Modal content-->
+                <div class="modal-content " style="text-align: center;">
+                   <div class="modal-body">
+                        <form>
+                            <div class="form-group " style="margin-top: 100px;">
+                                <h2 >Gracias por participar</h2>
+                                <div class="text parpadea">
+                                   <i class="fa fa-thumbs-up" style="margin-top: 40px; font-size: 150px; display: block;"></i>
+                                </div>
+                             </div>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+     </div>
+         <div hidden id="bar-example" style="height: 400px;"></div>
 
     <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
 

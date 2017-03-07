@@ -244,7 +244,7 @@ const userAdmin=localStorage.getItem("username");
             //Se obtienen las referencias para la insercion de la pregunta en la bd.
             const referenciaUserAdmin=firebase.database().ref().child('uses/admin/'+userAdmin);
             referenciaUserAdmin.child('topics').orderByKey().limitToLast(1).on("child_added", function(snapshot) {
-            sobreEscribirKeyRef(snapshot.key);
+                sobreEscribirKeyRef(snapshot.key);
             });   
             var refNewQuestion=userRef.child('topics/'+keyTopic+"/questions");
             //Se inserta el Json con la pregunta y sus respuestas.
