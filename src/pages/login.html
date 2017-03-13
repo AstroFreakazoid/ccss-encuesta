@@ -61,17 +61,32 @@
                             <div id="login" class="">
                                 <div id="output"></div>
                                 <div class="avatar"></div>
-                                <div class="form-box">
+                                <label>I'm an administrator:</label><br>
+                                <input type="checkbox" ng-model="checkboxModel.value1" style="width: 30px;height: 30px;">
+                                <div class="form-box" ng-if="checkboxModel.value1">
                                     <!-- Formulario de iniciae secion -->
                                     <form action="" method="">
-                                        <input name="user" type="text" placeholder="Username / Mail" id="loginEmail">
-                                        <input type="password" placeholder="password" id="loginPassword">
+                                        <div class="input-group">
+                                           <span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
+                                           <input name="user" type="text" placeholder="Username / Mail" id="loginEmail">
+                                        </div>
+                                        <div class="input-group">
+                                           <span class="input-group-addon"><i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i></span>
+                                           <input type="password" placeholder="password" id="loginPassword">
+                                        </div>
+                                       <br>
+                                        <button class="btn btn-info btn-block login" id="btnLoginAdmin"  type="button" ng-click="login()" >Login admin</button>
+                                    </form>
+                                </div>
+                                <div class="form-box" ng-if="checkboxModel.value1==false">
+                                    <!-- Formulario de iniciae secion -->
+                                    <form action="" method="">
+                                        <div class="input-group">
+                                           <span class="input-group-addon"><i class="fa fa-key fa-lg" aria-hidden="true"></i></span>
+                                           <input name="user" type="text" placeholder="Cedula" id="cedulaInvited" onkeypress="return justNumbers(event);">
+                                        </div>
                                         <br><br>
-                                        <label>I'm an administrator:
-                                            <input type="checkbox" ng-model="checkboxModel.value1">
-                                            <input ng-if="checkboxModel.value1" type="text" value="insert code" />
-                                        </label><br>
-                                        <button class="btn btn-info btn-block login" id="btnLogin"  type="button" ng-click="login()" >Login</button>
+                                        <button class="btn btn-info btn-block login" id="btnLoginInvited"  type="button" ng-click="login()" >Login invited</button>
                                     </form>
                                 </div>
                             </div>

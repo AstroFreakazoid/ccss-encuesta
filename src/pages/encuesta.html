@@ -32,8 +32,6 @@
     <script src="../../assets/angular/encuestaController.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
     <style>
-        @import('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css')
-
         .funkyradio div {
             clear: both;
             overflow: hidden;
@@ -172,7 +170,7 @@
         <div id="myCarousel" class="carousel slide" style="opacity: 0.8;">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox" >
-                <div ng-if="$index==0" class="item bg-primary active">
+                <div  class="item bg-primary active">
                     <div class="carousel-caption" style="position: absolute;">
                         <h3>{{topic.name}}</h3>
                         <h4>{{comment}}</h4>
@@ -181,7 +179,7 @@
                 </div>
                 <div class="item bg-primary" ng-repeat="(idQuestion,question) in topic.questions">
                     <div >
-
+                                             
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-lg-12">
@@ -215,16 +213,17 @@
 
                     </div>
                 </div>
+                 <div class="item bg-primary ">
+                    <div class="carousel-caption" style="position: absolute;">
+                        <h3>Gracias por su participación</h3>
+                        <h4>Congreso Geriatrico 2017</h4>
+                         <div class="col-md-12 col-sm-12 col-lg-12" style="margin-top: 20px;">
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="direccionarFinEncuesta()">Salir</button>
+                        </div>
+                    </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </div>
             </div>
-            <!-- Left and right controls -->
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <i class="fa fa-arrow-left fa-2x hidden" style="margin-top: 300px;"></i>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <i class="fa fa-arrow-right fa-2x hidden" style="margin-top: 300px;"></i>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
     </div>
     
@@ -404,8 +403,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" data-backdrop="static">Enviar Comentario</button>
-                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()" data-backdrop="static" data-keyboard="false"  data-toggle="modal" data-target="#modalGracias">No Gracias</button>
+                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" >Enviar Comentario</button>
+                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()"  data-toggle="modal" data-target="#modalGracias">No Gracias</button>
                     </div>
                    
                 </div>
