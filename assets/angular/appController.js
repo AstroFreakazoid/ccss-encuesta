@@ -30,36 +30,37 @@ const userAdmin=localStorage.getItem("username");
         const referenciaUserAdmin=firebase.database().ref().child('uses/admin');
         //Se crea la rferencia a los datos del usuario administrados.
         const userRef=referenciaUserAdmin.child(userAdmin);
+
         const profileRef=userRef.child('profile');
-        //Se crea un objeto con la funcion$firebaseObject();.
+        // //Se crea un objeto con la funcion$firebaseObject();.
         this.UserAdmidObject=$firebaseObject(profileRef);
-        //Se obtiene la referencia al nombre del usuario invitado .
-        var userinvitedRef=profileRef.child('invitedname');
-        //Se declara la variable que guardara la referencia a los datos del invitado.
-        var referenciaUserInvited;
+        // //Se obtiene la referencia al nombre del usuario invitado .
+        // var userinvitedRef=profileRef.child('invitedname');
+        // //Se declara la variable que guardara la referencia a los datos del invitado.
+        // var referenciaUserInvited;
 
-        //Se obtienen el nombre del invitado pormedio del snapshot.
-        userinvitedRef.on('value', function(snapshot) 
-        {
-            //Se crea un objeto invitado. Por medio de la referncia se trae el Json.
-             referenciaUserInvited=firebase.database().ref().child('uses/invited/'+snapshot.val()+"/profile");
-            //Se llama la fucntion guardar objeto para poder sacar los datos 
-            guardarObject(referenciaUserInvited);
+        // //Se obtienen el nombre del invitado pormedio del snapshot.
+        // userinvitedRef.on('value', function(snapshot) 
+        // {
+        //     //Se crea un objeto invitado. Por medio de la referncia se trae el Json.
+        //      referenciaUserInvited=firebase.database().ref().child('uses/invited/'+snapshot.val()+"/profile");
+        //     //Se llama la fucntion guardar objeto para poder sacar los datos 
+        //     guardarObject(referenciaUserInvited);
 
-            //Se valida si existe  invitado sino para ocultar el boton de registrar invitado.
-            if(snapshot.val()!='null')
-            {
-                 $('#btnRegistrarInvitado').addClass("hidden");//Se oculta el boton
-                 $('#btnDatosInvitado').removeClass("hidden");//Remueve la clase que oculta el boto.
-                $('#btnDatosInvitado').addClass("show");//Agrega una clase que hace el boton visible.
-            }
-            if(snapshot.val()==='null')
-            {
-                $('#btnDatosInvitado').addClass("hidden");//Remueve la clase que oculta el boto.
-                $('#btnRegistrarInvitado').removeClass("hidden");//Agrega la clase que oculta el boto.
-                $('#btnRegistrarInvitado').addClass("show");//Agrega una clase que hace el boton visible.
-            }
-        });
+        //     //Se valida si existe  invitado sino para ocultar el boton de registrar invitado.
+        //     if(snapshot.val()!='null')
+        //     {
+        //          $('#btnRegistrarInvitado').addClass("hidden");//Se oculta el boton
+        //          $('#btnDatosInvitado').removeClass("hidden");//Remueve la clase que oculta el boto.
+        //         $('#btnDatosInvitado').addClass("show");//Agrega una clase que hace el boton visible.
+        //     }
+        //     if(snapshot.val()==='null')
+        //     {
+        //         $('#btnDatosInvitado').addClass("hidden");//Remueve la clase que oculta el boto.
+        //         $('#btnRegistrarInvitado').removeClass("hidden");//Agrega la clase que oculta el boto.
+        //         $('#btnRegistrarInvitado').addClass("show");//Agrega una clase que hace el boton visible.
+        //     }
+        // });
      
         //Se crea un array con datos quemados. Es el array avecedario.
         $scope.obtion= [{id:'A'},{id:'B'},{id:'C'},{id:'D'},{id:'E'},{id:'F'},{id:'G'},{id:'H'},{id:'I'},
@@ -87,7 +88,7 @@ const userAdmin=localStorage.getItem("username");
             if(valueInput.value!=""){
                 refUnaPregunta.set(valueInput.value);
             }else{
-                alert("No puede modificar la respuesta con vacio, puede eliminarla si lo desea");
+                alert("No puede modificar la pregunta con vacio, puede eliminarla si lo desea");
             }
         }
         //Function que eliminara una pregunata.
@@ -254,18 +255,18 @@ const userAdmin=localStorage.getItem("username");
                     visible:false,
                     answers:[
                     {
-                        name:valueInputRespA,
+                        name:"",
                         porcentage:0,
                     },
                     {
-                        name:valueInputRespB,
+                        name:"",
                         porcentage:0,
                     },
                     {
-                        name:valueInputRespC,
+                        name:"",
                         porcentage:0,
                     },{
-                        name:valueInputRespD,
+                        name:"",
                         porcentage:0,
                     }],
             });
@@ -287,18 +288,18 @@ const userAdmin=localStorage.getItem("username");
                     visible:false,
                     answers:[
                     {
-                        name:'A'+idTopic,
+                        name:'A',
                         porcentage:0,
                     },
                     {
-                        name:'B'+idTopic,
+                        name:'B',
                         porcentage:0,
                     },
                     {
-                        name:'C'+idTopic,
+                        name:'C',
                         porcentage:0,
                     },{
-                        name:'D'+idTopic,
+                        name:'D',
                         porcentage:0,
                     }],
             });
@@ -315,6 +316,8 @@ const userAdmin=localStorage.getItem("username");
             valueInput = document.getElementById(idInput);
             refUnTopic=topicsRef.child(idTopic+"/name");
             refUnTopic.set(valueInput.value);
+            this.topicObject=$firebaseObject(topicsRef);
+            
         }
         //Function encargada de eliminar un tema.
         $scope.eliminarTopic = function(idTopic)
@@ -329,23 +332,23 @@ const userAdmin=localStorage.getItem("username");
         var passwordInvitado=document.getElementById("pwd");
         var nameInvitadoFormanted;
 
-        $scope.registrarInvitado=function()
-        {   
-            if(this.valiadarDatosInvited()){
-               nameInvitadoFormanted=this.formatearNameUser(correoInvitado.value);
-               firebase.database().ref().child('uses/invited/'+nameInvitadoFormanted+"/profile/").set(
-                {name:nameInvitado.value,
-                 dependence:userAdmin,
-                 password:passwordInvitado.value,
-                 rol:"invited",
-                 username:nameInvitadoFormanted
-             }); 
-               profileRef.update({
-                invitedname:nameInvitadoFormanted
-               });
-            }
+        // $scope.registrarInvitado=function()
+        // {   
+        //     if(this.valiadarDatosInvited()){
+        //        nameInvitadoFormanted=this.formatearNameUser(correoInvitado.value);
+        //        firebase.database().ref().child('uses/invited/'+nameInvitadoFormanted+"/profile/").set(
+        //         {name:nameInvitado.value,
+        //          dependence:userAdmin,
+        //          password:passwordInvitado.value,
+        //          rol:"invited",
+        //          username:nameInvitadoFormanted
+        //      }); 
+        //        profileRef.update({
+        //         invitedname:nameInvitadoFormanted
+        //        });
+        //     }
             
-        } 
+        // } 
         $scope.valiadarDatosInvited=function()
         {   var siguiente=true;
 

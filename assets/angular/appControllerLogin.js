@@ -91,7 +91,19 @@ const userAdmin=localStorage.getItem("username");
                   username:emailRegis.value,
                   imgname:imageUrl
           });
-         
+          var userCommentsrRef=ref.child("/uses/admin/"+nameUser+"/comments");
+           userCommentsrRef.set({
+                  comment:" "
+          });
+          var userCantQuestionProgresRef=ref.child("/uses/admin/"+nameUser+"/cantQuestionProgres");
+           userCantQuestionProgresRef.set({
+                  cantQuestion:" "
+          });
+          var userNexQuestionRef=ref.child("/uses/admin/"+nameUser+"/nexQuestion");
+           userNexQuestionRef.set({
+                  nex:false
+          });
+
           var refNewTopic=ref.child("/uses/admin/"+nameUser+"/topics");//Se crea la ruta para el Json de los topics
            //Se inserta el Json en la bd
            refNewTopic.push().set(
@@ -148,6 +160,7 @@ const userAdmin=localStorage.getItem("username");
        }
        return formatName;//Se retorna la cadena de caracteres ya formateada.
     }
+
     $scope.valiadar = function()//Function que valida que los datos que el usuario ingreso esta correctos.
     { var todoBien=true;//Variable que guardara el resultado binario (true=bien,false=mal).
       var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;//Exprecion de patrones para la validacion del correo electronico.
@@ -190,56 +203,73 @@ const userAdmin=localStorage.getItem("username");
       }
       return todoBien;
     }
-    var txtEmail = document.getElementById('loginEmail');
-    var txtPassword = document.getElementById('loginPassword');
-    var correoFormateado="null";//Varisable que almacenara el correo electronico si . y @
+    
     $scope.checkboxModel = {
-       value1 :false 
+       value1 :false
     };
+    var existeInvited;
     $scope.login = function(){
-      correoFormateado=$scope.formatearNameUser(txtEmail.value);//Se llama a la function que formatea el correo electronico.
+      var cedulaInvited=[];
       if($scope.checkboxModel.value1){
-        ref.child("/uses/admin").orderByChild("profile/username/").on("child_added", function(snapshot) 
-        {//Se obtiene la lista de usuarios exixtentes en la bd.
-          if(snapshot.key===correoFormateado)
-          {//Se comparan los nombres de los corros 
-              ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
-              {
-                  if(txtPassword.value==snapshot.val())
-                  {
-                    localStorage.setItem("username",correoFormateado);
-                    location.href = "manager.html";
-                  }else{
-                    alert("Contraseña no valida");
-                  }
-              });
+          var txtEmail = $('#loginEmail');
+          var txtPassword = $('#loginPassword');
+          var correoFormateado="null";//Varisable que almacenara el correo electronico si . y @
+          correoFormateado=$scope.formatearNameUser(txtEmail.val());//Se llama a la function que formatea el correo electronico.
+          ref.child("/uses/admin").orderByChild("profile/username/").on("child_added", function(snapshot) 
+          {//Se obtiene la lista de usuarios exixtentes en la bd.
+            if(snapshot.key===correoFormateado)
+            {//Se comparan los nombres de los corros 
+                ref.child("/uses/admin/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
+                {   if(txtPassword.val()==snapshot.val())
+                    {
+                      localStorage.setItem("username",correoFormateado);
+                      //openedWindow = window.open('managerTopic.html');
+                      //openedWindow = window.open('manager.html');
+                      location.href = "manager.html";
+                    }else{
+                      alert("Contraseña no valida");
+                    }
+                });
+            }
+          });
+        }else{
+          var i=0;
+          ref.child("/uses/invited").orderByChild("profile/username/").on("child_added", function(snapshot) 
+          {//Se obtiene la lista de usuarios exixtentes en la bd.
+            cedulaInvited[i]=snapshot.key;
+            i++;  
+          });
+          var listo=false;
+          for(i=0;i<cedulaInvited.length && listo==false;i++){
+              if(cedulaInvited[i]==$('#cedulaInvited').val()){
+                listo=true;
+              }
           }
-        });
-      }else{
-        ref.child("/uses/invited").orderByChild("profile/username/").on("child_added", function(snapshot) 
-        {//Se obtiene la lista de usuarios exixtentes en la bd.
-          if(snapshot.key===correoFormateado)
-          {//Se comparan los nombres de los corros 
-              ref.child("/uses/invited/"+correoFormateado+"/profile/password").on("value", function(snapshot) 
-              {
-                  if(txtPassword.value==snapshot.val())
-                  {
-                    localStorage.setItem("usernameInvited",correoFormateado);
-                    location.href = "encuesta.html";
-                  }else{
-                    alert("Contraseña no valida");
-                  }
-              });
+          if(!listo && cedulaInvited.length!=0 && $('#cedulaInvited').val()!=""){
+              firebase.database().ref().child('uses/invited/'+$('#cedulaInvited').val()+"/profile/").set({
+                  dependence:'mar90jesusgmailcom',
+                  rol:"invited",
+                  username:$('#cedulaInvited').val()
+              }); 
+              localStorage.setItem("usernameInvited",$('#cedulaInvited').val());
+              openedWindow = window.open('encuesta.html');
+             // location.href = "encuesta.html";
           }
-        });
+          if(listo && cedulaInvited.length!=0){
+              alert("El usuario ya existe en el sistema");
+          }
+          if($('#cedulaInvited').val()==""){
+              alert("Ingrese un usuario");
+          }
       }
-      
-   
     }
-
-
   });
 }());
 
-
-
+function justNumbers(e)
+{
+   var keynum = window.event ? window.event.keyCode : e.which;
+   if ((keynum == 8) || (keynum == 46))
+        return true;
+    return /\d/.test(String.fromCharCode(keynum));
+}
