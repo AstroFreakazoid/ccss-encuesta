@@ -4,15 +4,14 @@ const userAdmin=localStorage.getItem("username");
 (function() {
 //Inicializar Firebase
   //Se inicialializa firebase.
-    var config = {
-        apiKey: "AIzaSyCmI3gN4jJR-TV7FaiGhUkhvxOdtdP2sco",
-        authDomain: "encuesta-5a920.firebaseapp.com",
-        databaseURL: "https://encuesta-5a920.firebaseio.com",
-        storageBucket: "encuesta-5a920.appspot.com",
-        messagingSenderId: "843177083745"
+ var config = {
+    apiKey: "AIzaSyAkkKRqtp_2xY8qIeSuzJnTHIlKdDuQqis",
+    authDomain: "congresocrgeriatria2017.firebaseapp.com",
+    databaseURL: "https://congresocrgeriatria2017.firebaseio.com",
+    storageBucket: "congresocrgeriatria2017.appspot.com",
+    messagingSenderId: "207357275337"
   };
   firebase.initializeApp(config);
-
    //Modulo  angular.
    angular
     .module('appModuleOne',['firebase'])
