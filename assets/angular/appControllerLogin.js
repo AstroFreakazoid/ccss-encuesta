@@ -20,42 +20,50 @@ const userAdmin=localStorage.getItem("username");
       var imageUrl="";//Variable que almacenara url del la foto del perfil de usuario.
      //Se crea la referencia a la bd.
       const ref=firebase.database().ref();
-      //Se obtiene el elemento file.
-      var fileButton=document.getElementById('imgProfile');
-      var uploader=document.getElementById('uploader');
-      //Funtion que cargara el archivo al storage de firebase.
-      fileButton.addEventListener('change', function(e) {
-        //Se obtiene el archivo.
-        var file=e.target.files[0];
-        //Se crea la referencia al storage de firebase.
-        var storageRef= firebase.storage().ref('imgs').child(file.name);
-        //Se guarda el archivo en el storage de firebase
-        var task=storageRef.put(file);
-        //Se corre el proceso de descragar del archivo y carga del archivo
-        task.on('state_changed',
-          function progress(snapshot){
-            var percentage= (snapshot.bytesTransferred / snapshot.totalBytes )*100;//Se obtienen los porcentages de cargadel file.
-              var valor=""+percentage+"%";//Se guarda el porcentage en prceso como una cadena de caracteres.
-              uploader.style.width=valor;//Se modifica el el width del div que simula progreso en la vista.
-              
-            if (percentage==100){//Cuando la carga del file llegue a su 100% entra por el if;
+      $scope.checkboxModel = {
+       value1 :false
+      };
 
-              storageRef.getDownloadURL().then(function(url) {//Se obtiene la direccion del archivo subido al local stoarge de firebase.
-                imageUrl=url;//Se guarda la ruta en esta variable.
-                uploader.style.width="0%";//Se pone en cero % el width del div que simula el´processo de carga del file en lavista
-                //Se carga el avatar con la imagen file .
-                $(".avatarRegistrar").css({
-                    "background-image": 'url('+imageUrl+')'
-                });
-              }).catch(function(error) {
-                   alert(error.message);
-              });
-            }
-          },
-          function error(err){},
-          function complete(){}
-        );
-      });
+      $scope.cargarCodigo = function(){
+        if($scope.checkboxModel.value1){
+            //Se obtiene el elemento file.
+            var fileButton=document.getElementById('imgProfile');
+            var uploader=document.getElementById('uploader');
+            //Funtion que cargara el archivo al storage de firebase.
+            fileButton.addEventListener('change', function(e) {
+              //Se obtiene el archivo.
+              var file=e.target.files[0];
+              //Se crea la referencia al storage de firebase.
+              var storageRef= firebase.storage().ref('imgs').child(file.name);
+              //Se guarda el archivo en el storage de firebase
+              var task=storageRef.put(file);
+              //Se corre el proceso de descragar del archivo y carga del archivo
+              task.on('state_changed',
+                function progress(snapshot){
+                  var percentage= (snapshot.bytesTransferred / snapshot.totalBytes )*100;//Se obtienen los porcentages de cargadel file.
+                    var valor=""+percentage+"%";//Se guarda el porcentage en prceso como una cadena de caracteres.
+                    uploader.style.width=valor;//Se modifica el el width del div que simula progreso en la vista.
+                    
+                  if (percentage==100){//Cuando la carga del file llegue a su 100% entra por el if;
+
+                    storageRef.getDownloadURL().then(function(url) {//Se obtiene la direccion del archivo subido al local stoarge de firebase.
+                      imageUrl=url;//Se guarda la ruta en esta variable.
+                      uploader.style.width="0%";//Se pone en cero % el width del div que simula el´processo de carga del file en lavista
+                      //Se carga el avatar con la imagen file .
+                      $(".avatarRegistrar").css({
+                          "background-image": 'url('+imageUrl+')'
+                      });
+                    }).catch(function(error) {
+                        alert(error.message);
+                    });
+                  }
+                },
+                function error(err){},
+                function complete(){}
+              );
+            });
+        }
+      }     
 
     // Obtener elementos
   
@@ -63,6 +71,43 @@ const userAdmin=localStorage.getItem("username");
     var passwordRegis = document.getElementById('password');
     var nameUserRegis = document.getElementById('nameUser');
     var userExistente;
+    
+    $scope.registrarInvited = function()//Function que registra a un usuario.
+    {   var listUserName=[];
+         var i=0;
+          nameUser=$scope.formatearNameUser($('#email').val());//Se llama a la function que formatea el correo electronico.
+          ref.child("/uses/invited").orderByChild("profile/username/").on("child_added", function(snapshot) 
+          {//Se obtiene la lista de usuarios exixtentes en la bd.
+            listUserName[i]=snapshot.key;
+            i++;  
+          });
+          var listo=false;
+          for(var i=0;i<listUserName.length && listo==false;i++){
+              if(listUserName[i]===nameUser){
+                listo=true;
+              }
+          }
+          if(!listo && listUserName.length!=0 && $('#email').val()!="" && $('#nameUser').val()!=""){
+              firebase.database().ref().child('uses/invited/'+nameUser+"/profile/").set({
+                  dependence:'mar90jesusgmailcom',
+                  name:$('#nameUser').val(),
+                  rol:"invited",
+                  username:nameUser
+              }); 
+              $('#abtnLogin').click();
+          }
+          if(listo && listUserName.length!=0){
+              alert("The user already exists in the system");
+          }
+          if($('#email').val()==""){
+              alert("Enter an email");
+          }
+          if($('#nameUser').val()==""){
+              alert("You must enter your name");
+              
+          }
+    }
+    
     $scope.registrarUser = function()//Function que registra a un usuario.
     { userExistente=false;//Variable booleana que sirve parasaber si ya existe el usuario
       var nameUser="null";//Varisable que almacenara el correo electronico si . y @
@@ -78,16 +123,14 @@ const userAdmin=localStorage.getItem("username");
       if(userExistente==false & nameUser.length>0)//Se valida que no exista el usuario y que el nombre de usuario tenga suficiente caracteres.
       { if($scope.valiadar())//Se invoca a la function valida la cual me retornara un booleano, esta funtion valiada que todo este bien con los datos ingresados por el usuario a la hora de su registro.
         { localStorage.setItem("username", nameUser);// Todo bien ya se puede guardar el usuario en el local storage para percistencia.
-          $('#btnaLogin').removeClass("hidden");//Se remueve la clase que oculta el boton de iniciar secion.
-          $('#btnaLogin').addClass("show");//Se agrega la clase que mostrara el boton de iniciar secion
-          var userRef=ref.child("/uses/admin/"+nameUser+"/profile");//Se crea los Json para crear la estructura de arbol donde el Usuario -
+          var userRef=ref.child("/uses/admin/"+nameUser+"/profile");//Se crea los Json para crear la estructura de arbol donde el Usuario-
           userRef.set({//almacenara sus datos como topics,perfil y respuesta .
                   commentary:"null",//Json del perfil
                   invitedname:"null",
-                  name:nameUserRegis.value,
-                  password:passwordRegis.value,
+                  name:$('#nameUser').val(),
+                  password:$('#password').val(),
                   rol:"admin",
-                  username:emailRegis.value,
+                  username:$('#email').val(),
                   imgname:imageUrl
           });
           var userCommentsrRef=ref.child("/uses/admin/"+nameUser+"/comments");
@@ -132,13 +175,16 @@ const userAdmin=localStorage.getItem("username");
                  },
                 ],
             });
+            alert("Your registration was successful.");
+            $('#abtnLogin').click();
+            
         }
       }else{
         if(nameUser.length==0){
-          alert("Ingrese un correo electronico");
+          alert("Enter an email");
         }else{
           
-          alert("Correo electronico ya existe en el sistema");
+          alert("Email already exists in the system");
         }
         
       }
@@ -165,24 +211,24 @@ const userAdmin=localStorage.getItem("username");
       var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;//Exprecion de patrones para la validacion del correo electronico.
 
        if($('#nameUser').val().indexOf(" ") == 0||$('#nameUser').val()==" "){
-        alert("Debe Ingresar su nombre y apellidos");
+        alert("You must enter your name");
         todoBien=false;
         return todoBien;
       }
 
       if($('#email').val().indexOf(" ") == 0){
-        alert("Debe Ingresar un Correo Electronico");
+        alert("You must enter an Email");
         todoBien=false;
         return todoBien;
       }
       
       if($('#password').val().indexOf(" ") == 0){
-        alert("Debe Ingresar una contraseña");
+        alert("You must enter a password");
         todoBien=false;
         return todoBien;
       }
       if($('#password').val().length<6){
-        alert("Debe Ingresar una contraseña con mas de 6 caracteres");
+        alert("You must enter a password longer than 6 characters");
         todoBien=false;
         return todoBien;
       }
@@ -190,22 +236,20 @@ const userAdmin=localStorage.getItem("username");
       if (emailRegex.test($('#email').val())) {
           
       }else{
-        alert("Debe Ingresar uncorreo valido");
+        alert("You must enter a valid email");
         todoBien=false;
         return todoBien;
       }
       
       if(imageUrl.length==0){
-        alert("Debe Ingresar una foto de perfil");
+        alert("Enter a Profile Image");
         todoBien=false;
         return todoBien;
       }
       return todoBien;
     }
     
-    $scope.checkboxModel = {
-       value1 :false
-    };
+   
     var existeInvited;
     $scope.login = function(){
       var cedulaInvited=[];
@@ -226,49 +270,39 @@ const userAdmin=localStorage.getItem("username");
                       //openedWindow = window.open('manager.html');
                       location.href = "manager.html";
                     }else{
-                      alert("Contraseña no valida");
+                      alert("Invalid password");
                     }
                 });
             }
           });
         }else{
-          var i=0;
+         var listUserName=[];
+         var i=0;
+          nameUser=$scope.formatearNameUser($('#emailInvited').val());//Se llama a la function que formatea el correo electronico.
           ref.child("/uses/invited").orderByChild("profile/username/").on("child_added", function(snapshot) 
           {//Se obtiene la lista de usuarios exixtentes en la bd.
-            cedulaInvited[i]=snapshot.key;
+            listUserName[i]=snapshot.key;
             i++;  
           });
           var listo=false;
-          for(i=0;i<cedulaInvited.length && listo==false;i++){
-              if(cedulaInvited[i]==$('#cedulaInvited').val()){
+          for(var i=0;i<listUserName.length && listo==false;i++){
+              if(listUserName[i]===nameUser){
                 listo=true;
               }
           }
-          if(!listo && cedulaInvited.length!=0 && $('#cedulaInvited').val()!=""){
-              firebase.database().ref().child('uses/invited/'+$('#cedulaInvited').val()+"/profile/").set({
-                  dependence:'mar90jesusgmailcom',
-                  rol:"invited",
-                  username:$('#cedulaInvited').val()
-              }); 
-              localStorage.setItem("usernameInvited",$('#cedulaInvited').val());
+          if(listo && listUserName.length!=0 && $('#emailInvited').val()!=""){
+              localStorage.setItem("usernameInvited",nameUser);
               openedWindow = window.open('encuesta.html');
-             // location.href = "encuesta.html";
           }
-          if(listo && cedulaInvited.length!=0){
-              alert("El usuario ya existe en el sistema");
+          if(!listo && listUserName.length!=0){
+              alert("The user does not exist in the system");
           }
-          if($('#cedulaInvited').val()==""){
-              alert("Ingrese un usuario");
+          if($('#emailInvited').val()==""){
+              alert("Enter your email address");
           }
       }
     }
   });
 }());
 
-function justNumbers(e)
-{
-   var keynum = window.event ? window.event.keyCode : e.which;
-   if ((keynum == 8) || (keynum == 46))
-        return true;
-    return /\d/.test(String.fromCharCode(keynum));
-}
+

@@ -62,7 +62,7 @@ function myFunction() {
                 refUserAdmin.child('comments').on("value", function(snapshot){
                     valueTextArea= $('#comment').val();
                     if(bandera){
-                        comentarios=snapshot.val().comment+"\n User:"+localStorage.getItem("usernameInvited")+":  "+valueTextArea;
+                        comentarios=snapshot.val().comment+"\n "+localStorage.getItem("usernameInvited")+":  "+valueTextArea;
                         $scope.todosComentarios=comentarios;
                         bandera=false;
                     }
@@ -139,10 +139,10 @@ function myFunction() {
                     $scope.valor2= listIdQuestionsPorcentAnswers[(snapshot.val()-1)][1];
                     $scope.valor3= listIdQuestionsPorcentAnswers[(snapshot.val()-1)][2];
                     $scope.valor4= listIdQuestionsPorcentAnswers[(snapshot.val()-1)][3];
-                    graph.setData([ {y: 'Respuesta 1', a:  $scope.valor1},
-                                    {y: 'Respuesta 2', a:  $scope.valor2},
-                                    {y: 'Respuesta 3', a:  $scope.valor3},
-                                    {y: 'Respuesta 4', a:  $scope.valor4}
+                    graph.setData([ {y: 'Answer 1', a:  $scope.valor1},
+                                    {y: 'Answer 2', a:  $scope.valor2},
+                                    {y: 'Answer 3', a:  $scope.valor3},
+                                    {y: 'Answer 4', a:  $scope.valor4}
                                 ]);
                 }
             });
@@ -194,10 +194,10 @@ function myFunction() {
                 refUserAdmincomments.update({
                     comment: " "
                 })
-                 graph.setData([{y: 'Respuesta 1', a:  0},
-                            {y: 'Respuesta 2', a: 0},
-                            {y: 'Respuesta 3', a: 0},
-                            {y: 'Respuesta 4', a: 0}
+                 graph.setData([{y: 'Answer 1', a:  0},
+                            {y: 'Answer 2', a: 0},
+                            {y: 'Answer 3', a: 0},
+                            {y: 'Answer 4', a: 0}
                           ]);
             }
             
@@ -208,10 +208,10 @@ function myFunction() {
             //Diagrama de Barra para la muestra de estadistica  de las preguntas.
             element: 'bar-example',
             data: [
-                {y: 'Respuesta 1', a:  $scope.valor1},
-                {y: 'Respuesta 2', a:  $scope.valor2},
-                {y: 'Respuesta 3', a:  $scope.valor3},
-                {y: 'Respuesta 4', a:  $scope.valor4}
+                {y: 'Answer 1', a:  $scope.valor1},
+                {y: 'Answer 2', a:  $scope.valor2},
+                {y: 'Answer 3', a:  $scope.valor3},
+                {y: 'Answer 4', a:  $scope.valor4}
             ],
             xkey: 'y',
             ykeys: ['a'],
