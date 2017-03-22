@@ -9,13 +9,12 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- script grafico -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
-
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <script src="../../assets/js/raphael.min.js"></script>
+    <script src="../../assets/js/morris.min.js"></script>
     <script src="../../assets/js/angular.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="../../assets/js/firebase.js"></script>
+
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/angular/encuestaController.js"></script>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -84,8 +83,8 @@
                                                 </div>
                                                  <div class="item bg-primary "  style="height: 170px;">
                                                     <div  style="text-align: center;">
-                                                        <h3>Gracias por su participación</h3>
-                                                        <h4>Congreso Geriatrico 2017</h4>
+                                                        <h3>Thanks for your participation</h3>
+                                                        <h4>2017 Geriatric Congress</h4>
                                                     </div>
                                                     
                                                 </div>
@@ -99,17 +98,17 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <h3>ESTADISTICAS GLOBALES</h3>
+                        <h3>GLOBAL STATISTICS</h3>
                         <div class="col-md-12 col-sm-12 col-lg-12"style="height:500px;" id="paraimprimir2">
                             <div id="bar-example" style="height: 350px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalSelectTema">Seleccionar Tema</button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalComment">Ver comentarios</button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;"  ng-click="imprimir()">Imprimir Ventana</button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" ng-click="siguienteSlide()">Siguiente pregunta</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalSelectTema">Select Theme</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalComment">See comments</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;"  ng-click="imprimir()">Print  Graphic </button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" ng-click="siguienteSlide()">Next question</button>
         </div>
     </div>
     <div class="container">
@@ -120,7 +119,7 @@
                 <!-- Modal content-->
                 <div class="modal-content row"  style="height: 300px;">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">Comentarios del publico</h4>
+                         <h4 class="modal-title">Comments from the public</h4>
                     </div>
                     <div class="modal-body">
                         <form class="col-md-12 col-sm-12 col-lg-12">
@@ -132,7 +131,7 @@
                             </div>
                         </form>
                         <div class="modal-footer"  >
-                            <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4"  data-dismiss="modal">Salir</button>
+                            <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4"  data-dismiss="modal">Get out</button>
                        </div>
                     </div>
                 </div>
@@ -148,18 +147,18 @@
                 <!-- Modal content-->
                 <div class="modal-content row"  style="height: 100%;">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">Seleccione el Tema</h4>
+                         <h4 class="modal-title">Select Topic</h4>
                     </div>
                     <div class="modal-body col-md-12 col-sm-12 col-lg-12">
                         <form >
                             <div class="form-group">
                                 <div ng-repeat="(idTopic,topic) in objectManegerTopic">
-                                    <button type="button" class="btn btn-default col-md-12 col-sm-12 col-lg-12" style="width: 100%; margin-bottom: 10px;"  ng-click="seleccionarTema(idTopic)">{{topic.name}}</button>
+                                    <button type="button" class="btn btn-default col-md-12 col-sm-12 col-lg-12" style="width: 100%; margin-bottom: 10px;"  ng-click="seleccionarTema(idTopic)"  data-dismiss="modal">{{topic.name}}</button>
                                </div>
                             </div>
                         </form>
                         <div class="modal-footer"  >
-                            <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4"  data-dismiss="modal">Salir</button>
+                            
                        </div>
                     </div>
                 </div>

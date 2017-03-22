@@ -3,12 +3,12 @@ const userAdmin=localStorage.getItem("username");
 //Se inicializa el usuario.
 (function(){
     //Se inicialializa firebase.
-    var config = {
-        apiKey: "AIzaSyCmI3gN4jJR-TV7FaiGhUkhvxOdtdP2sco",
-        authDomain: "encuesta-5a920.firebaseapp.com",
-        databaseURL: "https://encuesta-5a920.firebaseio.com",
-        storageBucket: "encuesta-5a920.appspot.com",
-        messagingSenderId: "843177083745"
+  var config = {
+    apiKey: "AIzaSyAkkKRqtp_2xY8qIeSuzJnTHIlKdDuQqis",
+    authDomain: "congresocrgeriatria2017.firebaseapp.com",
+    databaseURL: "https://congresocrgeriatria2017.firebaseio.com",
+    storageBucket: "congresocrgeriatria2017.appspot.com",
+    messagingSenderId: "207357275337"
   };
   firebase.initializeApp(config);
 
@@ -25,7 +25,12 @@ const userAdmin=localStorage.getItem("username");
         //Se crea una referencia a la informacion extra relacionada a la pagina mananger.
         const referenciaInformation=firebase.database().ref().child('information/infoMananger/questionsrgistr');
         //Se crea un objeto con la funcion$firebaseObject();
-        this.objectInform=$firebaseObject(referenciaInformation);
+        setInterval(function() {
+            $scope.$apply(function(){
+                this.objectInform=$firebaseObject(referenciaInformation);
+            });
+                
+        }, 1000);
         //Se crea una referencia a la informacion relacionda con un administrados.
         const referenciaUserAdmin=firebase.database().ref().child('uses/admin');
         //Se crea la rferencia a los datos del usuario administrados.

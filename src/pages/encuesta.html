@@ -9,9 +9,10 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <!-- script grafico -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <script src="../../assets/js/raphael.min.js"></script>
+    <script src="../../assets/js/morris.min.js"></script>
+    <script src="../../assets/js/firebase.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
@@ -21,12 +22,10 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/stats.css">
-    <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+
     
     <!-- AngularJS -->
      <script src="../../assets/js/angular.min.js"></script>
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
      <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/angular/encuestaController.js"></script>
@@ -152,7 +151,7 @@
         }
     </style>
 </head>
-<body id="body" ng-controller="encuestaCtrl">
+<body id="body" ng-controller="encuestaCtrl" onbeforeunload="return myFunction()">
     <div id="preloader">
         <img src="../../assets/img/preloader.gif" alt="Preloader">
     </div>
@@ -161,7 +160,7 @@
 
     <div class="container">
         <div class="row text-center">
-            <h1>ENCUESTA</h1>
+            <h1>POLL</h1>
             <hr width="50%"><br>
         </div>
     </div>
@@ -202,7 +201,7 @@
                                 <br>
                                 <hr>
                                 <div class="col-sm-6 col-xs-6">
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId">ESTADISTICAS</button>
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId">STATISTICS</button>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a data-toggle="modal" data-target="#helpId"><i class="fa fa-slideshare btn-lg"></i></a>
@@ -215,10 +214,10 @@
                 </div>
                  <div class="item bg-primary ">
                     <div class="carousel-caption" style="position: absolute;">
-                        <h3>Gracias por su participación</h3>
-                        <h4>Congreso Geriatrico 2017</h4>
+                        <h3>Thanks for your participation</h3>
+                        <h4>2017 Geriatric Congress</h4>
                          <div class="col-md-12 col-sm-12 col-lg-12" style="margin-top: 20px;">
-                            <button type="button" class="btn btn-primary btn-lg" ng-click="direccionarFinEncuesta()">Salir</button>
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="direccionarFinEncuesta()">Get out</button>
                         </div>
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -243,7 +242,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci asperiores debitis dicta dolore doloremque dolores doloribus ex expedita facere impedit laudantium maiores nesciunt, perspiciatis reiciendis reprehenderit similique voluptatem voluptatibus.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
                 </div>
             </div>
         </div>
@@ -258,7 +257,7 @@
             <div class="modal-content full-width-modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="statsLabelId">ESTADISTICAS</h4>
+                    <h4 class="modal-title" id="statsLabelId">STATISTICS</h4>
                 </div>
                 <div class="modal-body text-center">
 
@@ -378,7 +377,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Continuar</button>
+                    <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Continue</button>
                 </div>
             </div>
         </div>
@@ -392,7 +391,7 @@
                 <!-- Modal content-->
                 <div class="modal-content row">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">Puedes hacer un comentario si lo deseas</h4>
+                         <h4 class="modal-title">You can make a comment if you want</h4>
                     </div>
                     <div class="modal-body">
                         <form class="col-md-12 col-sm-12 col-lg-12">
@@ -403,8 +402,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" >Enviar Comentario</button>
-                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()"  data-toggle="modal" data-target="#modalGracias">No Gracias</button>
+                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" >Send comment</button>
+                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()"  data-toggle="modal" data-target="#modalGracias">No thanks</button>
                     </div>
                    
                 </div>
@@ -421,7 +420,7 @@
                    <div class="modal-body">
                         <form>
                             <div class="form-group " style="margin-top: 100px;">
-                                <h2 >Gracias por participar</h2>
+                                <h2 >Thanks for participating</h2>
                                 <div class="text parpadea">
                                    <i class="fa fa-thumbs-up" style="margin-top: 40px; font-size: 150px; display: block;"></i>
                                 </div>
