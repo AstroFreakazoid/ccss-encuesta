@@ -6,13 +6,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>CCSS : CONGRESO NACIONAL DE GERIATRIA</title>
-    <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+    <link  href="../../assets/img/iconTitle.png" type="image/x-icon" rel="shortcut icon">
+    <title>Astrofreakazoid</title>
     <meta name="description" content="Blue One Page Creative HTML5 Template">
     <meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
     <meta name="author" content="Muhammad Morshed">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
@@ -20,15 +19,15 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/login.css">
+    <script src="../services/conn.js"></script>
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
     <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="../../assets/js/angular.min.js"></script>
     <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="../../assets/js/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
-    <script src="../../assets/js/angular.min.js"></script>
     <style>
         html,body{
             background: #eee url(../../assets/img/ancianos-blur.jpg) center fixed no-repeat;
@@ -52,8 +51,8 @@
                 <!-- Nav tabs -->
                 <div class="card">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="abtnLogin">Login</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Check in</a></li>
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" id="abtnLogin">Iniciar sesión</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Registrarse</a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -73,9 +72,9 @@
                                            <input type="password" placeholder="password" id="loginPassword">
                                         </div>
                                        <br>
-                                        <label>I'm an administrator</label><br>
+                                        <label>Yo soy administrador</label><br>
                                         <input type="checkbox" ng-model="checkboxModel.value1" style="width: 30px;height: 30px;">
-                                        <button class="btn btn-info btn-block login" id="btnLoginAdmin"  type="button" ng-click="login()" >Login admin</button>
+                                        <button class="btn btn-info btn-block login" id="btnLoginAdmin"  type="button" ng-click="login()" >Iniciar sesión</button>
                                     </form>
                                 </div>
                                 <div class="form-box" ng-if="checkboxModel.value1==false">
@@ -86,9 +85,9 @@
                                            <input name="user" type="text" placeholder="Your Email" id="emailInvited">
                                         </div>
                                         <br><br>
-                                        <label>You are an administrator</label><br>
+                                        <label>Usted es administrador</label><br>
                                         <input type="checkbox" ng-model="checkboxModel.value1" style="width: 30px;height: 30px;">
-                                        <button class="btn btn-info btn-block login" id="btnLoginInvited" title="Double click" type="button" ng-click="login()" >Login invited</button>
+                                        <button class="btn btn-info btn-block login" id="btnLoginInvited" title="Double click" type="button" ng-click="login()" >Iniciar sesión</button>
                                     </form>
                                 </div>
                                 
@@ -105,40 +104,40 @@
                                         <div class="avatarRegistrar"></div>
                                         <form class="form-horizontal" method="post" action="#">
                                              <div class="form-group">
-                                                <label for="nameUser" class="cols-sm-2 control-label">Your name</label>
+                                                <label for="nameUser" class="cols-sm-2 control-label">Su nombre</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="nameUser" id="nameUser"  placeholder="Enter your name"/>
+                                                        <input type="text" class="form-control" name="nameUser" id="nameUser"  placeholder="Ingrese su nombre y apellido"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                                                <label for="email" class="cols-sm-2 control-label">Su correo electrónico</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+                                                        <input type="text" class="form-control" name="email" id="email"  placeholder="Ingrese su correo"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label ng-if="checkboxModel.value1">I'm an administrator</label><br>
-                                                <label ng-if="checkboxModel.value1==false">You are an administrator</label><br>
+                                                <label ng-if="checkboxModel.value1">Yo soy administrador</label><br>
+                                                <label ng-if="checkboxModel.value1==false">Usted es administrador</label><br>
                                                 <input type="checkbox" ng-model="checkboxModel.value1" style="width: 30px;height: 30px;">
                                             </div>
 
                                             <div class="form-group" ng-if="checkboxModel.value1">
-                                                <label for="password" class="cols-sm-2 control-label">Password</label>
+                                                <label for="password" class="cols-sm-2 control-label">Contraseña</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                        <input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+                                                        <input type="password" class="form-control" name="password" id="password"  placeholder="Ingrese su contraseña"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group" ng-if="checkboxModel.value1">
-                                                <label for="image" class="cols-sm-2 control-label">Profile Picture</label>
+                                                <label for="image" class="cols-sm-2 control-label">Imagen de perfil</label>
                                                 <div class="cols-sm-10">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></span>
@@ -153,8 +152,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group ">
-                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar" ng-click="registrarUser()"  ng-if="checkboxModel.value1">Register administrator</button>
-                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar" ng-click="registrarInvited()"  ng-if="checkboxModel.value1==false">Register Invited</button>
+                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar" ng-click="registrarUser()"  ng-if="checkboxModel.value1">Registrarse</button>
+                                                <button type="button" class="btn btn-primary btn-lg btn-block login-button" id="btnRegistrar" ng-click="registrarInvited()"  ng-if="checkboxModel.value1==false">Registrarse</button>
                                             </div>
                                             <div class="login-register btn-primary btn-lg btn-block hidden " id="btnaLogin">
                                                 <a href="manager.html">Login</a>
@@ -186,9 +185,6 @@
     <script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
     <script src="../../assets/js/jquery-countTo.js"></script>
     <script src="../../assets/js/jquery.appear.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-    <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
     <script src="../../assets/js/login.js"></script>

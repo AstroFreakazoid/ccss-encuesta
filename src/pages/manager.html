@@ -5,14 +5,14 @@
 <!--[if gt IE 8]><!--> 
 <html lang="en" class="no-js" ng-app="myApp"> <!--<![endif]-->
 <head>
-    <title>CCSS: ENCUESTACR</title>
+    <link  href="../../assets/img/iconTitle.png" type="image/x-icon" rel="shortcut icon">
+    <title>Astrofreakazoid</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
@@ -20,16 +20,15 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/manager.css">
-    <script src="../../services/conn.js"></script>
+    <script src="../services/conn.js"></script>
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
     <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="../../assets/js/angular.min.js"></script>
     <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="../../assets/js/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
-    <script src="../../assets/js/angular.min.js"></script>
     
 </head>
 <body id="body" ng-controller="MyCtrl as ctrl">
@@ -54,12 +53,11 @@
                     </h1>
                 </a>
             </div>
-            <nav class="collapse navbar-collapse navbar-right" role="navigation">
+            <nav class="collapse navbar-collapse navbar-right " role="navigation">
                 <ul id="nav" class="nav navbar-nav">
-                    <li><a href="home.html">PRINCIPAL</a></li>
-                    <li><a href="encuesta.html">POLL</a></li>
-                    <li><a href="manager.html">MANAGER</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="https://congresocrgeriatria2017.firebaseapp.com/">SALIR</a></li>
+                    <li><a href="managerTopic.html">INICIAR ENCUESTA</a></li>
+                    <li><a href="about.html">ACERCADE</a></li>
                 </ul>
             </nav>
         </div>
@@ -75,7 +73,7 @@
                 <a id="user-btn-details" href="#aboutModal" data-toggle="modal" data-target="#myModal2">
                     <img src='{{ctrl.UserAdmidObject.imgname}}' name="aboutme" width="140" height="140" class="img-circle">
                     &nbsp;&nbsp;&nbsp;
-                   <em><b>See description!</b></em>
+                   <em><b>VER DESCRIPCIÓN</b></em>
                 </a>
              </div>
 
@@ -88,7 +86,7 @@
              <div class="col-sm-12 col-md-4 col-lg-4">
                 <br><br>
                 <button type="button" class="btn btn-primary btn-lg" style="width: 100%" data-toggle="modal" data-target="#shareLink">
-                    Share by link &nbsp;
+                    Compartir por enlace &nbsp;
                     <i class="btn-down-up fa fa-share-alt"></i>
                 </button> <br><br>
                 <!--<button type="button" class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#myModal" id="btnRegistrarInvitado">
@@ -107,7 +105,7 @@
     <div class="container bg-primary">
         <div class="row">
            <div class="col-sm-12 col-md-8 col-lg-8">
-                <h3>Registered Questions</h3>
+                <h3>Registrar Pregunta</h3>
                 <p>{{ctrl.objectInform.text}}</p>
                 <br><br><br>
                 <!-- PREGUNTAS -->
@@ -125,7 +123,7 @@
                         <div class="panel-body">
                             <div class="panel-group" id="{{$index + '-'+ obtion[$index].id}}">
 
-                                 <label class="lbel">Theme
+                                 <label class="lbel">Tema
                                     <input type="text" value="{{topic.name}}" class="inputTextResp" id="{{topic.name +'-'+ idTopoc}}">
                                     <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarTopic(idTopoc,topic.name +'-'+ idTopoc)" title="Modify"></i>
                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarTopic(idTopoc)" title="Remove"></i>
@@ -143,7 +141,7 @@
                                     <div id="{{idQuestion + '-'+ idTopoc}}" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <div class="">
-                                                <label  class="lbel">Question
+                                                <label  class="lbel">Pregunta
                                                     <input type="text" value="{{question.name}}" id="{{question.name }}">
                                                     <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarPregunta(question.name,idQuestion,idTopoc)" title="Modify"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarPregunta(idQuestion,idTopoc)" title="Remove"></i>
@@ -168,10 +166,10 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-12 col-sm-12 col-md-12">
-                        <i><b>Click here to register a new question!</b></i>
+                        <i><b>De clic aqui para registrar una nueva pregunta</b></i>
                         <br><br>
                         <button class="btn btn-info btn-lg" style="width: 100%" data-toggle="modal" data-target="#registerAns">
-                            NEW QUESTION &nbsp;
+                            Nueva Pregunta &nbsp;
                             <i class="btn-down-up fa fa-plus-square"></i>
                         </button>
                         <br><br>
@@ -181,7 +179,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-lg-12">
-                        <h3>News</h3>
+                        <h3>Noticias</h3>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. <b> Repudiandae impedit ratione ducimus dicta eaque. </b> Eius, saepe voluptate maxime, voluptatibus suscipit.
                         </p>
@@ -235,7 +233,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">Register new question</h4>
+                  <h4 class="modal-title">REGISTRAR NUEVA PREGUNTA</h4>
                 </div>
                 
                 <div class="modal-body .container-fluid">
@@ -284,17 +282,17 @@
                                             <div class="step2 row">
                                                
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevoTema">New topic</button>
+                                                    <button type="button" class="btn btn-default nuevoTema">NUEVO TEMA</button>
                                                 </div>
                                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                                    <button type="button" class="btn btn-default nuevaPregunta">New question</button>
+                                                    <button type="button" class="btn btn-default nuevaPregunta">NUEVA PREGUNTA</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane" role="tabpanel" id="step2">
                                             <div class="step2">
                                                 <div class="step_21">
-                                                    <h5><strong>Theme</strong></h5>
+                                                    <h5><strong>TEMA</strong></h5>
                                                     <hr>
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -304,13 +302,13 @@
                                                 </div>
                                             </div>
                                             <ul class="list-inline pull-right">
-                                                <li><button type="button" class="btn btn-primary btnContinue1 next-step btnSaveAnContinue">Continue</button></li>
+                                                <li><button type="button" class="btn btn-primary btnContinue1 next-step btnSaveAnContinue">Continuar</button></li>
                                             </ul>
                                         </div>
                                         <div class="tab-pane " role="tabpanel" id="step3">
                                             <div class="step33">
                                                 <div class="step_21">
-                                                    <h5><strong>Question</strong></h5>
+                                                    <h5><strong>PREGUNTA</strong></h5>
                                                     <hr>
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -321,7 +319,7 @@
                                             </div>
                                             <div class="list-inline pull-right row">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <button type="button" class="btn btn-primary btnContinue2 next-step btnSaveAnContinue">Continue</button>
+                                                    <button type="button" class="btn btn-primary btnContinue2 next-step btnSaveAnContinue">Continuar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -344,7 +342,7 @@
                                             </div>
                                             <div class="list-inline pull-right row">
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                                     <button type="button" class="btn btn-default" ng-click="registar()">Register</button>
+                                                     <button type="button" class="btn btn-default" ng-click="registar()">REGISTRAR</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -371,16 +369,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">×</button>
-                  <h4 class="modal-title">Copy this link to share</h4>
+                  <h4 class="modal-title">Compartir por enlace</h4>
                 </div>
                 
                 <div class="modal-body">            
-                    <input style="width: 100%;border: none;font-size: 15px;color: red;" type="text" value="file:///C:/Users/alego/Documents/GitHub/ccss-encuesta/" />
+                    <input style="width: 100%;border: none;font-size: 15px;color: red;" type="text" value="https://congresocrgeriatria2017.firebaseapp.com/" />
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Copy to clipboard</button>
-                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Continue</button>
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Copiar al portapapeles</button>
+                    <button type="button" class="btn btn-default  btn-info btn-lg" data-dismiss="modal">Continuar</button>
                 </div>
             </div>
         </div>
@@ -401,7 +399,7 @@
                 <div class="modal-body">            
                   <form>
                     <div class="form-group">
-                      <label for="name">Name:</label>
+                      <label for="name">Nombre:</label>
                       <input type="text" class="form-control" id="name" placeholder="Enter name">
                     </div>
                     <div class="form-group">
@@ -491,10 +489,8 @@
 
                 <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
                     <div class="footer-single">
-                        <img src="../../assets/img/footer-logo.png" alt="">
-                        <br><br>
-                        <p>Frase: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloribus enim est hic illum ipsam perferendis, soluta. Accusamus aliquam amet distinctio eius ex necessitatibus nihil placeat quam, unde voluptatem? Voluptate.</p>
-                        <br>
+                        <img src="../../assets/img/preloader.png" alt="">
+                        <br><br><br>
                         <p><b>Gracias por nuestra pagina</b></p>
                     </div>
                 </div>
@@ -508,19 +504,21 @@
                 <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
                     <div class="footer-single">
                         <br>
-                        <h6>More information!</h6>
+                        <h6>Mas informacion!</h6>
                         <form action="#" class="subscribe">
                             <input title="alguien@ejemplo.com" placeholder="alguien@ejemplo.com" type="text" name="subscribe" id="subscribe">
                             <input type="submit" value="&#8594;" id="subs">
                         </form>
-                        <p>Enter your email to receive more information about our services!</p>
+                        <p>Ingresa tu correo electronico para recibir mas informacion de nuestros servicios!</p>
                     </div>
                 </div>
+
+
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <p class="copyright text-center">
-                        Developed by <a href="">Marvin Calvo Acuña and Jose Alejandro Gomez Castro</a>
+                        Desarrollado por <a href="">Marvin Calvo Acuña y Jose Alejandro Gomez Castro</a>
                         <br>
                         Copyright © 2017 <a href="">Astrofreakazoid</a>
                     </p>
@@ -538,9 +536,6 @@
     <script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
     <script src="../../assets/js/jquery-countTo.js"></script>
     <script src="../../assets/js/jquery.appear.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
     <script src="../../assets/angular/appController.js"></script>
