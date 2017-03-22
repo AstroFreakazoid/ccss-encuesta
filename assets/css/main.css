@@ -172,10 +172,18 @@ body > section,
     bottom: 0;
     left: 0;
     right: 30px;
-    width: 200px;
+    width: 500px;
     margin: auto;
 }
 
+@media(max-width: 500px){
+  #preloader > img { margin-left: 0px; margin-top: 225px; width: 315px; }
+}
+
+#logo img{
+  width: 245px;
+  padding: 5px;
+}
 
 /*=========================================
 	Header
@@ -536,7 +544,7 @@ top: -8px;
 ==========================================*/
 
 #facts {
-	background-image: url("../img/parallax/city.jpg");
+	background-image: url("../img/jose2.jpg");
 	background-color: rgba(6,32,51,.8);
 	background-attachment: fixed !important;
 	background-position: center center;
@@ -664,6 +672,10 @@ label.error {
 
 .footer-social {
   margin-top: 17px;
+}
+
+.footer-single img{
+  width: 300px;
 }
 
 .footer-social li a {
