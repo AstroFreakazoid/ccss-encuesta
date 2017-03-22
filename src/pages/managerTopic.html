@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js" ng-app="myApp">
 <head>
-    <title>CCSS: ENCUESTACR</title>
+    <link  href="../../assets/img/iconTitle.png" type="image/x-icon" rel="shortcut icon">
+    <title>Astrofreakazoid</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../services/conn.js"></script>
     <!-- script grafico -->
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
     <script src="../../assets/js/raphael.min.js"></script>
     <script src="../../assets/js/morris.min.js"></script>
     <script src="../../assets/js/angular.min.js"></script>
     <script src="../../assets/js/firebase.js"></script>
-
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/angular/encuestaController.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
@@ -32,6 +32,31 @@
     <img src="../../assets/img/preloader.png" alt="Preloader">
 </div>
 
+<header id="navigation" class="navbar-fixed-top navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- responsive nav button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars fa-2x"></i>
+            </button>
+            <a class="navbar-brand" href="#body">
+                <h1 id="logo">
+                    <img src="../../assets/img/logo.png" alt="Brandi">
+                </h1>
+            </a>
+        </div>
+        <nav class="collapse navbar-collapse navbar-right " role="navigation">
+            <ul id="nav" class="nav navbar-nav">
+                <li><a href="https://congresocrgeriatria2017.firebaseapp.com/">SALIR</a></li>
+                <li><a href="manager.html">MANAGER</a></li>
+                <li><a href="about.html">ACERCADE</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<br><br><br><br
 
 
 <!-- //.bar chart -->
@@ -83,8 +108,8 @@
                                                 </div>
                                                  <div class="item bg-primary "  style="height: 170px;">
                                                     <div  style="text-align: center;">
-                                                        <h3>Thanks for your participation</h3>
-                                                        <h4>2017 Geriatric Congress</h4>
+                                                        <h3>GRACIAS POR SU PARTICIAPCIÓN</h3>
+                                                        <h4>CONGRESO NACIONAL DE GERIATRIA 2017.</h4>
                                                     </div>
                                                     
                                                 </div>
@@ -98,17 +123,17 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <h3>GLOBAL STATISTICS</h3>
+                        <h3>ESTADISTICAS GLOBALES</h3>
                         <div class="col-md-12 col-sm-12 col-lg-12"style="height:500px;" id="paraimprimir2">
-                            <div id="bar-example" style="height: 350px;"></div>
+                            <div id="bar-example" style="height: 325px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalSelectTema">Select Theme</button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalComment">See comments</button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;"  ng-click="imprimir()">Print  Graphic </button>
-            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" ng-click="siguienteSlide()">Next question</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalSelectTema">SELECCIONAR TEMA</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" data-toggle="modal" data-target="#modalComment">VER COMENTARIOS</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;"  ng-click="imprimir()">IMPRIMIR GRAFICO</button>
+            <button type="button" class="btn btn-default col-md-3 col-sm-12 col-lg-3" style="bottom: 100px; height: 40px;" ng-click="siguienteSlide()">SIGUIENTE PREGUNTA</button>
         </div>
     </div>
     <div class="container">
@@ -119,19 +144,19 @@
                 <!-- Modal content-->
                 <div class="modal-content row"  style="height: 300px;">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">Comments from the public</h4>
+                         <h4 class="modal-title">COMENTARIOS DEL PÚBLICO</h4>
                     </div>
                     <div class="modal-body">
                         <form class="col-md-12 col-sm-12 col-lg-12">
                             <div class="form-group">
-                                <label for="comment">Comment:</label>
+                                <label for="comment">COMENTRIO:</label>
                                 <div style="border: 1px; border-style: dashed; height: 130px; font-size: 19px; padding: 10px; border-radius:6px;" >
-                                    <textarea class="form-control" rows="5" id="comment" style="resize:none;" ng-init ="inicializarComentario()" ng-model="todosComentarios"></textarea>
+                                    <textarea class="form-control" rows="5" id="comment" style="resize:none;" ng-init ="inicializarComentario()" ng-model="todosComentarios" disabled></textarea>
                                </div>
                             </div>
                         </form>
                         <div class="modal-footer"  >
-                            <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4"  data-dismiss="modal">Get out</button>
+                            <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4"  data-dismiss="modal">SALIR</button>
                        </div>
                     </div>
                 </div>
@@ -147,7 +172,7 @@
                 <!-- Modal content-->
                 <div class="modal-content row"  style="height: 100%;">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">Select Topic</h4>
+                         <h4 class="modal-title">SELECCIONE TEMA</h4>
                     </div>
                     <div class="modal-body col-md-12 col-sm-12 col-lg-12">
                         <form >
@@ -171,7 +196,49 @@
 </div>
 
 <!-- bar chart -->
+  <footer id="footer" class="footer">
+		<div class="container">
+			<div class="row">
 
+				<div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
+					<div class="footer-single">
+						<img src="../../assets/img/preloader.png" alt="">
+						<br><br><br>
+						<p><b>Gracias por nuestra pagina</b></p>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
+					<div class="footer-single">
+
+					</div>
+				</div>
+
+				<div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+					<div class="footer-single">
+						<br>
+						<h6>Mas informacion!</h6>
+						<form action="#" class="subscribe">
+							<input title="alguien@ejemplo.com" placeholder="alguien@ejemplo.com" type="text" name="subscribe" id="subscribe">
+							<input type="submit" value="&#8594;" id="subs">
+						</form>
+						<p>Ingresa tu correo electronico para recibir mas informacion de nuestros servicios!</p>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p class="copyright text-center">
+						Desarrollado por <a href="">Marvin Calvo Acuña y Jose Alejandro Gomez Castro</a>
+						<br>
+						Copyright © 2017 <a href="">Astrofreakazoid</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 
 <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
@@ -183,10 +250,19 @@
 <script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
 <script src="../../assets/js/jquery-countTo.js"></script>
 <script src="../../assets/js/jquery.appear.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
 <script src="../../assets/js/jquery.easing.min.js"></script>
 <script src="../../assets/js/wow.min.js"></script>
+<script>
+    var wow = new WOW ({
+            boxClass:     'wow',      // animated element css class (default is wow)
+            animateClass: 'animated', // animation css class (default is animated)
+            offset:       120,          // distance to the element when triggering the animation (default is 0)
+            mobile:       false,       // trigger animations on mobile devices (default is true)
+            live:         true        // act on asynchronously loaded content (default is true)
+        }
+    );
+    wow.init();
+</script>
 <!-- Custom Functions -->
 <script src="../../assets/js/custom.js"></script>
 <script src="../../assets/js/stats.js"></script>

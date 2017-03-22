@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js" ng-app="myApp">
 <head>
-    <title>CCSS: ENCUESTACR</title>
+    <link  href="../../assets/img/iconTitle.png" type="image/x-icon" rel="shortcut icon">
+    <title>Astrofreakazoid</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../services/conn.js"></script>
      <!-- script grafico -->
     <script src="../../assets/js/jquery-1.11.1.min.js"></script>
+    <!-- AngularJS -->
+    <script src="../../assets/js/angular.min.js"></script>
     <script src="../../assets/js/raphael.min.js"></script>
     <script src="../../assets/js/morris.min.js"></script>
     <script src="../../assets/js/firebase.js"></script>
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/jquery.fancybox.css">
@@ -22,145 +24,36 @@
     <link rel="stylesheet" href="../../assets/css/main.css">
     <link rel="stylesheet" href="../../assets/css/media-queries.css">
     <link rel="stylesheet" href="../../assets/css/stats.css">
-
+    <link rel="stylesheet" href="../../assets/css/encuesta.css">
     
-    <!-- AngularJS -->
-     <script src="../../assets/js/angular.min.js"></script>
      <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
     <script src="../../assets/angular/encuestaController.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
-    <style>
-        .funkyradio div {
-            clear: both;
-            overflow: hidden;
-        }
-
-        .funkyradio label {
-            width: 100%;
-            border-radius: 3px;
-            border: 1px solid #D1D3D4;
-            font-weight: normal;
-        }
-
-        .funkyradio input[type="radio"]:empty,
-        .funkyradio input[type="checkbox"]:empty {
-            display: none;
-        }
-
-        .funkyradio input[type="radio"]:empty ~ label,
-        .funkyradio input[type="checkbox"]:empty ~ label {
-            position: relative;
-            line-height: 2.5em;
-            text-indent: 3.25em;
-            margin-top: 2em;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .funkyradio input[type="radio"]:empty ~ label:before,
-        .funkyradio input[type="checkbox"]:empty ~ label:before {
-            position: absolute;
-            display: block;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            content: '';
-            width: 2.5em;
-            background: #D1D3D4;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .funkyradio input[type="radio"]:hover:not(:checked) ~ label,
-        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label {
-            color: #888;
-        }
-
-        .funkyradio input[type="radio"]:hover:not(:checked) ~ label:before,
-        .funkyradio input[type="checkbox"]:hover:not(:checked) ~ label:before {
-            content: '\2714';
-            text-indent: .9em;
-            color: #C2C2C2;
-        }
-
-        .funkyradio input[type="radio"]:checked ~ label,
-        .funkyradio input[type="checkbox"]:checked ~ label {
-            color: #777;
-        }
-
-        .funkyradio input[type="radio"]:checked ~ label:before,
-        .funkyradio input[type="checkbox"]:checked ~ label:before {
-            content: '\2714';
-            text-indent: .9em;
-            color: #333;
-            background-color: #ccc;
-        }
-
-        .funkyradio input[type="radio"]:focus ~ label:before,
-        .funkyradio input[type="checkbox"]:focus ~ label:before {
-            box-shadow: 0 0 0 3px #999;
-        }
-
-        .funkyradio-default input[type="radio"]:checked ~ label:before,
-        .funkyradio-default input[type="checkbox"]:checked ~ label:before {
-            color: #333;
-            background-color: #ccc;
-        }
-
-        .funkyradio-primary input[type="radio"]:checked ~ label:before,
-        .funkyradio-primary input[type="checkbox"]:checked ~ label:before {
-            color: #fff;
-            background-color: #337ab7;
-        }
-
-        .funkyradio-success input[type="radio"]:checked ~ label:before,
-        .funkyradio-success input[type="checkbox"]:checked ~ label:before {
-            color: #fff;
-            background-color: #5cb85c;
-        }
-
-        .funkyradio-danger input[type="radio"]:checked ~ label:before,
-        .funkyradio-danger input[type="checkbox"]:checked ~ label:before {
-            color: #fff;
-            background-color: #d9534f;
-        }
-
-        .funkyradio-warning input[type="radio"]:checked ~ label:before,
-        .funkyradio-warning input[type="checkbox"]:checked ~ label:before {
-            color: #fff;
-            background-color: #f0ad4e;
-        }
-
-        .funkyradio-info input[type="radio"]:checked ~ label:before,
-        .funkyradio-info input[type="checkbox"]:checked ~ label:before {
-            color: #fff;
-            background-color: #5bc0de;
-        }
-
-        .full-width-modal-dialog {
-            width: 98%;
-            height: 92%;
-            padding: 0;
-        }
-
-        .full-width-modal-content {
-            height: 99%;
-        }
-    </style>
 </head>
 <body id="body" ng-controller="encuestaCtrl" onbeforeunload="return myFunction()">
     <div id="preloader">
         <img src="../../assets/img/preloader.png" alt="Preloader">
     </div>
 
-    <br><br><br><br><br>
+    <header id="navigation" class="navbar-fixed-top navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#body">
+                    <h1 id="logo">
+                        <img src="../../assets/img/logo.png" alt="Brandi">
+                    </h1>
+                </a>
+            </div>
+            
+        </div>
+    </header>
+
+    <br><br><br><br>
 
     <div class="container">
         <div class="row text-center">
-            <h1>POLL</h1>
+            <h1>ENCUESTA</h1>
             <hr width="50%"><br>
         </div>
     </div>
@@ -174,7 +67,7 @@
                         <h3>{{topic.name}}</h3>
                         <h4>{{comment}}</h4>
                     </div>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class="item bg-primary" ng-repeat="(idQuestion,question) in topic.questions">
                     <div >
@@ -200,9 +93,7 @@
                             <div class="row text-center">
                                 <br>
                                 <hr>
-                                <div class="col-sm-6 col-xs-6">
-                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#statsId">STATISTICS</button>
-                                </div>
+                               
                                 <div class="col-sm-6 col-xs-6">
                                     <a data-toggle="modal" data-target="#helpId"><i class="fa fa-slideshare btn-lg"></i></a>
                                 </div>
@@ -214,19 +105,17 @@
                 </div>
                  <div class="item bg-primary ">
                     <div class="carousel-caption" style="position: absolute;">
-                        <h3>Thanks for your participation</h3>
-                        <h4>2017 Geriatric Congress</h4>
+                        <h3>GRACIAS POR SU PARTICIPACIÓN</h3>
+                        <h4>CONGRESO NACIONAL DE GERIATRIA 2017</h4>
                          <div class="col-md-12 col-sm-12 col-lg-12" style="margin-top: 20px;">
                             <button type="button" class="btn btn-primary btn-lg" ng-click="direccionarFinEncuesta()">Get out</button>
                         </div>
                     </div>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
             </div>
         </div>
     </div>
-    
-
 
 
     <!-- Inicio del perfil si modal -->
@@ -235,153 +124,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="helpLabelId">Help</h4>
+                    <h4 class="modal-title" id="helpLabelId">AYUDA</h4>
                 </div>
                 <div class="modal-body text-center">
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci asperiores debitis dicta dolore doloremque dolores doloribus ex expedita facere impedit laudantium maiores nesciunt, perspiciatis reiciendis reprehenderit similique voluptatem voluptatibus.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Continue</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- Inicio del perfil si modal -->
 
-
-
-    <!-- Inicio del perfil si modal -->
-    <div class="modal fade" id="statsId" tabindex="-1" role="dialog" aria-labelledby="statsLabelId" aria-hidden="true"  style="margin-top: 40px;">
-        <div class="modal-dialog full-width-modal-dialog">
-            <div class="modal-content full-width-modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="statsLabelId">STATISTICS</h4>
-                </div>
-                <div class="modal-body text-center">
-
-                    <div class="container bg-info">
-                        <div class="row">
-                            <div class="col-md-12"><br>
-                                <div class="text-center text-uppercase">
-
-                                </div>
-                                <!-- //.text-center -->
-
-                                <div class="column-chart">
-                                    <div class="legend legend-left hidden-xs">
-                                        <h3 class="legend-title">ME</h3>
-                                    </div>
-                                    <!-- //.legend -->
-
-                                    <div class="legend legend-right hidden-xs">
-                                        <div class="item">
-                                            <h4>Superhero</h4>
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <h4>Preety Good</h4>
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <h4>Good</h4>
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <h4>Newbie</h4>
-                                        </div>
-                                        <!-- //.item -->
-                                    </div>
-                                    <!-- //.legend -->
-
-                                    <div class="chart clearfix">
-                                        <div class="item">
-                                            <div class="bar">
-                                                <span class="percent">92%</span>
-
-                                                <div class="item-progress" data-percent="92">
-                                                    <span class="title">Creativity</span>
-                                                </div>
-                                                <!-- //.item-progress -->
-                                            </div>
-                                            <!-- //.bar -->
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <div class="bar">
-                                                <span class="percent">71%</span>
-
-                                                <div class="item-progress" data-percent="71">
-                                                    <span class="title">Reliable</span>
-                                                </div>
-                                                <!-- //.item-progress -->
-                                            </div>
-                                            <!-- //.bar -->
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <div class="bar">
-                                                <span class="percent">82%</span>
-
-                                                <div class="item-progress" data-percent="82">
-                                                    <span class="title">Comunication</span>
-                                                </div>
-                                                <!-- //.item-progress -->
-                                            </div>
-                                            <!-- //.bar -->
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <div class="bar">
-                                                <span class="percent">58%</span>
-
-                                                <div class="item-progress" data-percent="58">
-                                                    <span class="title">Leadership</span>
-                                                </div>
-                                                <!-- //.item-progress -->
-                                            </div>
-                                            <!-- //.bar -->
-                                        </div>
-                                        <!-- //.item -->
-
-                                        <div class="item">
-                                            <div class="bar">
-                                                <span class="percent">67%</span>
-
-                                                <div class="item-progress" data-percent="67">
-                                                    <span class="title">Persuasion</span>
-                                                </div>
-                                                <!-- //.item-progress -->
-                                            </div>
-                                            <!-- //.bar -->
-                                        </div>
-                                        <!-- //.item -->
-                                    </div>
-                                    <!-- //.chart -->
-                                </div>
-                                <!-- //.column-chart -->
-                            </div>
-                            <!-- //.col-md-6 -->
-                        </div>
-                        <!-- //.row -->
-                        <br>
-                    </div>
-                    <!-- //.container -->
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Continue</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Modal aparece al celeccionar una respuesta, en este modal se podra enviar comentarios-->
     <div class="container">
         <!-- Modal -->
@@ -391,19 +147,19 @@
                 <!-- Modal content-->
                 <div class="modal-content row">
                     <div class="col-md-12 col-sm-12 col-lg-12 modal-header" style="padding: 30px;">
-                         <h4 class="modal-title">You can make a comment if you want</h4>
+                         <h4 class="modal-title">Si lo deseas puedes hacre un comentario.</h4>
                     </div>
                     <div class="modal-body">
                         <form class="col-md-12 col-sm-12 col-lg-12">
                             <div class="form-group">
-                                <label for="comment">Comment:</label>
+                                <label for="comment">Comentario:</label>
                                 <textarea class="form-control" rows="5" id="comment" style="resize:none;"></textarea>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" >Send comment</button>
-                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()"  data-toggle="modal" data-target="#modalGracias">No thanks</button>
+                        <button type="button" class="btn btn-default col-md-4 col-sm-4 col-lg-4" ng-click="enviarComment()" >Enviar comentario</button>
+                        <button type="button" class="btn btn-default col-md-6 col-sm-6 col-lg-6" ng-click="ocultarModals()"  data-toggle="modal" data-target="#modalGracias">No Gracias</button>
                     </div>
                    
                 </div>
@@ -432,10 +188,50 @@
             </div>
         </div>
      </div>
-         <div hidden id="bar-example" style="height: 400px;"></div>
+    <div hidden id="bar-example" style="height: 400px;"></div>
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
 
-    <a href="javascript:void(0);" id="back-top"><i class="fa fa-angle-up fa-3x"></i></a>
+                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms">
+                    <div class="footer-single">
+                        <img src="../../assets/img/preloader.png" alt="">
+                        <br><br><br>
+                        <p><b>Gracias por nuestra pagina</b></p>
+                    </div>
+                </div>
 
+                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="footer-single">
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12 wow fadeInUp animated" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="footer-single">
+                        <br>
+                        <h6>Mas informacion!</h6>
+                        <form action="#" class="subscribe">
+                            <input title="alguien@ejemplo.com" placeholder="alguien@ejemplo.com" type="text" name="subscribe" id="subscribe">
+                            <input type="submit" value="&#8594;" id="subs">
+                        </form>
+                        <p>Ingresa tu correo electronico para recibir mas informacion de nuestros servicios!</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copyright text-center">
+                        Desarrollado por <a href="">Marvin Calvo Acuña y Jose Alejandro Gomez Castro</a>
+                        <br>
+                        Copyright © 2017 <a href="">Astrofreakazoid</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="../../assets/js/jquery.singlePageNav.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/jquery.fancybox.pack.js"></script>
@@ -443,8 +239,6 @@
     <script src="../../assets/js/jquery.parallax-1.1.3.js"></script>
     <script src="../../assets/js/jquery-countTo.js"></script>
     <script src="../../assets/js/jquery.appear.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
     <script>
