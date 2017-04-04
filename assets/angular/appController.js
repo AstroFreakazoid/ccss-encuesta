@@ -187,6 +187,7 @@ const userAdmin=localStorage.getItem("username");
         $scope.guardarTema = function()
         {   //Se obtienen los input txt con los datos del formulario de registrar tema y pregunta.
             valueInputTema = $("#tema").val();
+            valueTextAreaCasoClinico = $("#casoClinico").val();
             valueInputPregunta =$("#pregunta").val();
             valueInputRespA = $("#respA").val();
             valueInputRespB = $("#respB").val();
@@ -199,6 +200,7 @@ const userAdmin=localStorage.getItem("username");
            refNewTopic.push().set(
            {
                 name: valueInputTema,
+                casoClinico:valueTextAreaCasoClinico,
                 visible: false,
                 questions: 
                 [{  name:valueInputPregunta,
@@ -310,6 +312,14 @@ const userAdmin=localStorage.getItem("username");
         {       
             valueInput = document.getElementById(idInput);
             refUnTopic=topicsRef.child(idTopic+"/name");
+            refUnTopic.set(valueInput.value);
+            this.topicObject=$firebaseObject(topicsRef);
+            
+        }
+        $scope.modificarCasoClinico = function(idTopic,idInput)
+        {       
+            valueInput = document.getElementById(idInput);
+            refUnTopic=topicsRef.child(idTopic+"/casoClinico");
             refUnTopic.set(valueInput.value);
             this.topicObject=$firebaseObject(topicsRef);
             
