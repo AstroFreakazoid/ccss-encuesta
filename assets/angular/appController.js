@@ -2,18 +2,8 @@
 const userAdmin=localStorage.getItem("username");
 //Se inicializa el usuario.
 (function(){
-    //Se inicialializa firebase.
-  var config = {
-    apiKey: "AIzaSyAkkKRqtp_2xY8qIeSuzJnTHIlKdDuQqis",
-    authDomain: "congresocrgeriatria2017.firebaseapp.com",
-    databaseURL: "https://congresocrgeriatria2017.firebaseio.com",
-    storageBucket: "congresocrgeriatria2017.appspot.com",
-    messagingSenderId: "207357275337"
-  };
-  firebase.initializeApp(config);
-
   //Se inicialializa firebase.
-
+  firebase.initializeApp(config);
   //Se crean el modulo y los controller.
     angular
     .module('myApp',['firebase'])
@@ -125,9 +115,9 @@ const userAdmin=localStorage.getItem("username");
             refUnTopic=topicsRef.child(idTopic);
             refPregunta=refUnTopic.child("/questions");
             refUnaPregunta=refPregunta.child(idQuestion);
-            refRespuesta=refUnaPregunta.child("answers");
-            refRespuesta.push().set({
-                name: idAnswer,
+            refRespuesta=refUnaPregunta.child("answers/"+(idAnswer+1));
+            refRespuesta.update({
+                name: " ",
                 porcentage: 0,
             });
            
