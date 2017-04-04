@@ -31,7 +31,7 @@
     <script src="../../assets/angular/encuestaController.js"></script>
     <script src="../../assets/js/modernizr-2.6.2.min.js"></script>
 </head>
-<body id="body" ng-controller="encuestaCtrl" onbeforeunload="return myFunction()">
+<body id="body" ng-controller="encuestaCtrl">
     <div id="preloader">
         <img src="../../assets/img/preloader.png" alt="Preloader">
     </div>
@@ -124,11 +124,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="helpLabelId">AYUDA</h4>
+                    <h4 class="modal-title" id="helpLabelId">CASO CLINICO</h4>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body text-center" ng-repeat="(idTopic,topic) in objectManegerTopic" ng-if="topic.visible" >
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci asperiores debitis dicta dolore doloremque dolores doloribus ex expedita facere impedit laudantium maiores nesciunt, perspiciatis reiciendis reprehenderit similique voluptatem voluptatibus.</p>
+                    <p>{{topic.casoClinico}}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
@@ -176,7 +176,7 @@
                    <div class="modal-body">
                         <form>
                             <div class="form-group " style="margin-top: 100px;">
-                                <h2 >Thanks for participating</h2>
+                                <h2 >GRACIAS POR PARTICIPAR</h2>
                                 <div class="text parpadea">
                                    <i class="fa fa-thumbs-up" style="margin-top: 40px; font-size: 150px; display: block;"></i>
                                 </div>
@@ -241,6 +241,7 @@
     <script src="../../assets/js/jquery.appear.js"></script>
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
+    <script src="../../assets/js/main.js"></script>
     <script>
         var wow = new WOW ({
                 boxClass:     'wow',      // animated element css class (default is wow)

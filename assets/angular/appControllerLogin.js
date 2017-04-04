@@ -2,15 +2,7 @@
 const userAdmin=localStorage.getItem("username");
 //Se inicializa el usuario.
 (function() {
-//Inicializar Firebase
   //Se inicialializa firebase.
- var config = {
-    apiKey: "AIzaSyAkkKRqtp_2xY8qIeSuzJnTHIlKdDuQqis",
-    authDomain: "congresocrgeriatria2017.firebaseapp.com",
-    databaseURL: "https://congresocrgeriatria2017.firebaseio.com",
-    storageBucket: "congresocrgeriatria2017.appspot.com",
-    messagingSenderId: "207357275337"
-  };
   firebase.initializeApp(config);
    //Modulo  angular.
    angular
@@ -266,8 +258,6 @@ const userAdmin=localStorage.getItem("username");
                 {   if(txtPassword.val()==snapshot.val())
                     {
                       localStorage.setItem("username",correoFormateado);
-                      //openedWindow = window.open('managerTopic.html');
-                      //openedWindow = window.open('manager.html');
                       location.href = "manager.html";
                     }else{
                       alert("Invalid password");

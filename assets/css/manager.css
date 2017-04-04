@@ -1,57 +1,6 @@
 
 /*BUTON ANIM FIXED*/
 
-.material-button-anim {
-    padding: 127px 15px 27px;
-    text-align: center;
-    max-width: 320px;
-    margin: 0 auto 20px;
-    
-    position: fixed;
-    z-index: 15;
-    right: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.material-button {
-    position: relative;
-    top: 0;
-    z-index: 1;
-    width: 70px;
-    height: 70px;
-    font-size: 1.5em;
-    color: #fff;
-    background: #2C98DE;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 3px 6px rgba(0,0,0,.275);
-    outline: none;
-}
-.material-button-toggle {
-    z-index: 3;
-    width: 90px;
-    height: 90px;
-    margin: 0 auto;
-}
-.material-button-toggle span {
-    -webkit-transform: none;
-    transform:         none;
-    -webkit-transition: -webkit-transform .175s cubic-bazier(.175,.67,.83,.67);
-    transition:         transform .175s cubic-bazier(.175,.67,.83,.67);
-}
-.material-button-toggle.open {
-    -webkit-transform: scale(1.3,1.3);
-    transform:         scale(1.3,1.3);
-    -webkit-animation: toggleBtnAnim .175s;
-    animation:         toggleBtnAnim .175s;
-}
-.material-button-toggle.open span {
-    -webkit-transform: rotate(45deg);
-    transform:         rotate(45deg);
-    -webkit-transition: -webkit-transform .175s cubic-bazier(.175,.67,.83,.67);
-    transition:         transform .175s cubic-bazier(.175,.67,.83,.67);
-}
 
 #options {
     height: 70px;

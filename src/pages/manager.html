@@ -55,7 +55,7 @@
             </div>
             <nav class="collapse navbar-collapse navbar-right " role="navigation">
                 <ul id="nav" class="nav navbar-nav">
-                    <li><a href="https://congresocrgeriatria2017.firebaseapp.com/">SALIR</a></li>
+                    <li><a  onclick="localStorage.clear()" href="https://congresocrgeriatria2017.firebaseapp.com/">SALIR</a></li>
                     <li><a href="managerTopic.html">INICIAR ENCUESTA</a></li>
                     <li><a href="about.html">ACERCADE</a></li>
                 </ul>
@@ -127,6 +127,10 @@
                                     <input type="text" value="{{topic.name}}" class="inputTextResp" id="{{topic.name +'-'+ idTopoc}}">
                                     <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarTopic(idTopoc,topic.name +'-'+ idTopoc)" title="Modify"></i>
                                     <i class="fa fa-trash-o" aria-hidden="true" ng-click="eliminarTopic(idTopoc)" title="Remove"></i>
+                                </label>
+                                <label class="lbel">Caso Clinico
+                                    <textarea  class="inputTextResp" style="resize:none;" class="form-control" rows="4" cols="100" id="{{topic.name +'-'+ idTopoc + topic.casoClinico}}" placeholder="Caso Clinico">{{topic.casoClinico}}</textarea>
+                                    <i class="fa fa-pencil" aria-hidden="true" ng-click="modificarCasoClinico(idTopoc,topic.name +'-'+ idTopoc + topic.casoClinico)" title="Modify"></i>
                                 </label>
 
                                 <div class="panel panel-default" ng-repeat="(idQuestion,question) in topic.questions">
@@ -296,7 +300,9 @@
                                                     <hr>
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                                            <input type="text" class="form-control" id="tema" placeholder="Theme">
+                                                            <input type="text" class="form-control" id="tema" placeholder="Tema">
+                                                            <br>
+                                                            <textarea style="resize:none;" class="form-control" rows="4" cols="50" id="casoClinico" placeholder="Caso Clinico"></textarea>
                                                         </div>
                                                    </div>
                                                 </div>
@@ -312,7 +318,7 @@
                                                     <hr>
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12 col-xs-12">
-                                                            <input type="text" class="form-control" id="pregunta" placeholder="Question">
+                                                            <input type="text" class="form-control" id="pregunta" placeholder="Pregunta">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,13 +336,13 @@
                                                 <div class="row mar_ned">
                                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                                        <label for="respA">A</label>
-                                                       <input type="text" class="form-control" id="respA" placeholder="Answer A">
+                                                       <input type="text" class="form-control" id="respA" placeholder="Respuesta A">
                                                        <label for="respB">B</label>
-                                                       <input type="text" class="form-control" id="respB" placeholder="Answer B">
+                                                       <input type="text" class="form-control" id="respB" placeholder="Respuesta B">
                                                        <label for="respC">C</label>
-                                                       <input type="text" class="form-control" id="respC" placeholder="Answer C">
+                                                       <input type="text" class="form-control" id="respC" placeholder="Respuesta C">
                                                        <label for="respD">D</label>
-                                                       <input type="text" class="form-control" id="respD" placeholder="Answer D">
+                                                       <input type="text" class="form-control" id="respD" placeholder="Respuesta D">
                                                     </div>
                                                 </div>
                                             </div>
@@ -539,7 +545,7 @@
     <script src="../../assets/js/jquery.easing.min.js"></script>
     <script src="../../assets/js/wow.min.js"></script>
     <script src="../../assets/angular/appController.js"></script>
-    
+    <script src="../../assets/js/main.js"></script>
     <script>
         $(document).ready(function () {
             $('.material-button-toggle').on("click", function () {
